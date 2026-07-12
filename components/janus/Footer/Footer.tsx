@@ -98,10 +98,6 @@ export default function Footer() {
           <Link href="/#projects" className="hover:text-white transition-colors">
             BACK TO HOME PORTFOLIO
           </Link>
-          <span className="text-borders">|</span>
-          <Link href="#privacy" className="hover:text-white transition-colors">
-            SECURITY.TXT
-          </Link>
         </div>
       </div>
     </section>
