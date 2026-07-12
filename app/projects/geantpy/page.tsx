@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Layers } from 'lucide-react';
 import { GeantPyBackground } from '../../../components/projects/ProjectBackgrounds';
+import ProjectNavbar from '../../../components/projects/ProjectNavbar';
+import ProjectFooter from '../../../components/projects/ProjectFooter';
 
 export default function GeantPyPage() {
   return (
@@ -13,19 +15,7 @@ export default function GeantPyPage() {
         <GeantPyBackground />
       </div>
 
-      {/* Header */}
-      <header className="relative z-10 max-w-4xl mx-auto px-6 pt-8 flex items-center justify-between">
-        <Link
-          href="/#projects"
-          className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors font-mono text-xs uppercase tracking-wider group"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Projects</span>
-        </Link>
-        <span className="font-mono text-xs text-neutral-500 uppercase tracking-widest">
-          INDEPENDENT TOOL
-        </span>
-      </header>
+      <ProjectNavbar title="GeantPy" repoUrl="https://github.com/h-livv/geantpy" />
 
       {/* Main Content Area: Compact, 1-2 screen heights */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16 flex flex-col gap-16">
@@ -186,6 +176,7 @@ export default function GeantPyPage() {
         </section>
 
       </div>
+      <ProjectFooter />
     </main>
   );
 }
