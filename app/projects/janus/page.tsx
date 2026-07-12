@@ -1,30 +1,49 @@
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { projects } from '../../../data/projects';
+import type { Metadata } from 'next';
+import PipelineBackground from '@/components/janus/Background/PipelineBackground';
+import JanusPageWrapper from '@/components/janus/JanusPageWrapper';
+import Hero from '@/components/janus/Hero/Hero';
+import Production from '@/components/janus/Production/Production';
+import Transport from '@/components/janus/Transport/Transport';
+import Cooling from '@/components/janus/Cooling/Cooling';
+import Trapping from '@/components/janus/Trapping/Trapping';
+import Optimization from '@/components/janus/Optimization/Optimization';
+import Footer from '@/components/janus/Footer/Footer';
+
+export const metadata: Metadata = {
+  title: 'Janus',
+  description: 'An immersive product experience modeling antimatter production, relativistic transport, stochastic cooling, electromagnetic trapping, and parameter optimization.',
+};
 
 export default function JanusPage() {
-  const project = projects.find(p => p.slug === 'janus');
-  
-  if (!project) return null;
-
   return (
-    <main className="min-h-screen py-24 px-6 bg-background">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/#projects" className="inline-flex items-center gap-2 text-secondary hover:text-primary mb-12 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Home</span>
-        </Link>
-        <h1 className="text-4xl md:text-5xl font-medium text-primary mb-6">{project.title}</h1>
-        <div className="flex items-center gap-4 mb-12 text-sm text-secondary font-mono uppercase tracking-wider">
-          <span>{project.role}</span>
-          <span>&bull;</span>
-          <span>{project.category}</span>
+    <main className="min-h-screen bg-transparent text-white relative">
+      {/* Persistent 3D WebGL particle simulation background */}
+      <PipelineBackground />
+
+      {/* Cinematic scroll wrapper containing all sections */}
+      <JanusPageWrapper>
+        <div className="janus-section">
+          <Hero />
         </div>
-        <div className="prose prose-invert prose-p:text-secondary prose-p:font-light prose-p:leading-relaxed max-w-none">
-          <p>{project.description}</p>
-          <p>This page serves as the dedicated landing page for {project.title}. Detailed case study and technical documentation will be added here soon.</p>
+        <div className="janus-section">
+          <Production />
         </div>
-      </div>
+        <div className="janus-section">
+          <Transport />
+        </div>
+        <div className="janus-section">
+          <Cooling />
+        </div>
+        <div className="janus-section">
+          <Trapping />
+        </div>
+        <div className="janus-section">
+          <Optimization />
+        </div>
+        <div className="janus-footer">
+          <Footer />
+        </div>
+      </JanusPageWrapper>
     </main>
   );
 }
