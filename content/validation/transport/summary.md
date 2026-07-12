@@ -15,7 +15,7 @@ Across the validation hierarchy, the same invariants are monitored so that compl
 | Drift → Dipole | $5.7\times10^{-9}$ | $2.7\times10^{-12}$ | $1.0\times10^{-2}$ (vertical) |
 | Drift → Quadrupole | $2.3\times10^{-12}$ | $2.2\times10^{-12}$ | $\sim5\times10^{-7}$ |
 | FODO | $2.0\times10^{-12}$ | $1.9\times10^{-12}$  | $\sim10^{-10}$ |
-| ACOL | $1.2\times10^{-12}$ | $1.2\times10^{-12}$  | $\sim10^{-10}$ |
+| ACOL | $$1.2\times10^{-12}$$ | $$1.2\times10^{-12}$$  | $$\sim10^{-10}$$ |
 
 <img src="../assets/transport_stage/fodo_conservation.png" width="500" alt="FODO beam conservation">
 
