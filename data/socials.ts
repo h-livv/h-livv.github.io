@@ -9,17 +9,17 @@ export interface SocialLink {
 export const socials: SocialLink[] = [
   {
     name: 'GitHub',
-    href: 'https://github.com',
+    href: 'https://github.com/h-livv',
     icon: Code
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/in/harlivsingh/',
     icon: Briefcase
   },
   {
     name: 'Email',
-    href: 'mailto:hello@example.com',
+    href: 'mailto:harliv.research@gmail.com',
     icon: Mail
   }
 ];
