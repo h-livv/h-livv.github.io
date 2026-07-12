@@ -10,15 +10,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Tempest',
-    slug: 'tempest',
-    description: 'Scientific machine learning for PDE systems.',
-    role: 'Lead Developer',
-    category: 'Personal',
-    image: '/images/projects/tempest.png',
-    href: '/projects/tempest'
-  },
-  {
     title: 'Janus',
     slug: 'janus',
     description: 'End-to-end antimatter systems modeling and analysis.',
@@ -26,6 +17,15 @@ export const projects: Project[] = [
     category: 'Personal',
     image: '/images/projects/janus.png',
     href: '/projects/janus'
+  },
+  {
+    title: 'Tempest',
+    slug: 'tempest',
+    description: 'Scientific machine learning for PDE systems.',
+    role: 'Lead Developer',
+    category: 'Personal',
+    image: '/images/projects/tempest.png',
+    href: '/projects/tempest'
   },
   {
     title: 'Penrose',
