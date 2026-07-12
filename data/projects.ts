@@ -12,7 +12,7 @@ export const projects: Project[] = [
   {
     title: 'Janus',
     slug: 'janus',
-    description: 'End-to-end antimatter systems modeling and analysis.',
+    description: 'Computational framework for antimatter systems modeling and analysis.',
     role: 'Lead Developer',
     category: 'Personal',
     image: '/images/projects/janus.png',
@@ -21,11 +21,20 @@ export const projects: Project[] = [
   {
     title: 'Tempest',
     slug: 'tempest',
-    description: 'Scientific machine learning for PDE systems.',
+    description: 'Scientific computing framework for PDE simulation and operator learning.',
     role: 'Lead Developer',
     category: 'Personal',
     image: '/images/projects/tempest.png',
     href: '/projects/tempest'
+  },
+  {
+    title: 'GeantPy',
+    slug: 'geantpy',
+    description: 'Python orchestration layer for Geant4 simulation workflows.',
+    role: 'Lead Developer',
+    category: 'Personal',
+    image: '/images/projects/geantpy.png',
+    href: '/projects/geantpy'
   },
   {
     title: 'Penrose',
@@ -39,7 +48,7 @@ export const projects: Project[] = [
   {
     title: 'Nereid',
     slug: 'nereid',
-    description: 'Particle-based framework focused on Smoothed Particle Hydrodynamics (SPH).',
+    description: 'Smoothed Particle Hydrodynamics research framework.',
     role: 'Lead Developer',
     category: 'Collaborative',
     image: '/images/projects/nereid.png',
@@ -48,10 +57,12 @@ export const projects: Project[] = [
   {
     title: 'Atlas',
     slug: 'atlas',
-    description: 'Quantum simulation framework for researching physical systems.',
+    description: 'Quantum simulation framework for physical systems.',
     role: 'Lead Developer',
     category: 'Collaborative',
     image: '/images/projects/atlas.png',
     href: '/projects/atlas'
   }
+  
+
 ];

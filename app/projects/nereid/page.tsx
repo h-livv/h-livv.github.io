@@ -1,30 +1,36 @@
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { projects } from '../../../data/projects';
+'use client';
+
+import React from 'react';
+import CollaborativeProjectLayout from '../../../components/projects/CollaborativeProjectLayout';
+import { NereidBackground } from '../../../components/projects/ProjectBackgrounds';
 
 export default function NereidPage() {
-  const project = projects.find(p => p.slug === 'nereid');
-  
-  if (!project) return null;
+  const summaryParagraphs = [
+    'Nereid is a physical simulation framework for particle-based fluid dynamics utilizing Smoothed Particle Hydrodynamics (SPH). The platform provides a research-focused environment for modeling compressible and incompressible fluid flows by representing fluid volumes as discrete particle systems.',
+    'Developed as a collaborative project within SEDS Celestia, Nereid uses local smoothing kernels to interpolate physical quantities (density, pressure, viscosity) across neighbors, enabling simulation of free-surface flows, droplet dynamics, and container boundary interactions.'
+  ];
+
+  const contributions = [
+    'Framework Refactoring: Led a complete architectural overhaul of the SPH framework, modernizing the codebase for long-term maintainability and extensibility.',
+
+    'Simulation Infrastructure: Redesigned the simulation pipeline into modular components to support future numerical methods, visualization, and GPU acceleration.',
+
+    'Project Leadership: Sole active developer responsible for advancing the framework\'s technical roadmap and next-generation architecture.',
+  ];
+
+  const technologies = ['Python', 'NumPy', 'CUDA (Roadmap)'];
 
   return (
-    <main className="min-h-screen py-24 px-6 bg-background">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/#projects" className="inline-flex items-center gap-2 text-secondary hover:text-primary mb-12 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Home</span>
-        </Link>
-        <h1 className="text-4xl md:text-5xl font-medium text-primary mb-6">{project.title}</h1>
-        <div className="flex items-center gap-4 mb-12 text-sm text-secondary font-mono uppercase tracking-wider">
-          <span>{project.role}</span>
-          <span>&bull;</span>
-          <span>{project.category}</span>
-        </div>
-        <div className="prose prose-invert prose-p:text-secondary prose-p:font-light prose-p:leading-relaxed max-w-none">
-          <p>{project.description}</p>
-          <p>This page serves as the dedicated landing page for {project.title}. Detailed case study and technical documentation will be added here soon.</p>
-        </div>
-      </div>
-    </main>
+    <CollaborativeProjectLayout
+      title="Nereid"
+      subtitle="Particle-based fluid simulation using Smoothed Particle Hydrodynamics."
+      organization="SEDS Celestia"
+      role="Lead Developer / Simulation Development / Framework Design"
+      summaryParagraphs={summaryParagraphs}
+      contributionItems={contributions}
+      technologies={technologies}
+      repoUrl="https://github.com/seds-celestia-simulations/sim-nereid"
+      backgroundCanvas={<NereidBackground />}
+    />
   );
 }
