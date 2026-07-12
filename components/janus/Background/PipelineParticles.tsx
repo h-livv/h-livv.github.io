@@ -30,10 +30,7 @@ const vertexShader = `
   }
 
   void main() {
-    vec3 posA = vec3(0.0);
-    vec3 posB = vec3(0.0);
-
-    // Color definitions
+    // Stage colors
     vec3 colHero = vec3(0.3, 0.6, 0.9);         // Soft Cyan/Blue
     vec3 colProd = vec3(1.0, 0.35, 0.05);       // Orange Collision
     vec3 colTrans = vec3(0.0, 0.85, 0.7);       // Cyan Magnetic
@@ -44,89 +41,202 @@ const vertexShader = `
     vec3 colorA = vec3(0.0);
     vec3 colorB = vec3(0.0);
 
-    // Section selection
+    vec3 posA_raw = vec3(0.0);
+    vec3 posB_raw = vec3(0.0);
+
+    // Section selection and initial attribute mapping
     if (uActiveSection < 1.0) {
-      posA = aPosHero;
-      posB = aPosProduction;
+      posA_raw = aPosHero;
+      posB_raw = aPosProduction;
       colorA = colHero;
       colorB = colProd;
     } else if (uActiveSection < 2.0) {
-      posA = aPosProduction;
-      posB = aPosTransport;
+      posA_raw = aPosProduction;
+      posB_raw = aPosTransport;
       colorA = colProd;
       colorB = colTrans;
     } else if (uActiveSection < 3.0) {
-      posA = aPosTransport;
-      posB = aPosCooling;
+      posA_raw = aPosTransport;
+      posB_raw = aPosCooling;
       colorA = colTrans;
       colorB = colCool;
     } else if (uActiveSection < 4.0) {
-      posA = aPosCooling;
-      posB = aPosTrapping;
+      posA_raw = aPosCooling;
+      posB_raw = aPosTrapping;
       colorA = colCool;
       colorB = colTrap;
     } else if (uActiveSection < 5.0) {
-      posA = aPosTrapping;
-      posB = aPosOptimization;
+      posA_raw = aPosTrapping;
+      posB_raw = aPosOptimization;
       colorA = colTrap;
       colorB = colOpt;
     } else {
-      posA = aPosOptimization;
-      posB = aPosOptimization;
+      posA_raw = aPosOptimization;
+      posB_raw = aPosOptimization;
       colorA = colOpt;
       colorB = colOpt;
     }
 
-    // Blend coordinates and colors
-    vec3 blendedPos = mix(posA, posB, uTransition);
-    vColor = mix(colorA, colorB, uTransition);
+    vec3 posA_def = vec3(0.0);
+    vec3 posB_def = vec3(0.0);
 
-    // Hero: Add noise-based drift
-    if (uActiveSection == 0.0) {
-      float noiseX = sin(uTime * 0.5 + blendedPos.y) * 0.15;
-      float noiseY = cos(uTime * 0.4 + blendedPos.z) * 0.15;
-      float noiseZ = sin(uTime * 0.6 + blendedPos.x) * 0.15;
-      blendedPos += vec3(noiseX, noiseY, noiseZ) * (1.0 - uTransition);
+    // ==========================================
+    // 0. Hero: Diffuse cloud converging to beam
+    // ==========================================
+    {
+      float driftTime = uTime * 0.1;
+      float factor = mix(1.0, 0.28, smoothstep(-0.5, 0.5, sin(driftTime * 2.0)));
+      vec3 pos = aPosHero;
+      pos.yz *= factor;
+      pos.x += sin(uTime * 0.4 + aPosHero.y * 3.0) * 0.08;
+      pos.y += cos(uTime * 0.3 + aPosHero.z * 3.0) * 0.08;
+      pos.z += sin(uTime * 0.5 + aPosHero.x * 3.0) * 0.08;
+      
+      if (uActiveSection < 1.0) posA_def = pos;
     }
 
-    // Production: Collide & Explode movement over time
-    if (uActiveSection == 1.0 || (uActiveSection == 0.0 && uTransition > 0.5)) {
-      float t = mod(uTime * 0.8, 3.0);
-      // Exploding particles
-      if (length(posA - aPosHero) > 0.1) {
-        vec3 dir = normalize(posB);
-        blendedPos += dir * sin(t) * 0.4;
+    // ==========================================
+    // 1. Production: Forward target collision spray
+    // ==========================================
+    {
+      float seed = fract(sin(aPosProduction.x * 12.9898 + aPosProduction.y * 78.233) * 43758.5453);
+      float speed = 2.0 + 3.5 * seed;
+      float angle = (1.0 / speed) * 0.32 * (fract(seed * 33.123) - 0.5);
+      float theta = fract(seed * 99.99) * 6.28318;
+      float t = mod(uTime * 1.4 + seed * 2.0, 2.5);
+
+      vec3 pos = vec3(0.0);
+      if (aPosProduction.x < 0.0) {
+        // Incoming beam particle (moves left-to-right to target at x=0)
+        float beamX = -5.0 + t * 2.0;
+        if (beamX > 0.0) beamX = 0.0;
+        pos = vec3(beamX, aPosProduction.y, aPosProduction.z);
+      } else {
+        // Forward secondary shower (sprays right x>0)
+        float showerX = max(0.0, t - 1.0) * speed;
+        float showerY = showerX * angle * cos(theta);
+        float showerZ = showerX * angle * sin(theta);
+        // Wide-angle secondary scattering background
+        if (seed > 0.88) {
+          float scatterAngle = 0.7 * (seed - 0.94) * 6.283;
+          showerY += showerX * sin(scatterAngle) * 0.6;
+          showerZ += showerX * cos(scatterAngle) * 0.6;
+        }
+        pos = vec3(showerX, showerY, showerZ);
+      }
+
+      if (uActiveSection < 1.0) posB_def = pos;
+      if (uActiveSection >= 1.0 && uActiveSection < 2.0) posA_def = pos;
+    }
+
+    // ==========================================
+    // 2. Transport: FODO lattice beam envelope
+    // ==========================================
+    {
+      float x = -6.0 + 12.0 * fract((aPosTransport.x + uTime * 0.7 + 6.0) / 12.0);
+      float bend = sin(x * 0.5) * 0.9;
+      float envelopeY = 0.28 + 0.15 * sin(x * 1.8);
+      float envelopeZ = 0.28 - 0.15 * sin(x * 1.8);
+      float y = bend + aPosTransport.y * (envelopeY / 0.35);
+      float z = aPosTransport.z * (envelopeZ / 0.35);
+      vec3 pos = vec3(x, y, z);
+
+      if (uActiveSection >= 1.0 && uActiveSection < 2.0) posB_def = pos;
+      if (uActiveSection >= 2.0 && uActiveSection < 3.0) posA_def = pos;
+    }
+
+    // ==========================================
+    // 3. Cooling: Phase-space compression
+    // ==========================================
+    {
+      float y = -3.5 + 7.0 * fract((aPosCooling.y + uTime * 0.4 + 3.5) / 7.0);
+      float progress = (y + 3.5) / 7.0;
+      float compression = mix(2.2, 0.14, smoothstep(0.0, 0.8, progress));
+      
+      // Dampened betatron oscillation
+      float oscAngle = y * 2.5;
+      float cosA = cos(oscAngle);
+      float sinA = sin(oscAngle);
+      float x = (aPosCooling.x * cosA - aPosCooling.z * sinA) * compression;
+      float z = (aPosCooling.x * sinA + aPosCooling.z * cosA) * compression;
+      vec3 pos = vec3(x, y, z);
+
+      if (uActiveSection >= 2.0 && uActiveSection < 3.0) posB_def = pos;
+      if (uActiveSection >= 3.0 && uActiveSection < 4.0) posA_def = pos;
+    }
+
+    // ==========================================
+    // 4. Trapping: Penning Trap orbits
+    // ==========================================
+    {
+      float seed = fract(sin(aPosTrapping.x * 12.9898 + aPosTrapping.y * 78.233) * 43758.5453);
+      float axialPeriod = 1.6 + 2.4 * seed;
+      float y = aPosTrapping.y * sin(uTime * axialPeriod);
+      
+      // Fast cyclotron orbit
+      float cyclotronFreq = 6.0 + 8.0 * seed;
+      float cyclotronAngle = uTime * cyclotronFreq;
+      float cyclotronRad = 0.08 * (seed + 0.2);
+      
+      // Slow magnetron drift
+      float magnetronFreq = 0.3 + 0.4 * seed;
+      float magnetronAngle = uTime * magnetronFreq;
+      float magnetronRad = length(aPosTrapping.xz) * 0.85;
+      
+      float cx = magnetronRad * cos(magnetronAngle + seed * 6.283);
+      float cz = magnetronRad * sin(magnetronAngle + seed * 6.283);
+      
+      float x = cx + cyclotronRad * cos(cyclotronAngle);
+      float z = cz + cyclotronRad * sin(cyclotronAngle);
+      vec3 pos = vec3(x, y, z);
+
+      if (uActiveSection >= 3.0 && uActiveSection < 4.0) posB_def = pos;
+      if (uActiveSection >= 4.0 && uActiveSection < 5.0) posA_def = pos;
+    }
+
+    // ==========================================
+    // 5. Optimization: Parameter search flow on the 3D landscape
+    // ==========================================
+    {
+      float t = mod(uTime * 0.7, 3.0);
+      // Slide downhill towards the valleys (center) but remain on the landscape
+      float slide = smoothstep(0.0, 1.2, t) * smoothstep(2.8, 1.5, t) * 0.24; 
+      float x = aPosOptimization.x * (1.0 - slide);
+      float z = aPosOptimization.z * (1.0 - slide);
+      
+      // Recalculate landscape height for shifted coordinates
+      float distFromCenter = sqrt(x * x + z * z);
+      float y = sin(x * 2.0) * cos(z * 2.0) * exp(-distFromCenter * 0.15) * 0.8;
+      
+      // Add subtle gradient exploration noise
+      float noise = (1.0 - slide) * 0.05 * sin(uTime * 15.0 + aPosOptimization.x * 20.0);
+      x += noise;
+      z += noise;
+      vec3 pos = vec3(x, y, z);
+
+      if (uActiveSection >= 4.0 && uActiveSection < 5.0) posB_def = pos;
+      if (uActiveSection >= 5.0) {
+        posA_def = pos;
+        posB_def = pos;
       }
     }
 
-    // Transport: Add flowing wave motion
-    if (uActiveSection == 2.0) {
-      float speed = uTime * 2.0;
-      blendedPos.y += sin(blendedPos.x * 2.0 - speed) * 0.05;
-      blendedPos.z += cos(blendedPos.x * 2.0 - speed) * 0.05;
-    }
-
-    // Cooling: Spiraling inward wave
-    if (uActiveSection == 3.0) {
-      float speed = uTime * 3.0;
-      float angle = atan(blendedPos.y, blendedPos.x) - speed * 0.1;
-      float radius = length(blendedPos.xy);
-      blendedPos.x = radius * cos(angle);
-      blendedPos.y = radius * sin(angle);
-    }
+    // Blend final deformed coordinates and colors
+    vec3 blendedPos = mix(posA_def, posB_def, uTransition);
+    vColor = mix(colorA, colorB, uTransition);
 
     // Mouse parallax influence
-    blendedPos.xy += uMouse * 0.25;
+    blendedPos.xy += uMouse * 0.22;
 
-    // View calculations
+    // Projection
     vec4 mvPosition = modelViewMatrix * vec4(blendedPos, 1.0);
     gl_Position = projectionMatrix * mvPosition;
 
-    // Size attenuating with distance and pulsation
-    float sizePulse = 1.0 + 0.3 * sin(uTime * 3.0 + blendedPos.x * 10.0);
-    gl_PointSize = (18.0 / -mvPosition.z) * sizePulse;
+    // Size attenuating with distance
+    float sizePulse = 1.0 + 0.2 * sin(uTime * 3.5 + blendedPos.x * 12.0);
+    gl_PointSize = (19.0 / -mvPosition.z) * sizePulse;
 
-    // Fade out particles far away or very close
+    // Fade boundaries
     vAlpha = smoothstep(-15.0, -2.0, mvPosition.z) * smoothstep(0.0, -10.0, mvPosition.z);
   }
 `;
@@ -136,19 +246,18 @@ const fragmentShader = `
   varying float vAlpha;
 
   void main() {
-    // Make particles circular with soft edges
     vec2 center = gl_PointCoord - vec2(0.5);
     float dist = length(center);
     if (dist > 0.5) discard;
 
-    // Smooth glow falloff
+    // Soft circle glow falloff
     float glow = smoothstep(0.5, 0.0, dist);
     
-    // Add bright core
-    float core = smoothstep(0.15, 0.0, dist) * 0.8;
+    // Core glow intensity
+    float core = smoothstep(0.18, 0.0, dist) * 0.85;
     
     vec3 finalColor = vColor + vec3(core);
-    gl_FragColor = vec4(finalColor, glow * vAlpha * 0.9);
+    gl_FragColor = vec4(finalColor, glow * vAlpha * 0.85);
   }
 `;
 
@@ -168,7 +277,7 @@ export default function PipelineParticles() {
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const idx = i * 3;
 
-      // 0. Hero (Drifting dust sphere)
+      // 0. Hero: Spherical cloud seed
       const r = 0.5 + Math.random() * 4.5;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
@@ -176,86 +285,65 @@ export default function PipelineParticles() {
       hero[idx + 1] = r * Math.sin(phi) * Math.sin(theta);
       hero[idx + 2] = r * Math.cos(phi);
 
-      // 1. Production (Colliding beams + center explosion)
-      if (i < PARTICLE_COUNT * 0.15) {
-        // Left incoming beam
-        production[idx] = -6.0 + Math.random() * 5.0;
-        production[idx + 1] = (Math.random() - 0.5) * 0.05;
-        production[idx + 2] = (Math.random() - 0.5) * 0.05;
-      } else if (i < PARTICLE_COUNT * 0.3) {
-        // Right incoming beam
-        production[idx] = 1.0 + Math.random() * 5.0;
-        production[idx + 1] = (Math.random() - 0.5) * 0.05;
-        production[idx + 2] = (Math.random() - 0.5) * 0.05;
+      // 1. Production: Target collision seeds (beam vs target distribution)
+      if (i < PARTICLE_COUNT * 0.10) {
+        // Proton beam incoming seeds (negative x)
+        production[idx] = -5.0 + Math.random() * 4.9;
+        production[idx + 1] = (Math.random() - 0.5) * 0.03;
+        production[idx + 2] = (Math.random() - 0.5) * 0.03;
       } else {
-        // Explosion shrapnel
-        const expR = Math.random() * 2.5;
-        const expTheta = Math.random() * Math.PI * 2;
-        const expPhi = Math.acos(2 * Math.random() - 1);
-        production[idx] = expR * Math.sin(expPhi) * Math.cos(expTheta);
-        production[idx + 1] = expR * Math.sin(expPhi) * Math.sin(expTheta);
-        production[idx + 2] = expR * Math.cos(expPhi);
+        // Secondary shower generation center
+        production[idx] = Math.random() * 0.05;
+        production[idx + 1] = (Math.random() - 0.5) * 0.05;
+        production[idx + 2] = (Math.random() - 0.5) * 0.05;
       }
 
-      // 2. Transport (Magnetic beamlines - curved flow)
-      const tX = -6 + 12 * (i / PARTICLE_COUNT);
-      const angle = (i / PARTICLE_COUNT) * Math.PI * 6;
+      // 2. Transport: FODO lattice transverse offsets
+      const tX = -6.0 + 12.0 * (i / PARTICLE_COUNT);
+      const angle = (i / PARTICLE_COUNT) * Math.PI * 6.0;
       const rad = 0.2 + Math.random() * 0.35;
       transport[idx] = tX;
-      // S-curve magnetic bending
-      const bendY = Math.sin(tX * 0.8) * 1.2;
-      transport[idx + 1] = bendY + Math.sin(angle) * rad;
+      transport[idx + 1] = Math.sin(angle) * rad;
       transport[idx + 2] = Math.cos(angle) * rad;
 
-      // 3. Cooling (Calm spiraling vortex)
+      // 3. Cooling: Normal circular betatron coordinates
       const coolingProgress = i / PARTICLE_COUNT;
       const cY = -3.5 + 7.0 * coolingProgress;
-      // Vortex narrows down as Y decreases (towards confinement)
-      const cRad = 0.25 + 2.0 * Math.pow(coolingProgress, 1.5);
-      const cAngle = coolingProgress * Math.PI * 40.0;
+      const cAngle = coolingProgress * Math.PI * 30.0;
+      const cRad = 0.3 + Math.random() * 0.7;
       cooling[idx] = Math.cos(cAngle) * cRad;
       cooling[idx + 1] = cY;
       cooling[idx + 2] = Math.sin(cAngle) * cRad;
 
-      // 4. Trapping (Penning trap orbits)
+      // 4. Trapping: Confinement boundary distributions
       if (i < PARTICLE_COUNT * 0.4) {
-        // Central spherical trapped cloud
         const trapR = Math.random() * 0.6;
         const trapTheta = Math.random() * Math.PI * 2;
         const trapPhi = Math.acos(2 * Math.random() - 1);
         trapping[idx] = trapR * Math.sin(trapPhi) * Math.cos(trapTheta);
         trapping[idx + 1] = trapR * Math.sin(trapPhi) * Math.sin(trapTheta);
         trapping[idx + 2] = trapR * Math.cos(trapPhi);
-      } else if (i < PARTICLE_COUNT * 0.7) {
-        // Upper ring
-        const trapAngle = Math.random() * Math.PI * 2;
-        const rRing = 1.0 + (Math.random() - 0.5) * 0.15;
-        trapping[idx] = Math.cos(trapAngle) * rRing;
-        trapping[idx + 1] = 1.0 + (Math.random() - 0.5) * 0.1;
-        trapping[idx + 2] = Math.sin(trapAngle) * rRing;
       } else {
-        // Lower ring
         const trapAngle = Math.random() * Math.PI * 2;
-        const rRing = 1.0 + (Math.random() - 0.5) * 0.15;
+        const rRing = 0.9 + (Math.random() - 0.5) * 0.15;
+        const sign = i % 2 === 0 ? 1.0 : -1.0;
         trapping[idx] = Math.cos(trapAngle) * rRing;
-        trapping[idx + 1] = -1.0 + (Math.random() - 0.5) * 0.1;
+        trapping[idx + 1] = sign * (1.0 + (Math.random() - 0.5) * 0.1);
         trapping[idx + 2] = Math.sin(trapAngle) * rRing;
       }
 
-      // 5. Optimization (Convergence Grid / Math Landscape)
-      const gridSize = Math.floor(Math.sqrt(PARTICLE_COUNT)); // ~141
+      // 5. Optimization: Landscape Grid layout
+      const gridSize = Math.floor(Math.sqrt(PARTICLE_COUNT));
       const col = i % gridSize;
       const row = Math.floor(i / gridSize);
       
       const gridX = -4.0 + 8.0 * (col / gridSize);
       const gridY = -4.0 + 8.0 * (row / gridSize);
-      
-      // Compute mathematical landscape with convergence sink in center
       const distFromCenter = Math.sqrt(gridX * gridX + gridY * gridY);
       const gridZ = Math.sin(gridX * 2.0) * Math.cos(gridY * 2.0) * Math.exp(-distFromCenter * 0.15) * 0.8;
 
       optimization[idx] = gridX;
-      optimization[idx + 1] = gridZ; // map landscape height to Y axis for 3D grid layout
+      optimization[idx + 1] = gridZ;
       optimization[idx + 2] = gridY;
     }
 
@@ -298,46 +386,47 @@ export default function PipelineParticles() {
     let targetCamLookAt = new THREE.Vector3(0, 0, 0);
 
     if (activeSec === 0) {
-      // Hero: slow pan/zoom
+      // Hero: Text Left, Camera looks slightly right
       targetCamPos.set(
         Math.sin(time * 0.05) * 0.5,
         Math.cos(time * 0.03) * 0.3,
         8.0 - progress * 1.5
       );
+      targetCamLookAt.set(0.5, 0, 0);
     } else if (activeSec === 1) {
-      // Production: zoom in closer to see collisions
+      // Production: Text Left, Camera shifts left & looks right
       const blend = progress;
-      targetCamPos.set(0, 0, mix(6.5, 5.0, blend));
-      targetCamLookAt.set(0, 0, 0);
+      targetCamPos.set(-0.8, 0, mix(6.5, 5.0, blend));
+      targetCamLookAt.set(0.8, 0, 0);
     } else if (activeSec === 2) {
-      // Transport: angle/sideways tracking along the x-axis pipe flow
+      // Transport: Text Right, Camera shifts right & looks left
       const blend = progress;
-      targetCamPos.set(mix(0, 2.5, blend), mix(0, 1.2, blend), mix(5.0, 4.5, blend));
-      targetCamLookAt.set(mix(0, 1.5, blend), 0, 0);
+      targetCamPos.set(mix(-0.8, 1.2, blend), mix(0, 1.2, blend), mix(5.0, 4.2, blend));
+      targetCamLookAt.set(mix(0.8, -1.2, blend), 0, 0);
     } else if (activeSec === 3) {
-      // Cooling: look down the spiral funnel (top-down angular view)
+      // Cooling: Text Left, Camera shifts left & looks right
       const blend = progress;
-      targetCamPos.set(mix(2.5, 0.5, blend), mix(1.2, 5.5, blend), mix(4.5, 1.5, blend));
-      targetCamLookAt.set(mix(1.5, 0.0, blend), 0, 0);
+      targetCamPos.set(mix(1.2, -1.0, blend), mix(1.2, 5.0, blend), mix(4.2, 1.5, blend));
+      targetCamLookAt.set(mix(-1.2, 1.0, blend), 0, 0);
     } else if (activeSec === 4) {
-      // Trapping: zoom deep into Penning trap, slow orbit
+      // Trapping: Text Right, Camera shifts right & looks left
       const blend = progress;
       const angle = time * 0.2;
       targetCamPos.set(
-        Math.cos(angle) * mix(1.5, 2.5, blend),
-        mix(5.5, 0.5, blend),
+        Math.cos(angle) * mix(1.5, 2.5, blend) + 0.8,
+        mix(5.0, 0.5, blend),
         Math.sin(angle) * mix(1.5, 2.5, blend)
       );
-      targetCamLookAt.set(0, 0, 0);
+      targetCamLookAt.set(-0.8, 0, 0);
     } else if (activeSec === 5 || activeSec === 6) {
-      // Optimization: Isometric style grid overview
+      // Optimization: Text Left, Camera shifts left & looks right
       const blend = activeSec === 6 ? 1.0 : progress;
       targetCamPos.set(
-        mix(0, 5.0, blend),
-        mix(0.5, 4.0, blend),
-        mix(2.5, 6.0, blend)
+        mix(0.8, 3.8, blend),
+        mix(0.5, 3.8, blend),
+        mix(2.5, 5.8, blend)
       );
-      targetCamLookAt.set(0, -0.5, 0);
+      targetCamLookAt.set(mix(-0.8, 1.0, blend), -0.5, 0);
     }
 
     // Smoothly interpolate camera position
