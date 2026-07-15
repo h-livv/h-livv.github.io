@@ -7,7 +7,7 @@ const ROWS = 72;
 const VX = 0.55;
 const VY = 0.4;
 const DT = 1.0;
-const DIFFUSION = 0.012;
+const DIFFUSION = 0.0001;
 
 export default function AdvectionSimulator() {
   const containerRef = useRef<HTMLDivElement>(null);

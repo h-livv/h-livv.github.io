@@ -11,6 +11,7 @@ export const EQUATIONS = [
   'Linear Advection',
   'Diffusion',
   'Wave Equation',
+  'Burgers Equation',
   'Shallow Water Equations',
   'Rossby Wave Equation',
 ] as const;
