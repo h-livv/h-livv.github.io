@@ -16,9 +16,9 @@ export default function Navbar() {
           </Link>
           
           <div className="hidden md:flex items-center gap-6">
-            <a href="#projects" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Projects</a>
-            <a href="#blog" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Writing</a>
-            <a href="#contact" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Contact</a>
+            <Link href="/#projects" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Projects</Link>
+            <Link href="/#blog" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Writing</Link>
+            <Link href="/#contact" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Contact</Link>
           </div>
         </div>
 
