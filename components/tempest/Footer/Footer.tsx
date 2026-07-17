@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -64,14 +64,23 @@ export default function Footer() {
           ))}
         </div>
 
-        <Link
-          href="https://github.com/h-livv/tempest"
-          target="_blank"
-          className="inline-flex items-center gap-2.5 px-6 py-2.5 bg-white text-black font-mono font-medium text-xs rounded hover:bg-neutral-200 transition-all uppercase tracking-widest"
-        >
-          <GithubIcon className="w-4 h-4" />
-          <span>View on GitHub</span>
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/blog/tempest"
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 border border-white/20 text-white font-mono font-medium text-xs rounded hover:border-cyan-500/40 hover:bg-cyan-500/5 transition-all uppercase tracking-widest"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Notes</span>
+          </Link>
+          <Link
+            href="https://github.com/h-livv/tempest"
+            target="_blank"
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 bg-white text-black font-mono font-medium text-xs rounded hover:bg-neutral-200 transition-all uppercase tracking-widest"
+          >
+            <GithubIcon className="w-4 h-4" />
+            <span>View on GitHub</span>
+          </Link>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto w-full border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-neutral-400">

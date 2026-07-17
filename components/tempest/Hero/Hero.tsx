@@ -34,6 +34,13 @@ export default function Hero() {
           className="flex flex-wrap gap-4 font-mono text-xs"
         >
           <Link
+            href="/blog/tempest"
+            className="px-6 py-3 border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/10 rounded transition-colors text-slate-200 hover:text-white flex items-center gap-2"
+          >
+            <FileText className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Notes</span>
+          </Link>
+          <Link
             href="https://github.com/h-livv/tempest"
             target="_blank"
             className="px-6 py-3 border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/10 rounded transition-colors text-slate-200 hover:text-white flex items-center gap-2"

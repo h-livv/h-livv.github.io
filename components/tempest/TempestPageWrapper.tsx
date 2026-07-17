@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { FileText } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -71,6 +72,13 @@ export default function TempestPageWrapper({ children }: TempestPageWrapperProps
           Tempest
         </Link>
         <div className="flex items-center gap-6 font-mono text-xs">
+          <Link
+            href="/blog/tempest"
+            className="text-secondary hover:text-white transition-colors flex items-center gap-1.5"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Notes</span>
+          </Link>
           <Link
             href="https://github.com/h-livv/tempest"
             target="_blank"
