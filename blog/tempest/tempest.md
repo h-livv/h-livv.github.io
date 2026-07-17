@@ -6,7 +6,6 @@ Tempest is a computational framework for simulating and studying PDE-based syste
 
 However, it did not start out with this vision. I'm writing this to gain insight into the evolution of Tempest since its inception and what I've learnt along the way.
 
-
 ## The beginning
 
 At the end of my first year, I grew fascinated with Numerical Weather Prediction. The fact that even state of the art models hit a hard mathematical wall beyond 10-14 days really got me thinking about this field. The chaotic nature of the atmosphere was almost entrancing and too interesting to ignore.
@@ -17,11 +16,15 @@ So, there I was. An 18-year old trying to build an entire NWP model. I quickly r
 
 The entire code was, and still is, written in Python from scratch using NumPy with a simple Matplotlib dashboard.
 
+The initial design wasn't a planned out architecture. I was just focused on getting an output.
+
 ## Learning numerical methods
 
 I evolved the project incrementally, adding one PDE, integration method, boundary condition at a time. 
 
-I learnt what "finite-difference" actually meant, how boundary conditions work using ghost cells, how a PDE is actually mapped to a grid, and a lot of foundations for grid-based numerical solvers.
+I learnt how numerical solvers actually work by discretization and how they're actually just an approximation.
+
+How boundary conditions work using ghost cells, and a lot of foundations of grid-based numerical simulations.
 
 ## Validation
 
@@ -42,6 +45,8 @@ While validating my engine, I thought about what my now scientifically accurate 
 A generalized architecture could span use-cases from turbulence research to NWP. Not just limited to fluid phenomena, it could simulate electromagnetism and literally any system governed by PDEs.
 
 So, I started working on a generalized framework. Each module independent of others with no implicit assumptions.
+
+This was probably the single most important architectural leap. Tempest evolved from a PDE solver to a research framework.
 
 ## Scientific Machine Learning
 
@@ -66,6 +71,29 @@ What came with it was a beautiful dashboard and even more beautiful visuals.
 Tempest has come a long way. From just the linear advection to a potential research-grade (I hope) framework.
 
 I think the best thing about Tempest is its modular and generalized architecture. Implementing a new PDE just requires you to write its equation and nothing else.
+
+The next steps are to build on this foundation to explore complex, exciting concepts.
+
+## Things that surprised me
+
+A lot of things were very different from what I expected
+
+- Writing numerical equations and operators was easier than validating them
+- Boundary conditions were harder than the PDEs itself
+- Visualization became an important debugging tool rather than a cool feature
+- Scientific computing relies heavily on validation and confidence rather than core implementation
+
+## What Tempest taught me
+
+Scientific computing is all about confidence.
+
+Confidence that the mathematics has been translated correctly.<br>
+Confidence that the implementation behaves as expected.<br>
+Confidence that numerical errors are understood rather than ignored.
+
+Everything builds upon this confidence.
+
+More importantly, it taught me how to think about scientific computing itself. Concepts like modularity, convergence, reproducibility have dictated every project I've built since.
 
 ## If I Started Again Tomorrow
 
