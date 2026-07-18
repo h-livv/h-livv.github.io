@@ -14,6 +14,7 @@ export const EQUATIONS = [
   'Burgers Equation',
   'Shallow Water Equations',
   'Rossby Wave Equation',
+  'Barotropic Vorticity Equation'
 ] as const;
 
 export const SPATIAL_METHODS = [
