@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Tempest is a computational framework for simulating and studying PDE-based systems.
+Tempest is a computational laboratory for simulating and studying PDE-based systems. It hosts a variety of PDEs and numerical methods.
 
 However, it did not start out with this vision. I'm writing this to gain insight into the evolution of Tempest since its inception and what I've learnt along the way.
 
@@ -55,8 +55,6 @@ It was at this point that I started researching about scientific machine learnin
 So, I implemented one from scratch. A lightweight physics-informed CNN to predict the linear advection equation. Worked surprisingly well for such a simple model, but I wanted to explore further.
 
 I explored spectral methods such as the Fourier Neural Operator. It was really fun learning about the Fourier transform and how states are represented in the Fourier space.
-
-The next natural step is to implement a complete, end-to-end FNO and benchmark it against the CNN.
 
 ## 2D extension
 

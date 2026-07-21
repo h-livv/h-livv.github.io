@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     title: 'Tempest',
     slug: 'tempest',
-    description: 'Scientific computing framework for PDE simulation and operator learning.',
+    description: 'A computational laboratory for numerical methods and PDE simulation.',
     role: 'Lead Developer',
     category: 'Personal',
     image: '/images/projects/tempest.png',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     title: 'Nereid',
     slug: 'nereid',
-    description: 'Smoothed Particle Hydrodynamics research framework.',
+    description: 'An experimental platform for particle methods and Smoothed Particle Hydrodynamics.',
     role: 'Lead Developer',
     category: 'Collaborative',
     image: '/images/projects/nereid.png',
@@ -57,7 +57,7 @@ export const projects: Project[] = [
   {
     title: 'Atlas',
     slug: 'atlas',
-    description: 'Quantum simulation framework for physical systems.',
+    description: 'A physics-first quantum simulation framework for studying physical systems.',
     role: 'Lead Developer',
     category: 'Collaborative',
     image: '/images/projects/atlas.png',
