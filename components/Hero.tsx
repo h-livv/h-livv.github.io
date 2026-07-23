@@ -34,12 +34,12 @@ export default function Hero() {
           
           <h1 className="text-2xl md:text-4xl font-[700] leading-[1.2] tracking-tight text-primary mb-6">
             Exploring physics, mathematics,<br className="hidden md:block" />
-            and computation through<br className="hidden md:block" />
-            research software.
+            and computing by<br className="hidden md:block" />
+            building research software.
           </h1>
           
           <p className="text-sm md:text-base text-secondary max-w-prose leading-relaxed font-[400] mb-8">
-            Mathematics student at BITS Goa building software to study physical systems, numerical methods, and computational science.
+            Mathematics student at BITS Goa building research software to study complex systems.
           </p>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
