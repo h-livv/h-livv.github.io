@@ -26,7 +26,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="w-full"
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-secondary font-mono text-lg md:text-xl uppercase tracking-widest">Harliv Singh</span>
@@ -38,9 +38,9 @@ export default function Hero() {
             research software.
           </h1>
           
-           <p className="max-w-5xl text-base text-secondary">
-            Mathematics student at BITS Goa building research software to study complex systems.
-          </p>
+           <p className="text-sm md:text-base text-secondary leading-relaxed font-[400] mb-8">
+             Mathematics student at BITS Goa building research software to study complex systems. 
+           </p>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <a
