@@ -26,7 +26,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="max-w-5xl"
         >
           <div className="flex items-center gap-3 mb-6">
             <span className="text-secondary font-mono text-lg md:text-xl uppercase tracking-widest">Harliv Singh</span>
@@ -34,7 +34,7 @@ export default function Hero() {
           
           <h1 className="text-2xl md:text-4xl font-[700] leading-[1.2] tracking-tight text-primary mb-6">
             Exploring physics, mathematics,<br className="hidden md:block" />
-            and computing by building<br className="hidden md:block" />
+            and computing through<br className="hidden md:block" />
             research software.
           </h1>
           
