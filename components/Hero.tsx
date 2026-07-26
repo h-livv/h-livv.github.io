@@ -33,14 +33,12 @@ export default function Hero() {
           </div>
           
           <h1 className="text-2xl md:text-4xl font-[700] leading-[1.2] tracking-tight text-primary mb-6">
-            Exploring physics, mathematics,<br className="hidden md:block" />
-            and computing through<br className="hidden md:block" />
-            research software.
+            Physics, Mathematics,<br />and Computation
           </h1>
           
-           <p className="text-sm md:text-base text-secondary leading-relaxed font-[400] mb-8">
-             Mathematics student at BITS Goa building research software to study complex systems. 
-           </p>
+          <p className="text-sm md:text-base text-secondary max-w-prose leading-relaxed font-[400] mb-8">
+            Mathematics student at BITS Goa exploring physics and mathematics using computation.
+          </p>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <a

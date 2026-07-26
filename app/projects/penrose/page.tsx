@@ -6,28 +6,29 @@ import { PenroseBackground } from '../../../components/projects/ProjectBackgroun
 
 export default function PenrosePage() {
   const summaryParagraphs = [
-    'Penrose is a relativistic rendering framework designed for Schwarzschild spacetime ray tracing and general relativistic scientific visualization. The project solves the geodesic equations of motion around highly compact massive objects to simulate the extreme bending of light caused by strong gravitational lensing.',
-    'Developed in collaboration with the SEDS Celestia engineering team, the framework enables real-time visual output of black hole event horizons, photon spheres, and warped accretion disks, translating general relativistic physics into interactive, high-frame-rate simulations.'
+    'Penrose is a computational general relativity framework for simulating particle and photon motion in curved spacetime. It combines numerical geodesic integration, scientific validation, and visualization within a modular architecture designed to support research in relativistic physics and computational astrophysics.',
+    'The framework has evolved into a generalized simulation engine supporting extensible spacetime models, interchangeable numerical components, and mission-oriented applications. It now serves as the computational foundation for the Solar Gravitational Lens (SGL) digital twin, enabling the simulation of relativistic light propagation for future deep-space imaging studies.'
   ];
 
   const contributions = [
-    'Physics Pipeline: Developed and benchmarked the CPU-based relativistic integration pipeline for Schwarzschild ray tracing and gravitational lensing simulations.',
-    'Framework Architecture: Refactored the simulation engine into a modular, extensible architecture separating physics, benchmarking, and visualization components.',
-    'Scientific Validation: Designed benchmarking workflows and validation infrastructure to verify numerical accuracy and performance of the CPU physics backend.',
+    'Physics & Simulation Engine: Designed and implemented the generalized CPU simulation engine for relativistic particle and photon propagation, replacing metric-specific logic with a modular architecture supporting multiple spacetime models.',
+    'Framework Architecture: Led the architectural redesign of the framework, separating simulation, visualization, benchmarking, and rendering into extensible components to support future scientific applications.',
+    'Scientific Validation: Developed validation and benchmarking workflows to verify numerical accuracy, conservation properties, and long-term integration stability of the relativistic simulation engine.',
+    'SGL Development: Leading the development of the Solar Gravitational Lens digital twin, extending Penrose into a mission-scale simulation platform for modeling relativistic light propagation and end-to-end imaging workflows.',
   ];
 
-  const technologies = ['C++', 'OpenGL', 'GLSL'];
+  const technologies = ['C++', 'OpenGL', 'GLSL', 'Python'];
 
   return (
     <CollaborativeProjectLayout
       title="Penrose"
-      subtitle="A framework for relativistic ray tracing and black hole visualization."
+      subtitle="General relativity framework for simulating trajectories in curved spacetime."
       organization="SEDS Celestia"
-      role="Core Developer /Physics Pipeline / Framework Architecture"
+      role="Core Developer"
       summaryParagraphs={summaryParagraphs}
       contributionItems={contributions}
       technologies={technologies}
-      repoUrl="https://github.com/seds-celestia-simulations/sim-nereid"
+      repoUrl="https://github.com/seds-celestia-simulations/Penrose"
       backgroundCanvas={<PenroseBackground />}
     />
   );

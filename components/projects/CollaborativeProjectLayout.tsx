@@ -16,6 +16,7 @@ export interface CollaborativeProjectLayoutProps {
   technologies: string[];
   repoUrl: string;
   backgroundCanvas: React.ReactNode;
+  repositoryDescription?: string;
 }
 
 export default function CollaborativeProjectLayout({
@@ -28,6 +29,7 @@ export default function CollaborativeProjectLayout({
   technologies,
   repoUrl,
   backgroundCanvas,
+  repositoryDescription,
 }: CollaborativeProjectLayoutProps) {
   return (
     <main className="min-h-screen bg-black text-white relative overflow-hidden font-sans pb-16">
@@ -39,7 +41,7 @@ export default function CollaborativeProjectLayout({
       <ProjectNavbar title={title} repoUrl={repoUrl} />
 
       {/* Main Content Area: Compact, 1-2 screen heights */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16 flex flex-col gap-16">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-16 flex flex-col gap-16">
         
         {/* ==========================================
             1. HERO SECTION (Quiet & Compact)
@@ -49,13 +51,13 @@ export default function CollaborativeProjectLayout({
             <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-white">
               {title}
             </h1>
-            <p className="text-lg font-light text-neutral-400 leading-normal max-w-2xl">
+            <p className="text-[19px] font-light text-neutral-400 leading-normal max-w-2xl">
               {subtitle}
             </p>
           </div>
 
           {/* Key Metadata Block */}
-          <div className="grid grid-cols-2 gap-4 max-w-md p-4 border border-white/[0.04] bg-neutral-950/40 rounded font-mono text-xs">
+          <div className="grid grid-cols-2 gap-4 max-w-md p-4 border border-white/[0.04] bg-neutral-950/40 rounded font-mono text-[13px]">
             <div className="flex flex-col gap-1">
               <span className="text-neutral-500 uppercase tracking-wider">Organization</span>
               <span className="text-white font-medium">{organization}</span>
@@ -68,13 +70,13 @@ export default function CollaborativeProjectLayout({
         </section>
 
         {/* ==========================================
-            2. PROJECT SUMMARY
+            2. MOTIVATION
            ========================================== */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
-          <div className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-neutral-500">
-            Project Summary
+          <div className="md:col-span-4 font-mono text-[13px] uppercase tracking-widest text-neutral-500">
+            Motivation
           </div>
-          <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-sm font-light leading-relaxed">
+          <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[15px] font-light leading-relaxed">
             {summaryParagraphs.map((para, idx) => (
               <p key={idx}>{para}</p>
             ))}
@@ -85,10 +87,10 @@ export default function CollaborativeProjectLayout({
             3. MY CONTRIBUTION (Most Important)
            ========================================== */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
-          <div className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-neutral-500">
+          <div className="md:col-span-4 font-mono text-[13px] uppercase tracking-widest text-neutral-500">
             My Contribution
           </div>
-          <div className="md:col-span-8 flex flex-col gap-3.5 font-mono text-xs">
+          <div className="md:col-span-8 flex flex-col gap-3.5 font-mono text-[13px]">
             {contributionItems.map((item, idx) => (
               <div key={idx} className="flex items-start gap-3 border-b border-white/[0.02] pb-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 shrink-0 mt-1.5" />
@@ -102,10 +104,10 @@ export default function CollaborativeProjectLayout({
             4. TECHNOLOGY STACK
            ========================================== */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
-          <div className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-neutral-500">
+          <div className="md:col-span-4 font-mono text-[13px] uppercase tracking-widest text-neutral-500">
             Technology
           </div>
-          <div className="md:col-span-8 flex flex-wrap gap-2 font-mono text-xs">
+          <div className="md:col-span-8 flex flex-wrap gap-2 font-mono text-[13px]">
             {technologies.map((tech, idx) => (
               <span
                 key={idx}
@@ -123,15 +125,15 @@ export default function CollaborativeProjectLayout({
         <section className="border-t border-white/[0.04] pt-12 mt-4 text-center">
           <div className="max-w-2xl mx-auto flex flex-col items-center gap-5">
             <h2 className="text-xl font-normal tracking-tight text-white">
-              Continue exploring the project.
+              Explore {title}.
             </h2>
-            <p className="text-neutral-400 text-xs font-light leading-relaxed max-w-sm">
-              The repository contains source code, documentation, and ongoing development.
+            <p className="text-neutral-400 text-[13px] font-light leading-relaxed max-w-sm">
+              {repositoryDescription || "The repository contains source code, documentation, and ongoing development."}
             </p>
             <Link
               href={repoUrl}
               target="_blank"
-              className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 bg-white text-black font-mono font-medium text-xs rounded hover:bg-neutral-200 transition-colors uppercase tracking-wider"
+              className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 bg-white text-black font-mono font-medium text-[13px] rounded hover:bg-neutral-200 transition-colors uppercase tracking-wider"
             >
               <span>View Repository</span>
             </Link>

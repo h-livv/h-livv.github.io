@@ -16,7 +16,7 @@ export default function BlogSection() {
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
           <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">Notes</h2>
-          <p className="text-sm md:text-base text-primary mb-8 max-w-prose leading-relaxed font-[400]">
+          <p className="text-sm md:text-base text-primary mb-8 max-w-full leading-relaxed font-[400]">
             Essays and notes on scientific computing, physical simulations, and mathematical abstractions.
           </p>
 

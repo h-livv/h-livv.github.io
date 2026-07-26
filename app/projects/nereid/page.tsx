@@ -6,26 +6,25 @@ import { NereidBackground } from '../../../components/projects/ProjectBackground
 
 export default function NereidPage() {
   const summaryParagraphs = [
-    'Nereid is a physical simulation framework for particle-based fluid dynamics utilizing Smoothed Particle Hydrodynamics (SPH). The platform provides a research-focused environment for modeling compressible and incompressible fluid flows by representing fluid volumes as discrete particle systems.',
-    'Developed as a collaborative project within SEDS Celestia, Nereid uses local smoothing kernels to interpolate physical quantities (density, pressure, viscosity) across neighbors, enabling simulation of free-surface flows, droplet dynamics, and container boundary interactions.'
+    'Nereid is a computational laboratory for exploring particle-based numerical methods used in fluid dynamics and continuum simulation. The project investigates how physical systems can be represented through interacting particles, emphasizing numerical accuracy, simulation architecture, and scalable computational techniques.',
+    'Built as an experimental platform rather than a single simulator, Nereid provides an environment for developing particle methods, testing numerical formulations, and exploring high-performance implementations across CPU and GPU architectures.'
   ];
 
   const contributions = [
-    'Framework Refactoring: Led a complete architectural overhaul of the SPH framework, modernizing the codebase for long-term maintainability and extensibility.',
-
-    'Simulation Infrastructure: Redesigned the simulation pipeline into modular components to support future numerical methods, visualization, and GPU acceleration.',
-
-    'Project Leadership: Sole active developer responsible for advancing the framework\'s technical roadmap and next-generation architecture.',
+    'Framework Architecture: Led the architectural redesign of the simulation framework, introducing a modular pipeline supporting extensible numerical methods, visualization, and future GPU backends.',
+    'Particle Simulation: Implemented and validated particle-based simulation infrastructure, including neighborhood search, kernel evaluation, force computation, and time integration components.',
+    'High-Performance Computing: Designing the next-generation simulation engine with a focus on vectorization, parallel algorithms, spatial acceleration structures, and GPU execution.',
+    'Technical Leadership: Leading the technical roadmap and long-term evolution of the project following the development phase.'
   ];
 
-  const technologies = ['Python', 'NumPy', 'CUDA (Roadmap)'];
+  const technologies = ['Python', 'NumPy', 'Numba'];
 
   return (
     <CollaborativeProjectLayout
       title="Nereid"
-      subtitle="Particle-based fluid simulation using Smoothed Particle Hydrodynamics."
+      subtitle="A computational laboratory for particle methods, fluid simulation, and high-performance computing."
       organization="SEDS Celestia"
-      role="Lead Developer / Simulation Development / Framework Design"
+      role="Lead Developer"
       summaryParagraphs={summaryParagraphs}
       contributionItems={contributions}
       technologies={technologies}
