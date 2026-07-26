@@ -17,6 +17,7 @@ export default function AdvectionSimulator() {
   const uPrev = useRef<Float32Array>(new Float32Array(COLS * ROWS));
   const isDrawing = useRef(false);
   const sizeRef = useRef({ pw: 0, ph: 0 });
+  const isVisibleRef = useRef(true);
 
   const injectAt = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!canvasRef.current) return;
@@ -49,6 +50,11 @@ export default function AdvectionSimulator() {
 
     const field = uField.current;
     const prev = uPrev.current;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     const injectCenter = () => {
       for (let r = 0; r < ROWS; r++) {
@@ -123,6 +129,10 @@ export default function AdvectionSimulator() {
     };
 
     const render = () => {
+      if (!isVisibleRef.current) {
+        requestRef.current = requestAnimationFrame(render);
+        return;
+      }
       updateSimulation();
 
       const { pw, ph } = sizeRef.current;
@@ -161,10 +171,11 @@ export default function AdvectionSimulator() {
     resize();
     render();
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(container);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
 
     return () => {
+      resizeObserver.disconnect();
       observer.disconnect();
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };

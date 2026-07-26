@@ -8,12 +8,18 @@ import React, { useEffect, useRef } from 'react';
  */
 export function TempestBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     let animationId: number;
     let width = (canvas.width = window.innerWidth);
@@ -27,6 +33,10 @@ export function TempestBackground() {
 
     let time = 0;
     const render = () => {
+      if (!isVisibleRef.current) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
       time += 0.003; // extremely slow, continuous evolution
       
       // Deep navy background
@@ -108,125 +118,15 @@ export function TempestBackground() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
   }, []);
 
   return <canvas ref={canvasRef} className="w-full h-full block absolute inset-0" />;
 }
 
-/**
- * 2. PENROSE BACKGROUND
- * Schwarzschild ray-traced photon geodesics winding around a black hole
- */
 export function PenroseBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    const center = { x: width * 0.7, y: height * 0.4 };
-
-    // Geodesic ring templates
-    const ringCount = 5;
-    const rings = Array.from({ length: ringCount }).map((_, idx) => {
-      const baseRadius = 80 + idx * 45;
-      return {
-        radiusX: baseRadius * 1.6,
-        radiusY: baseRadius * 0.4,
-        angle: -0.15, // tilt
-        speed: 0.008 - idx * 0.001,
-        color: `rgba(168, 85, 247, ${0.12 - idx * 0.015})`, // Purple
-        offset: idx * Math.PI * 0.3,
-      };
-    });
-
-    let time = 0;
-    const render = () => {
-      time += 0.01;
-      center.x = width * 0.7;
-      center.y = height * 0.4;
-
-      // Dark background
-      ctx.fillStyle = '#000000';
-      ctx.fillRect(0, 0, width, height);
-
-      // Draw Accretion Disk Glow behind BH
-      const glowGrad = ctx.createRadialGradient(center.x, center.y, 10, center.x, center.y, 220);
-      glowGrad.addColorStop(0, 'rgba(147, 51, 234, 0.25)'); // purple glow
-      glowGrad.addColorStop(0.3, 'rgba(88, 28, 135, 0.1)');
-      glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = glowGrad;
-      ctx.beginPath();
-      ctx.arc(center.x, center.y, 220, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Event Horizon
-      ctx.fillStyle = '#000000';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(center.x, center.y, 35, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Orbiting photons along geodesics
-      rings.forEach((ring) => {
-        ctx.strokeStyle = ring.color;
-        ctx.lineWidth = 1;
-
-        ctx.save();
-        ctx.translate(center.x, center.y);
-        ctx.rotate(ring.angle);
-
-        // Draw orbital path ellipse
-        ctx.beginPath();
-        ctx.ellipse(0, 0, ring.radiusX, ring.radiusY, 0, 0, Math.PI * 2);
-        ctx.stroke();
-
-        // Draw photon pulses
-        const t = time * ring.speed * 40 + ring.offset;
-        const count = 3;
-        for (let i = 0; i < count; i++) {
-          const ptAngle = t + (i * Math.PI * 2) / count;
-          const px = Math.cos(ptAngle) * ring.radiusX;
-          const py = Math.sin(ptAngle) * ring.radiusY;
-
-          const size = 1.5 + Math.sin(ptAngle) * 0.5; // perspective size
-          const alpha = 0.3 + Math.sin(ptAngle) * 0.3; // fade on back side
-
-          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-          ctx.beginPath();
-          ctx.arc(px, py, size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      });
-
-      animationId = requestAnimationFrame(render);
-    };
-
-    render();
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="w-full h-full block absolute inset-0" />;
+  return <div className="w-full h-full block absolute inset-0 bg-black" />;
 }
 
 /**
@@ -245,135 +145,7 @@ export function AtlasBackground() {
   return <div className="w-full h-full block absolute inset-0 bg-black" />;
 }
 
-/**
- * 5. GEANTPY BACKGROUND
- * Terminal grid with subtle green and cyan tracking paths
- */
 export function GeantPyBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    // Dynamic tracking paths
-    interface Track {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      color: string;
-      history: { x: number; y: number }[];
-      maxHistory: number;
-    }
-    
-    let tracks: Track[] = [];
-
-    const spawnTrack = () => {
-      const isGreen = Math.random() > 0.4;
-      const angle = (Math.random() - 0.5) * Math.PI * 0.4; // forward direction
-      const speed = 1.0 + Math.random() * 2.0;
-      tracks.push({
-        x: 0,
-        y: height * 0.3 + Math.random() * height * 0.4,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        color: isGreen ? 'rgba(34, 197, 94, 0.3)' : 'rgba(6, 182, 212, 0.3)', // Green or Cyan
-        history: [],
-        maxHistory: 30 + Math.floor(Math.random() * 40),
-      });
-    };
-
-    // Pre-populate
-    for (let i = 0; i < 5; i++) {
-      spawnTrack();
-      for (let step = 0; step < 50; step++) {
-        tracks.forEach(t => {
-          t.history.push({ x: t.x, y: t.y });
-          t.x += t.vx;
-          t.y += t.vy;
-          t.vy += 0.015 * t.vx;
-          t.vx -= 0.015 * t.vy;
-        });
-      }
-    }
-
-    const render = () => {
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillRect(0, 0, width, height);
-
-      // Draw subtle grid
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.012)';
-      ctx.lineWidth = 1;
-      const gridSize = 45;
-      for (let x = 0; x < width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-      for (let y = 0; y < height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
-      }
-
-      // Update and draw tracks
-      if (Math.random() < 0.015 && tracks.length < 15) {
-        spawnTrack();
-      }
-
-      tracks.forEach((t, idx) => {
-        t.history.push({ x: t.x, y: t.y });
-        if (t.history.length > t.maxHistory) {
-          t.history.shift();
-        }
-
-        t.x += t.vx;
-        t.y += t.vy;
-
-        const bendForce = 0.003;
-        const temp = t.vx;
-        t.vx += t.vy * bendForce;
-        t.vy -= temp * bendForce;
-
-        if (t.history.length > 1) {
-          ctx.strokeStyle = t.color;
-          ctx.lineWidth = 1.2;
-          ctx.beginPath();
-          ctx.moveTo(t.history[0].x, t.history[0].y);
-          for (let i = 1; i < t.history.length; i++) {
-            ctx.lineTo(t.history[i].x, t.history[i].y);
-          }
-          ctx.stroke();
-        }
-      });
-
-      tracks = tracks.filter(t => t.x >= 0 && t.x <= width && t.y >= 0 && t.y <= height);
-
-      animationId = requestAnimationFrame(render);
-    };
-
-    render();
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="w-full h-full block absolute inset-0" />;
+  return <div className="w-full h-full block absolute inset-0 bg-black" />;
 }
 

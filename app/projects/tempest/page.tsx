@@ -22,7 +22,7 @@ export default function TempestPage() {
           {/* 1. HERO SECTION */}
           <section className="flex flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-white">
+              <h1 className="text-4xl md:text-5xl font-serif font-normal tracking-normal text-white">
                 Tempest
               </h1>
               <p className="text-[19px] font-light text-neutral-400 leading-normal max-w-2xl">

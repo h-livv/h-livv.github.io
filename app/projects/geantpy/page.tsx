@@ -24,7 +24,7 @@ export default function GeantPyPage() {
             1. HERO SECTION (Quiet & Compact)
            ========================================== */}
         <section className="flex flex-col gap-4">
-          <h1 className="text-4xl md:text-5xl font-normal tracking-tight text-white">
+          <h1 className="text-4xl md:text-5xl font-serif font-normal tracking-normal text-white">
             GeantPy
           </h1>
           <p className="text-[19px] font-light text-neutral-400 leading-normal max-w-2xl">

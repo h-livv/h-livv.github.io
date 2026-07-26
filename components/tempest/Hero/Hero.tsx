@@ -17,7 +17,7 @@ export default function Hero() {
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-6"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[0.95] text-white max-w-4xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-extralight tracking-normal leading-[0.95] text-white max-w-4xl">
             Engineering numerical models for partial differential equations.
           </h1>
 

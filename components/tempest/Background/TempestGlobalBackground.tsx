@@ -5,12 +5,18 @@ import { tempestScrollStore } from '@/hooks/tempest/useScrollStore';
 
 export default function TempestGlobalBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     let animationId: number;
     let width = 0;
@@ -75,6 +81,10 @@ export default function TempestGlobalBackground() {
 
     // Rendering pipeline
     const render = () => {
+      if (!isVisibleRef.current) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
       time += 0.008;
       const scroll = Math.max(0, Math.min(1, tempestScrollStore.progress));
       
@@ -266,6 +276,7 @@ export default function TempestGlobalBackground() {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
+      observer.disconnect();
     };
   }, []);
 

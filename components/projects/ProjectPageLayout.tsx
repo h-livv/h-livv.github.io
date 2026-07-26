@@ -83,7 +83,7 @@ export default function ProjectPageLayout({
            ========================================== */}
         <section className="flex flex-col gap-10">
           <div className="flex flex-col gap-4 max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-white">
+            <h1 className="text-5xl md:text-7xl font-serif font-normal tracking-normal text-white">
               {title}
             </h1>
             <p className="text-xl md:text-2xl font-light text-neutral-400 leading-relaxed">

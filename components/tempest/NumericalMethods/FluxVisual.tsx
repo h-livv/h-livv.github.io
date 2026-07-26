@@ -12,12 +12,18 @@ const STAGES = [
 
 export default function FluxVisual() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     let animationId: number;
     let time = 0;
@@ -30,6 +36,10 @@ export default function FluxVisual() {
     };
 
     const render = () => {
+      if (!isVisibleRef.current) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
       time += 0.012;
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
@@ -123,6 +133,7 @@ export default function FluxVisual() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
+      observer.disconnect();
     };
   }, []);
 

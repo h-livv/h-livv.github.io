@@ -1,5 +1,7 @@
+"use client";
 import * as motion from "framer-motion/client";
 import Link from 'next/link';
+import { Search } from 'lucide-react';
 
 export default function Navbar() {
   return (
@@ -20,10 +22,6 @@ export default function Navbar() {
             <Link href="/#blog" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Writing</Link>
             <Link href="/#contact" className="text-[12px] font-mono tracking-wider uppercase text-secondary hover:text-primary transition-colors">Contact</Link>
           </div>
-        </div>
-
-        <div className="w-4 h-4 rounded-full border border-secondary/50 flex items-center justify-center text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
-          <div className="w-2 h-2 rounded-full bg-current opacity-80" />
         </div>
       </div>
     </motion.nav>

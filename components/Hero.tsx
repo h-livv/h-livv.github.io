@@ -32,7 +32,7 @@ export default function Hero() {
             <span className="text-secondary font-mono text-lg md:text-xl uppercase tracking-widest">Harliv Singh</span>
           </div>
           
-          <h1 className="text-2xl md:text-4xl font-[700] leading-[1.2] tracking-tight text-primary mb-6">
+          <h1 className="text-3xl md:text-5xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-6">
             Physics, Mathematics,<br />and Computation
           </h1>
           

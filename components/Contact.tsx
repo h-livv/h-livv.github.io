@@ -11,7 +11,7 @@ export default function Contact() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <h2 className="text-2xl font-bold tracking-tight text-primary mb-6">Contact</h2>
+          <h2 className="text-3xl font-serif font-normal tracking-tight text-primary mb-6">Contact</h2>
           
           <div className="flex flex-col sm:flex-row gap-6">
             {socials.map((social) => {

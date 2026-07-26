@@ -19,12 +19,18 @@ const COLUMNS = [
 
 export default function FourierOperatorVisual() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     let animationId: number;
     let time = 0;
@@ -46,6 +52,10 @@ export default function FourierOperatorVisual() {
     };
 
     const render = () => {
+      if (!isVisibleRef.current) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
       time += 0.016;
       
       const CYCLE = 10.0;
@@ -278,6 +288,7 @@ export default function FourierOperatorVisual() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
+      observer.disconnect();
     };
   }, []);
 

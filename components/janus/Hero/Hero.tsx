@@ -42,8 +42,8 @@ export default function Hero() {
             00. SYSTEM INITIATION
           </div>
           
-          <h1 className="text-5xl md:text-8xl font-normal tracking-tight leading-none text-white max-w-3xl">
-            Engineering the <span className="text-[#5EEAD4] font-medium">antimatter</span> pipeline.
+          <h1 className="text-5xl md:text-8xl font-medium tracking-tight leading-none text-white max-w-3xl">
+            Engineering the <span className="text-[#5EEAD4]">antimatter</span> pipeline.
           </h1>
           
           <p className="text-secondary text-lg md:text-xl font-light leading-relaxed max-w-2xl mt-4">

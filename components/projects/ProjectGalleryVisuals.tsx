@@ -353,12 +353,18 @@ export function NereidSPHSetup() {
  */
 export function NereidFluidFrames() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(canvas);
 
     let width = (canvas.width = 180);
     let height = (canvas.height = 135);
@@ -385,6 +391,10 @@ export function NereidFluidFrames() {
     let animationId: number;
 
     const render = () => {
+      if (!isVisibleRef.current) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
       // Dark bg
       ctx.fillStyle = '#030712';
       ctx.fillRect(0, 0, width, height);
@@ -466,6 +476,7 @@ export function NereidFluidFrames() {
     render();
     return () => {
       cancelAnimationFrame(animationId);
+      observer.disconnect();
     };
   }, []);
 

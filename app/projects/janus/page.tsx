@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function JanusPage() {
   return (
-    <main className="min-h-screen bg-transparent text-white relative">
+    <main className="min-h-screen bg-transparent text-white relative z-10">
       {/* Persistent 3D WebGL particle simulation background */}
       <PipelineBackground />
 

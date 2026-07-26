@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -9,6 +9,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const garamond = EB_Garamond({
+  variable: "--font-garamond",
   subsets: ["latin"],
 });
 
@@ -25,9 +30,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${garamond.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-primary selection:bg-white/20 selection:text-white font-normal text-[15px] sm:text-base leading-relaxed tracking-tight">
+      <body className="min-h-full flex flex-col font-sans bg-background text-primary selection:bg-white/20 selection:text-white font-normal text-[14px] leading-relaxed tracking-tight">
         {children}
       </body>
     </html>
