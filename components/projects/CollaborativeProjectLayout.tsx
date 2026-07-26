@@ -124,7 +124,7 @@ export default function CollaborativeProjectLayout({
            ========================================== */}
         <section className="border-t border-white/[0.04] pt-12 mt-4 text-center">
           <div className="max-w-2xl mx-auto flex flex-col items-center gap-5">
-            <h2 className="text-2xl font-serif font-normal tracking-tight text-white">
+            <h2 className="text-3xl font-serif font-normal tracking-normal text-white">
               Explore {title}.
             </h2>
             <p className="text-neutral-400 text-[12px] font-light leading-relaxed max-w-sm">

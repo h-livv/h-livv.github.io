@@ -64,7 +64,7 @@ export default function ProjectPageLayout({
       </div>
 
       {/* Header / Back Navigation */}
-      <header className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 pt-8 flex items-center justify-between">
+      <header className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 pt-8 flex items-center justify-between">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors font-mono text-xs uppercase tracking-wider group"
@@ -77,13 +77,13 @@ export default function ProjectPageLayout({
         </span>
       </header>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 pt-16 flex flex-col gap-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 pt-16 flex flex-col gap-24">
         {/* ==========================================
             1. HERO SECTION
            ========================================== */}
         <section className="flex flex-col gap-10">
           <div className="flex flex-col gap-4 max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-serif font-normal tracking-normal text-white">
+            <h1 className="text-4xl md:text-5xl font-serif font-normal tracking-normal text-white">
               {title}
             </h1>
             <p className="text-xl md:text-2xl font-light text-neutral-400 leading-relaxed">

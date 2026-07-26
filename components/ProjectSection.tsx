@@ -15,7 +15,7 @@ export default function ProjectSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <h2 className="text-3xl font-serif font-normal tracking-tight text-primary mb-8">Projects</h2>
+          <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-8">Projects</h2>
           
           <div className="mb-12">
             <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-4">Research Projects</h3>

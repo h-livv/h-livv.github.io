@@ -202,7 +202,7 @@ export default function GeantPyPage() {
            ========================================== */}
         <section className="border-t border-white/[0.04] pt-12 mt-4 text-center">
           <div className="max-w-2xl mx-auto flex flex-col items-center gap-5">
-            <h2 className="text-xl font-normal tracking-tight text-white">
+            <h2 className="text-3xl font-serif font-normal tracking-normal text-white">
               Explore GeantPy.
             </h2>
             <p className="text-neutral-400 text-[13px] font-light leading-relaxed max-w-sm">

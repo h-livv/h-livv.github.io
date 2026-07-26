@@ -96,7 +96,7 @@ export default function TempestPage() {
 
           {/* 5. CLOSING SECTION */}
           <section className="border-t border-white/[0.04] pt-12 mt-4 text-center flex flex-col items-center gap-6">
-            <h2 className="text-xl font-normal tracking-tight text-white">
+            <h2 className="text-3xl font-serif font-normal tracking-normal text-white">
               Explore Tempest.
             </h2>
             <p className="text-neutral-300 text-[15px] font-light leading-relaxed max-w-lg">
@@ -126,7 +126,7 @@ export default function TempestPage() {
         
         {/* Simple Footer preserving backward/forward project navigation */}
         <footer className="w-full border-t border-white/[0.04] py-8 px-6 md:px-12 mt-4 bg-black relative z-10">
-          <div className="max-w-6xl mx-auto flex items-center justify-between font-mono text-[13px] text-neutral-500 uppercase tracking-wider">
+          <div className="max-w-5xl mx-auto flex items-center justify-between font-mono text-[13px] text-neutral-500 uppercase tracking-wider">
             <span className="text-neutral-300">Harliv Singh</span>
             <Link
               href="/#projects"

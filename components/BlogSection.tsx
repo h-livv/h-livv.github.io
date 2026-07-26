@@ -15,7 +15,7 @@ export default function BlogSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl font-serif font-normal tracking-tight text-primary mb-4">Notes</h2>
+          <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-4">Notes</h2>
           <p className="text-sm md:text-base text-primary mb-8 max-w-full leading-relaxed font-[400]">
             Essays and notes on scientific computing, physical simulations, and mathematical abstractions.
           </p>
