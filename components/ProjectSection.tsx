@@ -24,7 +24,7 @@ export default function ProjectSection() {
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-16">
-            Research Systems
+            Systems
           </h2>
           
           <div className="mb-20">
@@ -45,7 +45,7 @@ export default function ProjectSection() {
           </div>
 
           <div>
-            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Scientific Engines</h3>
+            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Computational Labs</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {engines.map((project, index) => (
                 <motion.div
