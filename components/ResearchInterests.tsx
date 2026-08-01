@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import * as motion from "framer-motion/client";
 
 const interests = [
   {
@@ -22,6 +19,7 @@ const interests = [
     topics: [
       "Mechanistic Interpretability",
       "AI Systems",
+      "Scientific Workflows",
       "Scientific ML",
     ],
   },
@@ -37,9 +35,6 @@ const interests = [
 ];
 
 export default function ResearchInterests() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const active = interests[activeIndex];
-
   return (
     <section
       id="research"
@@ -56,47 +51,31 @@ export default function ResearchInterests() {
             Research Interests
           </h2>
 
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {interests.map((interest, index) => (
-              <button
-                key={interest.title}
-                type="button"
-                onClick={() => setActiveIndex(index)}
-                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-widest border transition-all duration-200 ${
-                  activeIndex === index
-                    ? "bg-white/[0.04] border-white/[0.15] text-primary"
-                    : "bg-white/[0.01] border-white/[0.06] text-secondary hover:border-white/[0.12] hover:text-primary"
-                }`}
-              >
-                {interest.title}
-              </button>
-            ))}
-          </div>
-
-          <div className="rounded-xl border border-white/[0.05] bg-white/[0.01] p-6 md:p-8 min-h-[120px]">
-            <AnimatePresence mode="wait">
               <motion.div
-                key={active.title}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
+                key={interest.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.35, delay: index * 0.06 }}
+                className="rounded-xl border border-white/[0.05] bg-white/[0.01] p-6 md:p-8"
               >
                 <p className="text-sm font-medium text-primary mb-5">
-                  {active.title}
+                  {interest.title}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {active.topics.map((topic) => (
+                  {interest.topics.map((topic) => (
                     <span
                       key={topic}
-                      className="px-3 py-1.5 rounded-lg text-xs text-secondary border border-white/[0.06] bg-black/40 hover:border-white/[0.12] hover:text-primary transition-colors duration-200"
+                      className="px-3 py-1.5 rounded-lg text-xs text-secondary border border-white/[0.06] bg-black/40"
                     >
                       {topic}
                     </span>
                   ))}
                 </div>
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
         </motion.div>
       </div>
