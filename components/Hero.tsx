@@ -37,7 +37,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-sm md:text-base text-secondary max-w-prose leading-relaxed font-[400] mb-8">
-            Mathematics student at BITS Goa exploring physics and mathematics using computation.
+            Mathematics student at BITS Goa investigating complex systems.
           </p>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
