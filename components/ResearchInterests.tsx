@@ -19,16 +19,14 @@ const interests = [
     topics: [
       "Mechanistic Interpretability",
       "AI Systems",
-      "Scientific Workflows",
-      "Scientific ML",
+      "Scientific Machine Learning",
     ],
   },
   {
     title: "Computational Systems",
     topics: [
-      "GPU Architecture",
-      "Parallel Computing",
       "Computer Architecture",
+      "Parallel Computing",
       "Memory Systems",
     ],
   },
