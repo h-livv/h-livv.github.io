@@ -3,7 +3,7 @@ import * as motion from "framer-motion/client";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-12 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24">
+    <section id="contact" className="py-20 md:py-28 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}

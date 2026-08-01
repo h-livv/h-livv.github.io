@@ -1,5 +1,8 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import ResearchIdentity from '../components/ResearchIdentity';
+import CurrentFocus from '../components/CurrentFocus';
+import Philosophy from '../components/Philosophy';
 import ProjectSection from '../components/ProjectSection';
 import BlogSection from '../components/BlogSection';
 import Contact from '../components/Contact';
@@ -11,6 +14,9 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 relative z-10 bg-transparent">
         <Hero />
+        <ResearchIdentity />
+        <CurrentFocus />
+        <Philosophy />
         <ProjectSection />
         <BlogSection />
         <Contact />
