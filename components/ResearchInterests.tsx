@@ -46,7 +46,7 @@ export default function ResearchInterests() {
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-10">
-            Research Interests
+            Interests
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
