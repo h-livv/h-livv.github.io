@@ -67,7 +67,7 @@ export default function Hero() {
             className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-auto"
           >
             <a 
-              href="#projects" 
+              href="#research" 
               className="flex flex-col items-center gap-2 text-secondary hover:text-primary transition-colors text-[10px] font-mono uppercase tracking-widest"
             >
               <span>Explore my Projects</span>
