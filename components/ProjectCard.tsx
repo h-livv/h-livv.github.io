@@ -20,10 +20,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             <h3 className="text-sm font-semibold text-primary">{project.title}</h3>
             <ArrowRight className="w-5 h-5 text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary" />
           </div>
-          <p className="text-secondary text-[11px] mb-3 leading-normal max-w-prose line-clamp-2">{project.description}</p>
-          <div className="text-[11px] text-secondary/60 font-mono tracking-widest uppercase">
-            {project.role}
-          </div>
+          <p className="text-secondary text-[11px] leading-normal max-w-prose line-clamp-2">{project.description}</p>
         </div>
       </div>
     </Link>
