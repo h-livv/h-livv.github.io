@@ -20,7 +20,7 @@ export default function Footer() {
   ];
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-between px-6 py-12 md:px-12 md:py-20 select-none bg-black/80 backdrop-blur-sm border-t border-borders">
+    <section className="relative min-h-screen w-full flex flex-col justify-between px-6 py-12 md:px-12 md:py-20 select-none bg-black border-t border-borders">
       {/* Top section: Pipeline overview diagram */}
       <div className="max-w-6xl mx-auto w-full my-auto flex flex-col items-center justify-center gap-16 py-12">
         <div className="text-center flex flex-col items-center gap-4">
