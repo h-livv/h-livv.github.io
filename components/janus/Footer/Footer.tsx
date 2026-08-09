@@ -63,7 +63,16 @@ export default function Footer() {
           <h3 className="text-white text-lg font-light tracking-tight">
             Learn more about Janus
           </h3>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <Link
+            href="https://github.com/h-livv/Janus"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 border border-borders hover:border-white/50 hover:bg-neutral-900/60 text-white font-medium text-base rounded transition-all duration-300 flex items-center gap-3 bg-black/50 w-full sm:w-auto justify-center"
+          >
+            <GithubIcon className="w-5 h-5 text-white" />
+            <span>View on GitHub</span>
+          </Link>
+          <div className="flex flex-wrap gap-4 justify-center mt-2">
             <Link
               href="/projects/janus/docs"
               className="px-6 py-3 border border-borders hover:border-[#5EEAD4]/40 hover:bg-neutral-900/50 text-white font-medium text-sm rounded transition-all duration-300 flex items-center gap-2 bg-black/40"

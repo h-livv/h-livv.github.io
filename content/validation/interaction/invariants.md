@@ -20,12 +20,6 @@ Reports macroscopic counters for human inspection — it does **not** compare yi
 - Global baryon conservation check
 - Mean charged pions per inelastic event
 
-### Example terminal output (100k events)
-
-
-
----
-
 ---
 
 **Next page:** [Phenomenological Validation](phenomenology.md)
