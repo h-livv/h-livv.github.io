@@ -1,40 +1,19 @@
-# Transport Physics
+# 2. Transport
 
-The transport section propagates particles through a sequence of magnetic elements using the relativistic Boris integrator.
+Beamline transport is delegated to **Xsuite**. Janus owns only:
 
-Each element modifies the beam phase space according to its magnetic field structure. Composite lattices (FODO cells, minimal ACOL-inspired collector lines) are assembled from the same elements and validated at the ensemble level (envelope, emittance, Twiss).
+* Geant4 ROOT → NPZ seed extraction (`transport/io.py`) — load only; no experiment cuts
+* Conversion of seed arrays into `xpart.Particles` (`transport/xsuite.py`)
+* Packaging of transported NPZ output for optimization
+* Experiment scripts under `experiments/transport/` that define every scientific parameter
 
----
+Beamlines are constructed in Python with native Xsuite elements (`xt.Drift`, `xt.Quadrupole`, `xt.Bend`, …). Particle coordinates use the Xsuite convention: transverse positions `x`, `y` [m]; normalized momenta `px`, `py`; longitudinal phase `zeta` (set to 0 at injection); momentum deviation `delta`. Reference mass uses `xt.PROTON_MASS_EV` for both proton and antiproton ensembles.
 
-## Numerical integrator
+The physical models below describe the accelerator elements relevant to antimatter collection. Their tracking maps are provided by Xsuite, not by Janus. Horn and higher-order correctors remain conceptual until wired through Xsuite field-map elements.
 
-### Physical purpose
+# Magnetic Horn
 
-Advance relativistic charged particles under the Lorentz force in static magnetic lattices.
-
-### Governing equations
-
-$$
-\frac{d\vec{p}}{dt}=q(\vec{E}+\vec{v}\times\vec{B}),\qquad \vec{p}=\gamma m\vec{v}
-$$
-
-with $\vec{E}=0$ in the present magnetic transport studies. Positions and velocities are updated with a staggered leapfrog Boris scheme.
-
-### Assumptions
-
-* Classical relativistic point particles.
-* External fields only (no space charge in the current solver).
-
-### Simplifications
-
-* No synchrotron radiation reaction.
-* No stochastic scattering during transport.
-
----
-
-## Magnetic horn
-
-### Physical purpose
+## Physical Purpose
 
 The magnetic horn collects charged secondaries emerging from the target.
 
@@ -42,12 +21,15 @@ Low-angle particles are focused toward the transport axis.
 
 The horn greatly increases capture efficiency.
 
-### Governing equations
+## Governing Equations
 
 The horn field is approximated as
 
 $$
-B_\phi(r) = \frac{\mu_0 I}{2\pi r}
+B_\phi(r)
+=
+
+\frac{\mu_0 I}{2\pi r}
 $$
 
 where:
@@ -58,33 +40,34 @@ where:
 Particle motion follows
 
 $$
-\frac{d\vec p}{dt} = q(\vec v\times\vec B)
+\frac{d\vec p}{dt}
+=
+
+q(\vec v\times\vec B)
 $$
 
-### Assumptions
+## Assumptions
 
 * Cylindrical symmetry.
 * Steady-state current.
 * Idealized conductor geometry.
 
-### Simplifications
+## Simplifications
 
 * No skin effects.
 * No current pulse dynamics.
 * No conductor heating.
 * No field-map interpolation.
 
----
+# Drift Zone
 
-## Drift zone
-
-### Physical purpose
+## Physical Purpose
 
 A drift region allows particles to propagate without active magnetic focusing.
 
 Momentum-dependent divergence naturally develops.
 
-### Governing equations
+## Governing Equations
 
 No external force:
 
@@ -101,25 +84,26 @@ $$
 and
 
 $$
-\vec x(t) = \vec x_0+\vec v t
+\vec x(t)
+=
+
+\vec x_0+\vec v t
 $$
 
-### Assumptions
+## Assumptions
 
 * Perfect vacuum.
 * No residual magnetic field.
 
-### Simplifications
+## Simplifications
 
 * No scattering.
 * No energy loss.
 * No gas interactions.
 
----
+# Dipole Magnet
 
-## Dipole magnet
-
-### Physical purpose
+## Physical Purpose
 
 Dipoles provide momentum selection.
 
@@ -127,42 +111,46 @@ Particles with different momentum follow different trajectories.
 
 This allows antiproton filtering.
 
-### Governing equations
+## Governing Equations
 
 Radius of curvature:
 
 $$
-R = \frac{p}{qB}
+R
+=
+
+\frac{p}{qB}
 $$
 
 Equivalent accelerator form:
 
 $$
-p[\text{GeV}/c] = 0.2998\, B[\text{T}]\, R[\text{m}]
+p[\text{GeV}/c]
+=
+
+0.2998, B[\text{T}], R[\text{m}]
 $$
 
-### Assumptions
+## Assumptions
 
 * Uniform magnetic field.
 * Hard-edge boundaries.
 
-### Simplifications
+## Simplifications
 
 * No fringe fields.
 * No field errors.
 * No hysteresis.
 
----
+# Quadrupole Magnet
 
-## Quadrupole magnet
-
-### Physical purpose
+## Physical Purpose
 
 Quadrupoles focus the beam in one plane while defocusing it in the orthogonal plane.
 
 They provide transverse beam control.
 
-### Governing equations
+## Governing Equations
 
 Field model:
 
@@ -185,7 +173,10 @@ is the gradient.
 The focusing strength is
 
 $$
-k = \frac{qG}{p}
+k
+=
+
+\frac{qG}{p}
 $$
 
 Beam envelope evolution is approximately
@@ -194,14 +185,14 @@ $$
 x'' + kx = 0
 $$
 
-for the focusing plane (Janus field convention $B=(Gy,Gx,0)$ implies the complementary hyperbolic motion in the other plane).
+for the focusing plane.
 
-### Assumptions
+## Assumptions
 
 * Linear magnetic field.
-* Hard-edge magnet boundaries.
+* Small transverse displacement.
 
-### Simplifications
+## Simplifications
 
 * No higher-order multipoles.
 * No alignment errors.
@@ -209,22 +200,4 @@ for the focusing plane (Janus field convention $B=(Gy,Gx,0)$ implies the complem
 
 ---
 
-## Beam optics diagnostics
-
-### Physical purpose
-
-For multi-element lattices, validation shifts from single orbits to ensemble beam quality and first-order optics.
-
-### Observables
-
-From the tracked particle cloud, Janus computes RMS envelopes $(\sigma_x,\sigma_y)$, geometric emittances, Courant–Snyder Twiss parameters $(\beta,\alpha,\gamma)$, momentum spread $\Delta p/p$, transmission, and acceptance losses.
-
-Emittance conservation in linear magnetic optics follows from Liouville's theorem in the transverse plane: trajectories rearrange while phase-space area is preserved.
-
-### Linear comparison
-
-A modular optics backend provides thick-lens Drift/Quadrupole transfer matrices (and Twiss/envelope propagation). Tracked transfer matrices, envelopes, and Twiss functions are compared against this backend.
-
-For validation results, see [Transport validation](../validation/transport/index.md).
-
-Next: [Future extensions](future.md).
+**Next page:** [Future Extensions](future.md)

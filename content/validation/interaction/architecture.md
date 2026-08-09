@@ -1,11 +1,25 @@
-# Extraction Architecture
+## Two data streams
 
-To decouple validation logic from the inner workings of the transport engine, the architecture relies on an absolute separation of tracking points into two independent data streams:
+Geant4 writes two ROOT files per run (staged under `temp/`, then packaged into `data/interactions/<run_name>/`):
 
-1. **Terminal State Node (The "Validation" Node):**
-   Captures the system exclusively at the terminal boundaries of an interaction (e.g., immediately post-collision). It records the absolute pre-collision initial state and the final fragmented asymptotic state. This node must be dynamically aware, capturing instantaneous properties like sampled isotope variations and specific beam parameters per event.
+| File | Tree | Role |
+|------|------|------|
+| `validation.root` | `Validation` | Per-event initial / outgoing kinematics for conservation checks |
+| `simulation.root` | `Seeds` | Secondary kinematics for transport (and Phase 4 spatial plots) |
 
-2. **Birth State Node (The "Seed" Node):**
-   A global tracking hook that captures the fundamental birth parameters ($t=0$ position, momentum, energy, and PID) of every secondary particle generated anywhere in the target geometry, enabling spatial and kinematic distribution analyses.
+### Seed recording mode
 
-This separation allows each validation phase to consume the appropriate data stream without depending on engine internals.
+`interactions/config.json` → `output.record_mode`:
+
+| Mode | Meaning |
+|------|---------|
+| `"Hit"` (**default**) | Record kinematics when a particle crosses Target → Chamber |
+| `"Birth"` | Record \(t=0\) birth kinematics of secondaries |
+
+Transport and Phase 4 both read `Seeds`. With the default Hit mode, those are chamber-entry states, not necessarily production vertices.
+
+---
+
+---
+
+**Next page:** [Invariant Checks](invariants.md)

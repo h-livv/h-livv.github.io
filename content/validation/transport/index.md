@@ -1,48 +1,28 @@
 # Transport Validation
 
-This section is the canonical description of the Janus transport validation pipeline. It demonstrates that the relativistic particle integrator, lattice elements, and multi-element beam transport are physically trustworthy before optimization, deceleration, cooling, trapping, or digital-twin studies build upon them.
+**Current status:** Transport tracking is performed by **Xsuite**. Janus validates only its integration boundaries, metrics, studies, provenance, and automatic diagnostics — not Xsuite element physics.
 
----
+## What Janus tests
 
-## Purpose
+1. NPZ seed loading (`transport/io.py`)
+2. Conversion into `xpart.Particles` (`transport/xsuite.py`)
+3. Pipeline NPZ + metrics + provenance + analysis product generation
+4. Smoke tracking through a minimal `xtrack.Line`
+5. Structured metrics from in-memory `TransportResult` and NPZ adapter
+6. Study parameter generators and CSV export
+7. Per-run provenance fingerprinting
 
-Janus advances charged particles through user-defined electromagnetic lattices by integrating the relativistic Lorentz force. Validation asks whether that integration — and the magnets that source the fields — reproduce known accelerator physics before the same machinery is used for design or optimization.
+## Validation boundary
 
----
+Janus does **not** re-validate:
 
-## Hierarchical philosophy
+- Geant4 hadronic physics
+- Xsuite element physics or tracking maps
 
-Validation progresses deliberately:
+Janus **does** validate:
 
-| Stage | Question |
-|-------|----------|
-| Single particle | Does the Boris integrator solve the Lorentz equation correctly in elementary fields? |
-| Composite transport | Do validated elements remain consistent when joined? |
-| Beam transport | Does an ensemble evolve as expected under linear optics? |
-| Linear optics benchmarking | Does Janus agree with established first-order optics? |
-
-Each stage assumes the previous one. Independent validation at every level is required: optimization against a broken integrator, or Twiss matching on an untested lattice stack, would only tune numerical artefacts.
-
----
-
-## Why this matters for later Janus stages
-
-A credible foundation for antimatter transport, deceleration, cooling, trapping, and ultimately a digital twin of the beamline requires that:
-
-1. the **physics implementation** (fields + Lorentz force) is correct;
-2. **composite beamlines** preserve physical invariants across element boundaries;
-3. **beam observables** (envelope, emittance, Twiss) behave as accelerator physics predicts.
-
-The pages below address those three requirements in order.
-
----
-
-## Pages
-
-| Stage | Page |
-|-------|------|
-| Single-particle integrator | [Integrator validation](integrator.md) |
-| Composite lattices | [Composite lattice validation](composite.md) |
-| Beam dynamics | [Beam dynamics validation](beam-dynamics.md) |
-| Linear optics | [Linear optics benchmarking](optics.md) |
-| Conservation & scope | [Summary and scope](summary.md) |
+- Unit and coordinate conversions at the Geant4 → Xsuite boundary
+- NPZ seed and transported NPZ schemas
+- Metrics definitions and alive-particle masking
+- Provenance determinism for canonical parameters
+- Study aggregation without external Geant4 files

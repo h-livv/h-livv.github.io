@@ -23,11 +23,6 @@ Monte Carlo collision engines are stochastic and difficult to benchmark directly
 
 ## Transport validation
 
-The [transport validation pipeline](transport/index.md) progresses from single-particle physics to full beamline behaviour:
+The [transport validation pipeline](transport/index.md) establishes the correctness of Janus integration boundaries and metrics without re-validating the core tracking engine:
 
-1. [Introduction](transport/index.md) — purpose and hierarchical philosophy
-2. [Single-particle integrator](transport/integrator.md) — drift, dipole, quadrupole, magnetic horn
-3. [Composite lattices](transport/composite.md) — element handoffs and interface continuity
-4. [Beam dynamics](transport/beam-dynamics.md) — FODO ensemble diagnostics
-5. [Linear optics benchmarking](transport/optics.md) — transfer matrices, envelopes, Twiss parameters
-6. [Summary and scope](transport/summary.md) — conservation table, limitations, conclusions
+1. [Transport Boundaries & Diagnostics](transport/index.md) — NPZ schemas, metrics, provenance, and coordinate boundaries

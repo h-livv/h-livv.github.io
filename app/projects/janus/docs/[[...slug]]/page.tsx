@@ -27,11 +27,6 @@ const slugToFileMap: Record<string, string> = {
   'validation/interaction/invariants': 'validation/interaction/invariants.md',
   'validation/interaction/phenomenology': 'validation/interaction/phenomenology.md',
   'validation/transport': 'validation/transport/index.md',
-  'validation/transport/integrator': 'validation/transport/integrator.md',
-  'validation/transport/composite': 'validation/transport/composite.md',
-  'validation/transport/beam-dynamics': 'validation/transport/beam-dynamics.md',
-  'validation/transport/optics': 'validation/transport/optics.md',
-  'validation/transport/summary': 'validation/transport/summary.md',
   'roadmap': 'roadmap.md',
   'acknowledgements': 'acknowledgements.md',
 };
@@ -50,11 +45,6 @@ export async function generateStaticParams() {
     { slug: ['validation', 'interaction', 'invariants'] },
     { slug: ['validation', 'interaction', 'phenomenology'] },
     { slug: ['validation', 'transport'] },
-    { slug: ['validation', 'transport', 'integrator'] },
-    { slug: ['validation', 'transport', 'composite'] },
-    { slug: ['validation', 'transport', 'beam-dynamics'] },
-    { slug: ['validation', 'transport', 'optics'] },
-    { slug: ['validation', 'transport', 'summary'] },
     { slug: ['roadmap'] },
     { slug: ['acknowledgements'] },
   ];
@@ -106,11 +96,6 @@ const navTree: NavItem[] = [
         title: 'Transport Validation',
         items: [
           { title: 'Overview', href: '/projects/janus/docs/validation/transport', slug: 'validation/transport' },
-          { title: 'Single-Particle Integrator', href: '/projects/janus/docs/validation/transport/integrator', slug: 'validation/transport/integrator' },
-          { title: 'Composite Lattices', href: '/projects/janus/docs/validation/transport/composite', slug: 'validation/transport/composite' },
-          { title: 'Beam Dynamics', href: '/projects/janus/docs/validation/transport/beam-dynamics', slug: 'validation/transport/beam-dynamics' },
-          { title: 'Linear Optics Benchmarking', href: '/projects/janus/docs/validation/transport/optics', slug: 'validation/transport/optics' },
-          { title: 'Conservation & Scope', href: '/projects/janus/docs/validation/transport/summary', slug: 'validation/transport/summary' },
         ]
       }
     ]
@@ -353,11 +338,6 @@ export default async function Page({ params }: PageProps) {
             'architecture': '/projects/janus/docs/validation/interaction/architecture',
             'invariants': '/projects/janus/docs/validation/interaction/invariants',
             'phenomenology': '/projects/janus/docs/validation/interaction/phenomenology',
-            'integrator': '/projects/janus/docs/validation/transport/integrator',
-            'composite': '/projects/janus/docs/validation/transport/composite',
-            'beam-dynamics': '/projects/janus/docs/validation/transport/beam-dynamics',
-            'optics': '/projects/janus/docs/validation/transport/optics',
-            'summary': '/projects/janus/docs/validation/transport/summary',
             'roadmap': '/projects/janus/docs/roadmap',
             'acknowledgements': '/projects/janus/docs/acknowledgements',
           };

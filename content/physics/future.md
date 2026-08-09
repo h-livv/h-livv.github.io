@@ -1,64 +1,69 @@
-# Future Extensions
+# Sextupole Magnet
 
-The following physics and lattice elements are planned but not yet part of the validated Janus core.
-
----
-
-## Sextupole magnet
-
-### Physical purpose
+## Physical Purpose
 
 Sextupoles correct chromatic aberrations.
 
 Particles of different momentum experience different focusing strengths; sextupoles compensate for this effect.
 
-### Governing equations
+## Governing Equations
 
 Field expansion:
 
 $$
-B_x = Sxy
+B_x
+=
+
+Sxy
 $$
 
 $$
-B_y = \frac{S}{2}(x^2-y^2)
+B_y
+=
+
+\frac{S}{2}(x^2-y^2)
 $$
 
 where
 
 $$
-S = \frac{\partial^2 B}{\partial x^2}
+S
+=
+
+\frac{\partial^2 B}{\partial x^2}
 $$
 
 is the sextupole strength.
 
-### Assumptions
+## Assumptions
 
 * Ideal sextupole field.
 * Small beam offsets.
 
-### Simplifications
+## Simplifications
 
 * No magnet imperfections.
 * No saturation effects.
 
----
+# Current Scope
 
-## Planned lattice elements
+**Implemented today**
 
-* Sextupoles and higher multipoles
-* Solenoids (placeholder case only)
+* Target production (Geant4: `engines/geant4/` + `interactions/`)
+* Collision-stage validation (`interactions/validation/`)
+* NPZ seed extraction from Geant4 ROOT output (`transport/io.py`)
+* Xsuite-backed drift, quadrupole, and bend transport via Python experiment scripts
+* Automatic post-transport diagnostics (`transport/analysis/`)
 
----
+**Not yet implemented**
 
-## Planned pipeline features
+* Magnetic horn as an Xsuite field-map element
+* Cooling, deceleration, trapping, and global optimization
 
-* Stochastic cooling
-* Electron cooling
-* Deceleration stages
-* Trap injection
-* Penning traps
-* Antihydrogen formation
-* Storage and confinement
+For how to define and run a transport study, see [transport guide](guides/transport_guide.md).
 
-These extensions will build on the validated interaction and transport foundation described in the preceding pages. See also the project [Roadmap](../roadmap.md).
+# Philosophy
+
+Janus is not intended to reproduce every microscopic accelerator effect.
+
+Instead, it seeks to capture the dominant beam-physics mechanisms that determine antimatter yield, transport efficiency, momentum selection, and beamline optimization while remaining computationally tractable for large-scale parameter studies and optimization workflows.

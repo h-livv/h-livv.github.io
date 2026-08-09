@@ -14,36 +14,44 @@ export default function Optimization() {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-white leading-tight">
-            Physics-driven optimization <span className="text-amber-500 font-medium">of the complete pipeline.</span>
+            Explore the parameter space. Understand the physics. <span className="text-amber-500 font-medium">Optimize the pipeline.</span>
           </h2>
           
           <p className="text-secondary text-sm md:text-base font-light leading-relaxed max-w-xl">
-            Janus couples physical simulations with differentiable optimization. By taking gradients directly through solver steps, the platform performs multi-objective sweeps to optimize magnet placement, cooling schedules, and electrode potentials simultaneously.
+            Janus treats antimatter production and transport as a coupled computational system. Parameter sweeps and sensitivity analysis reveal which physical parameters control performance, while surrogate models and numerical optimization provide increasingly efficient ways to search the resulting design space.
           </p>
         </div>
 
         {/* Right stats column */}
         <div className="md:col-span-5 border border-borders bg-black/40 backdrop-blur-sm p-6 rounded font-mono text-xs flex flex-col gap-6 text-left w-full">
           <div className="text-white border-b border-borders pb-3 uppercase tracking-wider font-semibold">
-            OPTIMIZATION ENGINE
+            OPTIMIZATION FRAMEWORK
           </div>
           
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-              <span className="text-secondary">METHOD</span>
-              <span className="text-white">Gradient-Based</span>
+              <span className="text-secondary">PARAMETER SPACE</span>
+              <span className="text-white">Multi-dimensional</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-secondary">SOLVER</span>
-              <span className="text-white">L-BFGS-B</span>
+              <span className="text-secondary">ANALYSIS</span>
+              <span className="text-white">Sensitivity</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-secondary">OBJECTIVE</span>
-              <span className="text-white">User Defined</span>
+              <span className="text-secondary">SURROGATES</span>
+              <span className="text-white">Experimental</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-secondary">BACKEND</span>
-              <span className="text-white">SciPy</span>
+              <span className="text-secondary">OPTIMIZERS</span>
+              <span className="text-white">Multiple methods</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-secondary">OBJECTIVES</span>
+              <span className="text-white">Multi-objective</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-secondary">CONSTRAINTS</span>
+              <span className="text-white">Physics-defined</span>
             </div>
             <div className="flex justify-between">
               <span className="text-secondary">STATUS</span>
@@ -52,7 +60,7 @@ export default function Optimization() {
           </div>
 
           <div className="border-t border-borders pt-4 text-[10px] text-secondary leading-normal">
-            * Optimization infrastructure designed for future differentiable physics workflows.
+            * Optimization methods are selected according to the structure and cost of the underlying physical model.
           </div>
         </div>
       </div>
