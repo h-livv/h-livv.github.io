@@ -195,23 +195,37 @@ const vertexShader = `
     }
 
     // ==========================================
-    // 5. Optimization: Parameter search flow on the 3D landscape
+    // 5. Optimization: Parameter-space exploration landscape
     // ==========================================
     {
-      float t = mod(uTime * 0.7, 3.0);
-      // Slide downhill towards the valleys (center) but remain on the landscape
-      float slide = smoothstep(0.0, 1.2, t) * smoothstep(2.8, 1.5, t) * 0.24; 
-      float x = aPosOptimization.x * (1.0 - slide);
-      float z = aPosOptimization.z * (1.0 - slide);
+      float seed = rand(aPosOptimization.xz * 7.13);
       
-      // Recalculate landscape height for shifted coordinates
-      float distFromCenter = sqrt(x * x + z * z);
-      float y = sin(x * 2.0) * cos(z * 2.0) * exp(-distFromCenter * 0.15) * 0.8;
+      // Slow drift along exploration trajectories through the parameter space
+      float driftPhase = uTime * 0.12 + seed * 6.283;
+      float driftAmp = 0.15 + 0.1 * sin(seed * 41.3);
       
-      // Add subtle gradient exploration noise
-      float noise = (1.0 - slide) * 0.05 * sin(uTime * 15.0 + aPosOptimization.x * 20.0);
-      x += noise;
-      z += noise;
+      float x = aPosOptimization.x + sin(driftPhase + aPosOptimization.z * 0.8) * driftAmp;
+      float z = aPosOptimization.z + cos(driftPhase * 0.7 + aPosOptimization.x * 0.6) * driftAmp;
+      
+      // Multi-modal response surface: several regions of interest, no single minimum
+      float r1 = length(vec2(x - 1.8, z - 1.2));
+      float r2 = length(vec2(x + 2.0, z + 1.5));
+      float r3 = length(vec2(x + 0.5, z - 2.5));
+      float r4 = length(vec2(x - 2.5, z + 2.0));
+      
+      float surface = 0.0;
+      surface += 0.6 * exp(-r1 * r1 * 0.3);
+      surface -= 0.4 * exp(-r2 * r2 * 0.25);
+      surface += 0.5 * exp(-r3 * r3 * 0.35);
+      surface -= 0.3 * exp(-r4 * r4 * 0.2);
+      surface += 0.15 * sin(x * 1.5) * cos(z * 1.2);
+      
+      float y = surface * 2.2;
+      
+      // Subtle per-particle jitter for organic feel
+      x += sin(uTime * 0.8 + seed * 50.0) * 0.02;
+      z += cos(uTime * 0.6 + seed * 37.0) * 0.02;
+      
       vec3 pos = vec3(x, y, z);
 
       if (uActiveSection >= 4.0 && uActiveSection < 5.0) posB_def = pos;
@@ -332,19 +346,75 @@ export default function PipelineParticles() {
         trapping[idx + 2] = Math.sin(trapAngle) * rRing;
       }
 
-      // 5. Optimization: Landscape Grid layout
-      const gridSize = Math.floor(Math.sqrt(PARTICLE_COUNT));
-      const col = i % gridSize;
-      const row = Math.floor(i / gridSize);
-      
-      const gridX = -4.0 + 8.0 * (col / gridSize);
-      const gridY = -4.0 + 8.0 * (row / gridSize);
-      const distFromCenter = Math.sqrt(gridX * gridX + gridY * gridY);
-      const gridZ = Math.sin(gridX * 2.0) * Math.cos(gridY * 2.0) * Math.exp(-distFromCenter * 0.15) * 0.8;
-
-      optimization[idx] = gridX;
-      optimization[idx + 1] = gridZ;
-      optimization[idx + 2] = gridY;
+      // 5. Optimization: Multi-cluster parameter-space exploration layout
+      {
+        const seed = Math.abs(Math.sin(i * 12.9898 + 78.233) * 43758.5453) % 1;
+        const seed2 = Math.abs(Math.sin(i * 39.346 + 11.135) * 21345.6789) % 1;
+        
+        // Define multiple regions of interest (clusters) in the parameter space
+        const clusters = [
+          { cx: 1.8, cz: 1.2, weight: 0.22, spread: 1.2 },
+          { cx: -2.0, cz: -1.5, weight: 0.18, spread: 1.4 },
+          { cx: 0.5, cz: -2.5, weight: 0.15, spread: 1.0 },
+          { cx: -2.5, cz: 2.0, weight: 0.12, spread: 1.3 },
+          { cx: 0.0, cz: 0.0, weight: 0.08, spread: 2.5 },  // Broad background
+        ];
+        // Remaining particles form connecting exploration trajectories
+        const trajectoryWeight = 1.0 - clusters.reduce((s, c) => s + c.weight, 0);
+        
+        let ox: number, oz: number;
+        let cumWeight = 0;
+        let assigned = false;
+        const particleFrac = i / PARTICLE_COUNT;
+        
+        for (const cl of clusters) {
+          cumWeight += cl.weight;
+          if (particleFrac < cumWeight && !assigned) {
+            // Gaussian-ish distribution around cluster center
+            const angle = seed * Math.PI * 2;
+            const radius = cl.spread * Math.sqrt(-2.0 * Math.log(Math.max(seed2, 0.001))) * 0.4;
+            ox = cl.cx + Math.cos(angle) * radius;
+            oz = cl.cz + Math.sin(angle) * radius;
+            assigned = true;
+          }
+        }
+        
+        if (!assigned) {
+          // Trajectory / exploration particles: paths between clusters
+          const trajIdx = (particleFrac - cumWeight) / trajectoryWeight;
+          const pathSel = Math.floor(trajIdx * 4) % 4;
+          const pathT = (trajIdx * 4) % 1;
+          
+          const paths = [
+            { x0: 1.8, z0: 1.2, x1: -2.0, z1: -1.5 },
+            { x0: -2.0, z0: -1.5, x1: 0.5, z1: -2.5 },
+            { x0: 0.5, z0: -2.5, x1: -2.5, z1: 2.0 },
+            { x0: -2.5, z0: 2.0, x1: 1.8, z1: 1.2 },
+          ];
+          const p = paths[pathSel];
+          ox = p.x0 + (p.x1 - p.x0) * pathT + (seed - 0.5) * 0.8;
+          oz = p.z0 + (p.z1 - p.z0) * pathT + (seed2 - 0.5) * 0.8;
+        }
+        
+        // Compute response-surface height for this position
+        const r1 = Math.sqrt((ox! - 1.8) ** 2 + (oz! - 1.2) ** 2);
+        const r2 = Math.sqrt((ox! + 2.0) ** 2 + (oz! + 1.5) ** 2);
+        const r3 = Math.sqrt((ox! - 0.5) ** 2 + (oz! + 2.5) ** 2);
+        const r4 = Math.sqrt((ox! + 2.5) ** 2 + (oz! - 2.0) ** 2);
+        
+        let surface = 0;
+        surface += 0.6 * Math.exp(-r1 * r1 * 0.3);
+        surface -= 0.4 * Math.exp(-r2 * r2 * 0.25);
+        surface += 0.5 * Math.exp(-r3 * r3 * 0.35);
+        surface -= 0.3 * Math.exp(-r4 * r4 * 0.2);
+        surface += 0.15 * Math.sin(ox! * 1.5) * Math.cos(oz! * 1.2);
+        
+        const oy = surface * 2.2;
+        
+        optimization[idx] = ox!;
+        optimization[idx + 1] = oy;
+        optimization[idx + 2] = oz!;
+      }
     }
 
     return { hero, production, transport, cooling, trapping, optimization };

@@ -18,7 +18,7 @@ export default function Optimization() {
           </h2>
           
           <p className="text-secondary text-sm md:text-base font-light leading-relaxed max-w-xl">
-            Janus treats antimatter production and transport as a coupled computational system. Parameter sweeps and sensitivity analysis reveal which physical parameters control performance, while surrogate models and numerical optimization provide increasingly efficient ways to search the resulting design space.
+          Janus treats the antimatter pipeline as a coupled computational system. Parameter sweeps and sensitivity analysis reveal which physical parameters control performance, while surrogate models and numerical optimization provide increasingly efficient ways to explore the resulting design space.
           </p>
         </div>
 
