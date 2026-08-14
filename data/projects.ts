@@ -12,7 +12,7 @@ export const projects: Project[] = [
   {
     title: 'Janus',
     slug: 'janus',
-    description: 'Computational framework for antimatter systems modeling and analysis.',
+    description: 'Computational framework for particle transport and optimization, with a focus on antimatter systems',
     role: 'Lead Developer',
     category: 'Research Projects',
     image: '/images/projects/janus.png',
@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     title: 'Penrose',
     slug: 'penrose',
-    description: 'General relativity framework for curved spacetime modeling.',
+    description: 'Computational framework for studying particle and photon motion in curved spacetime through numerical general relativity',
     role: 'Core Developer',
     category: 'Research Projects',
     image: '/images/projects/penrose.png',
@@ -30,7 +30,7 @@ export const projects: Project[] = [
   {
     title: 'Tempest',
     slug: 'tempest',
-    description: 'A computational laboratory for numerical methods and PDE simulation.',
+    description: 'Computational laboratory for investigating numerical methods and their application to partial differential equations',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/tempest.png',
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   {
     title: 'Atlas',
     slug: 'atlas',
-    description: 'A physics-first quantum simulation framework for studying physical systems.',
+    description: 'Physics-first framework for studying quantum systems through Hamiltonian simulation and variational algorithms',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/atlas.png',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     title: 'Nereid',
     slug: 'nereid',
-    description: 'An experimental platform for particle methods and Smoothed Particle Hydrodynamics.',
+    description: 'Exploratory laboratory for particle-based fluid simulation using smoothed particle hydrodynamics',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/nereid.png',
@@ -57,11 +57,19 @@ export const projects: Project[] = [
   {
     title: 'GeantPy',
     slug: 'geantpy',
-    description: 'Python orchestration layer for Geant4 simulation workflows.',
+    description: 'Python interface for automating and orchestrating Geant4 simulation workflows',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/geantpy.png',
     href: '/projects/geantpy'
   },
-
+  {
+    title: 'Solar Gravitational Lens',
+    slug: 'sgl',
+    description: 'Foundation for SGL Research',
+    role: 'Lead Developer',
+    category: 'Research Projects',
+    image: '',
+    href: 'https://github.com/h-livv/sgl'
+  }
 ];

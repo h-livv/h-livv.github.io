@@ -2,7 +2,7 @@ import { projects } from '../data/projects';
 import ProjectCard from './ProjectCard';
 import * as motion from "framer-motion/client";
 
-const infrastructureSlugs = ['janus', 'penrose', 'geantpy'];
+const infrastructureSlugs = ['janus', 'penrose', 'geantpy', 'sgl'];
 const engineSlugs = ['tempest', 'nereid', 'atlas'];
 
 export default function ProjectSection() {
@@ -28,24 +28,61 @@ export default function ProjectSection() {
           </h2>
           
           <div className="mb-20">
-            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Research Infrastructure</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {infrastructure.map((project, index) => (
-                <motion.div
-                  key={project.slug}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.35, delay: index * 0.08 }}
-                >
-                  <ProjectCard project={project} />
-                </motion.div>
-              ))}
+            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Research</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="flex flex-col gap-5">
+                {infrastructure.filter(p => p.slug === 'janus').map((project) => (
+                  <motion.div
+                    key={project.slug}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.35, delay: 0 }}
+                  >
+                    <ProjectCard project={project} featured={true} />
+                  </motion.div>
+                ))}
+                {infrastructure.filter(p => p.slug === 'geantpy').map((project) => (
+                  <motion.div
+                    key={project.slug}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.35, delay: 0.16 }}
+                  >
+                    <ProjectCard project={project} compact={true} />
+                  </motion.div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-5">
+                {infrastructure.filter(p => p.slug === 'penrose').map((project) => (
+                  <motion.div
+                    key={project.slug}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.35, delay: 0.08 }}
+                  >
+                    <ProjectCard project={project} featured={true} />
+                  </motion.div>
+                ))}
+                {infrastructure.filter(p => p.slug === 'sgl').map((project) => (
+                  <motion.div
+                    key={project.slug}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.35, delay: 0.24 }}
+                  >
+                    <ProjectCard project={project} compact={true} />
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
 
           <div>
-            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Computational Labs</h3>
+            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Labs</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {engines.map((project, index) => (
                 <motion.div
@@ -55,7 +92,7 @@ export default function ProjectSection() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.35, delay: index * 0.08 }}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project} diminished={true} />
                 </motion.div>
               ))}
             </div>

@@ -1,23 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 pb-12">
@@ -57,25 +42,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <AnimatePresence>
-        {isVisible && (
-          <motion.div 
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-auto"
-          >
-            <a 
-              href="#research" 
-              className="flex flex-col items-center gap-2 text-secondary hover:text-primary transition-colors text-[10px] font-mono uppercase tracking-widest"
-            >
-              <span>Explore my Projects</span>
-              <ArrowDown className="w-4 h-4 animate-bounce" />
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
