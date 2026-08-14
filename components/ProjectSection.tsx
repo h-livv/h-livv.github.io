@@ -82,7 +82,7 @@ export default function ProjectSection() {
           </div>
 
           <div>
-            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Labs</h3>
+            <h3 className="text-xs font-mono text-secondary uppercase tracking-widest mb-6">Explorations</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {engines.map((project, index) => (
                 <motion.div
