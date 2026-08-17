@@ -9,14 +9,17 @@ import ProjectFooter from './ProjectFooter';
 export interface CollaborativeProjectLayoutProps {
   title: string;
   subtitle: string;
-  organization: string;
-  role: string;
+  organization?: string;
+  role?: string;
   summaryParagraphs: string[];
   contributionItems: string[];
   technologies: string[];
   repoUrl: string;
   backgroundCanvas: React.ReactNode;
   repositoryDescription?: string;
+  statusContext?: string;
+  motivationHeader?: string;
+  contributionHeader?: string;
 }
 
 export default function CollaborativeProjectLayout({
@@ -30,6 +33,9 @@ export default function CollaborativeProjectLayout({
   repoUrl,
   backgroundCanvas,
   repositoryDescription,
+  statusContext,
+  motivationHeader,
+  contributionHeader,
 }: CollaborativeProjectLayoutProps) {
   return (
     <main className="min-h-screen bg-transparent text-white relative overflow-hidden font-sans pb-16">
@@ -54,19 +60,30 @@ export default function CollaborativeProjectLayout({
             <p className="text-[16px] font-light text-neutral-400 leading-normal max-w-2xl">
               {subtitle}
             </p>
+            {statusContext && (
+              <span className="inline-block px-2.5 py-1 text-[11px] font-mono tracking-widest text-neutral-300 uppercase border border-white/10 bg-white/5 rounded w-fit mt-2">
+                {statusContext}
+              </span>
+            )}
           </div>
 
           {/* Key Metadata Block */}
-          <div className="grid grid-cols-2 gap-4 max-w-md p-4 border border-white/[0.04] bg-neutral-950/40 rounded font-mono text-[12px]">
-            <div className="flex flex-col gap-1">
-              <span className="text-neutral-500 uppercase tracking-wider">Organization</span>
-              <span className="text-white font-medium">{organization}</span>
+          {(organization || role) && (
+            <div className="grid grid-cols-2 gap-4 max-w-md p-4 border border-white/[0.04] bg-neutral-950/40 rounded font-mono text-[12px]">
+              {organization && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-neutral-500 uppercase tracking-wider">Organization</span>
+                  <span className="text-white font-medium">{organization}</span>
+                </div>
+              )}
+              {role && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-neutral-500 uppercase tracking-wider">Role</span>
+                  <span className="text-white font-medium">{role}</span>
+                </div>
+              )}
             </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-neutral-500 uppercase tracking-wider">Role</span>
-              <span className="text-white font-medium">{role}</span>
-            </div>
-          </div>
+          )}
         </section>
 
         {/* ==========================================
@@ -74,7 +91,7 @@ export default function CollaborativeProjectLayout({
            ========================================== */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
           <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-            Motivation
+            {motivationHeader || "Motivation"}
           </div>
           <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
             {summaryParagraphs.map((para, idx) => (
@@ -88,7 +105,7 @@ export default function CollaborativeProjectLayout({
            ========================================== */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
           <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-            My Contribution
+            {contributionHeader || "My Contribution"}
           </div>
           <div className="md:col-span-8 flex flex-col gap-3.5 font-mono text-[12px]">
             {contributionItems.map((item, idx) => (

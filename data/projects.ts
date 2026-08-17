@@ -12,7 +12,7 @@ export const projects: Project[] = [
   {
     title: 'Janus',
     slug: 'janus',
-    description: 'Computational framework for particle transport and optimization, with a focus on antimatter systems',
+    description: 'Computational framework for particle transport and optimization, with a focus on antimatter systems.',
     role: 'Lead Developer',
     category: 'Research Projects',
     image: '/images/projects/janus.png',
@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     title: 'Penrose',
     slug: 'penrose',
-    description: 'Computational framework for studying particle and photon motion in curved spacetime through numerical general relativity',
+    description: 'Numerical exploration of particle and photon motion in curved spacetime.',
     role: 'Core Developer',
     category: 'Research Projects',
     image: '/images/projects/penrose.png',
@@ -30,7 +30,7 @@ export const projects: Project[] = [
   {
     title: 'Tempest',
     slug: 'tempest',
-    description: 'Computational laboratory for investigating numerical methods and their application to partial differential equations',
+    description: 'Computational laboratory for studying numerical methods for partial differential equations through derivation, implementation, and computational experiments.',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/tempest.png',
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   {
     title: 'Atlas',
     slug: 'atlas',
-    description: 'Physics-first framework for studying quantum systems through Hamiltonian simulation and variational algorithms',
+    description: 'Exploration of quantum simulation through Hamiltonian simulation and variational algorithms.',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/atlas.png',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     title: 'Nereid',
     slug: 'nereid',
-    description: 'Exploratory laboratory for particle-based fluid simulation using smoothed particle hydrodynamics',
+    description: 'Exploration of particle-based fluid simulation using Smoothed Particle Hydrodynamics.',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/nereid.png',
@@ -57,7 +57,7 @@ export const projects: Project[] = [
   {
     title: 'GeantPy',
     slug: 'geantpy',
-    description: 'Python interface for automating and orchestrating Geant4 simulation workflows',
+    description: 'Python interface for automating and orchestrating Geant4 simulation workflows.',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/geantpy.png',

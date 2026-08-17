@@ -3,12 +3,12 @@ import * as motion from "framer-motion/client";
 const interests = [
   {
     title: "Scientific Computing",
-    topics: ["Numerical Methods", "Simulations", "Optimization", "HPC"],
+    topics: ["Numerical Methods", "PDEs", "Optimization", "HPC"],
   },
   {
     title: "Computational Physics",
     topics: [
-      "High-Energy Physics",
+      "Particle Physics",
       "General Relativity",
       "Fluid Dynamics"
     ],

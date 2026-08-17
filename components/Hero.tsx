@@ -27,10 +27,10 @@ export default function Hero() {
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <a
-              href="#projects"
+              href="#work"
               className="px-4 py-2 rounded-lg bg-white text-black text-xs font-medium hover:scale-[1.02] active:scale-100 transition-transform duration-200"
             >
-              Projects
+              Work
             </a>
             <a
               href="#contact"
