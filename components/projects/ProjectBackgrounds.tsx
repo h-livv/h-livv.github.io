@@ -149,3 +149,11 @@ export function GeantPyBackground() {
   return <div className="w-full h-full block absolute inset-0 bg-black" />;
 }
 
+/**
+ * 6. JANUS BACKGROUND
+ * Plain black background to remove animations
+ */
+export function JanusBackground() {
+  return <div className="w-full h-full block absolute inset-0 bg-black" />;
+}
+

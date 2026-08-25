@@ -20,6 +20,7 @@ export interface CollaborativeProjectLayoutProps {
   statusContext?: string;
   motivationHeader?: string;
   contributionHeader?: string;
+  children?: React.ReactNode;
 }
 
 export default function CollaborativeProjectLayout({
@@ -36,6 +37,7 @@ export default function CollaborativeProjectLayout({
   statusContext,
   motivationHeader,
   contributionHeader,
+  children,
 }: CollaborativeProjectLayoutProps) {
   return (
     <main className="min-h-screen bg-transparent text-white relative overflow-hidden font-sans pb-16">
@@ -135,6 +137,8 @@ export default function CollaborativeProjectLayout({
             ))}
           </div>
         </section>
+
+        {children}
 
         {/* ==========================================
             5. REPOSITORY SECTION (Dominates the end)
