@@ -12,7 +12,7 @@ export const projects: Project[] = [
   {
     title: 'Janus',
     slug: 'janus',
-    description: 'Computational framework for particle transport and optimization, with a focus on antimatter systems.',
+    description: 'Exploring optimization methods for high-energy particle beamlines.',
     role: 'Lead Developer',
     category: 'Research Projects',
     image: '/images/projects/janus.png',
