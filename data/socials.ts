@@ -14,7 +14,7 @@ export const socials: SocialLink[] = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/harlivsingh/',
+    href: 'https://www.linkedin.com/in/h-livv/',
     icon: Briefcase
   },
   {

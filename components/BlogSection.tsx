@@ -15,9 +15,9 @@ export default function BlogSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-4">Notes</h2>
+          <h2 className="text-3xl font-serif font-normal leading-[1.2] tracking-normal text-primary mb-4">Writing</h2>
           <p className="text-sm md:text-base text-primary mb-8 max-w-full leading-relaxed font-[400]">
-            Notes and essays from ongoing explorations.
+            Notes and essays on things I find interesting.
           </p>
 
           {posts.length === 0 ? (
