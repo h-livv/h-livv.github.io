@@ -17,7 +17,7 @@ export default function ProjectCard({ project, featured = false, compact = false
             />
           </div>
         )}
-        <div className={`p-4 shrink-0 ${featured ? 'md:p-6 md:pb-5' : 'pb-3.5'}`}>
+        <div className={`p-4 shrink-0 ${featured ? 'md:p-6 md:pb-5' : 'pb-3.5'} ${diminished ? 'flex-1 flex flex-col justify-center' : ''}`}>
           <div className="flex items-center justify-between mb-1.5">
             <h3 className={`font-semibold text-primary ${featured ? 'text-sm md:text-base' : 'text-sm'}`}>{project.title}</h3>
             <ArrowRight className="w-5 h-5 text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary" />
