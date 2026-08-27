@@ -5,26 +5,27 @@ import { JanusBackground } from '../../../components/projects/ProjectBackgrounds
 
 export const metadata: Metadata = {
   title: 'JANUS',
-  description: 'An exploratory computational physics project investigating optimization methods for high-energy particle beamlines.',
+  description: 'A computational framework for studying high-energy particle transport and production.',
 };
 
 export default function JanusPage() {
   const summary = [
-    'JANUS is a computational system built to investigate how physical beamline parameters influence coupled high-energy particle simulations, and how computational methods can explore and optimize those systems. It couples particle-interaction simulation with deterministic beam transport to measure downstream effects, using antiproton production as the current physical case study.'
+    'Janus couples Geant4 particle-interaction simulation with Xsuite beam transport to study how physical parameters affect downstream particle behavior.',
+    'The case study explored 26 GeV proton bombardment of a high-Z target, with antiproton production as the primary observable.'
   ];
 
   const explored = [
-    'Particle interaction simulation: Geant4 is used to model high-energy proton–target interactions and resulting particle production.',
-    'Beam transport simulation: Xsuite is used for deterministic relativistic particle transport through accelerator lattices and magnetic elements.'
+    'Particle interaction: Geant4 models high-energy proton–target interactions and particle production.',
+    'Beam transport: Xsuite models relativistic particle transport through accelerator lattices and magnetic elements.'
   ];
 
-  const technologies = ['Geant4', 'Xsuite', 'Python', 'C++', 'Numerical Optimization'];
+  const technologies = ['Geant4', 'Xsuite', 'Python', 'C++', 'Numerical Simulation'];
 
   return (
     <CollaborativeProjectLayout
       title="JANUS"
-      subtitle="Exploring computational optimization of high-energy particle beamlines."
-      statusContext="Research Project"
+      subtitle="A computational framework for studying high-energy particle transport and production."
+      statusContext="Exploration"
       motivationHeader="Overview"
       contributionHeader="PHYSICAL MODEL"
       summaryParagraphs={summary}
@@ -32,68 +33,54 @@ export default function JanusPage() {
       technologies={technologies}
       repoUrl="https://github.com/h-livv/janus"
       backgroundCanvas={<JanusBackground />}
-      repositoryDescription="Source code, experiments, and ongoing research for the JANUS project."
+      repositoryDescription="The repository is preserved as a completed exploration of coupled particle-interaction simulation and beam transport."
     >
       {/* ==========================================
           THE PIPELINE
          ========================================== */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
         <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-          The Pipeline
+          Pipeline
         </div>
         <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
           <div className="font-mono text-[12px] p-4 border border-white/[0.04] bg-neutral-950/40 rounded text-center">
-            Beam / Particle Generation → Particle Interaction → Transport → Observable Extraction → Optimization
+            Proton Beam → Particle Interaction → Particle Production → Beam Transport → Diagnostics
           </div>
-          <p className="text-[13px] text-neutral-400">
-            This represents the current computational environment for the antiproton case study.
-          </p>
         </div>
       </section>
 
       {/* ==========================================
-          MAIN RESEARCH QUESTION
+          RESEARCH QUESTION
          ========================================== */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
         <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-          Main Research Question
+          Research Question
         </div>
         <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
           <p className="text-white font-medium italic">
-            "How do physical beamline parameters influence coupled high-energy particle simulations, and how can computational methods explore and optimize those systems?"
+            &ldquo;How do physical beamline parameters influence coupled high-energy particle simulations?&rdquo;
           </p>
           <p>
-            With antiproton production as the immediate case study, the work is interested in parameter sensitivity, search-space structure, parameter interactions, and the behavior and computational cost of simulation-based optimization.
+            The exploration focused on parameter sensitivity, downstream beam behavior, and the computational structure of coupling particle-interaction and beam-transport simulations.
           </p>
         </div>
       </section>
 
       {/* ==========================================
-          VALIDATION
+          IMPLEMENTATION
          ========================================== */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
         <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-          Validation
+          Implementation
         </div>
         <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
-          <p>
-            JANUS separately validates and tests the collision and transport stages. This includes Geant4 collision validation, physical-distribution checks, and JANUS-side Xsuite transport tests. Refer to the <a href="https://github.com/h-livv/janus" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">repository validation documentation</a> for complete details.
-          </p>
-        </div>
-      </section>
-
-      {/* ==========================================
-          FUTURE WORK
-         ========================================== */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
-        <div className="md:col-span-4 font-mono text-[12px] uppercase tracking-widest text-neutral-500">
-          Future Work
-        </div>
-        <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
-          <ul className="list-decimal pl-5 space-y-2 text-neutral-400">
-            <li>Improving the coupled Geant4/Xsuite simulation environment.</li>
-            <li>Investigating simulation-based optimization and parameter sensitivity.</li>
-            <li>Expanding the physical constraints and beamline models as useful research questions emerge.</li>
+          <p>The implemented system includes:</p>
+          <ul className="list-disc pl-5 space-y-2 text-neutral-400">
+            <li>Geant4 target bombardment and collision validation</li>
+            <li>ROOT-based particle data transfer</li>
+            <li>Xsuite beam transport</li>
+            <li>Configurable drift, quadrupole, bend, and aperture elements</li>
+            <li>Transport diagnostics and validation tests</li>
           </ul>
         </div>
       </section>

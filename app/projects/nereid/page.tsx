@@ -21,7 +21,7 @@ export default function NereidPage() {
     <CollaborativeProjectLayout
       title="Nereid"
       subtitle="Exploration of particle-based fluid simulation using Smoothed Particle Hydrodynamics."
-      statusContext="Earlier Work"
+      statusContext="Exploration"
       motivationHeader="Overview"
       contributionHeader="FOCUS"
       summaryParagraphs={summary}

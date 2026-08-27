@@ -22,7 +22,7 @@ export default function PenrosePage() {
     <CollaborativeProjectLayout
       title="Penrose"
       subtitle="Numerical exploration of particle and photon motion in curved spacetime."
-      statusContext="Earlier Work"
+      statusContext="Exploration"
 
       motivationHeader="Overview"
       contributionHeader="FOCUS"

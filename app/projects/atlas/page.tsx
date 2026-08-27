@@ -21,7 +21,7 @@ export default function AtlasPage() {
     <CollaborativeProjectLayout
       title="Atlas"
       subtitle="Exploration of quantum simulation through Hamiltonian simulation and variational algorithms."
-      statusContext="Earlier Work"
+      statusContext="Exploration"
       /* organization and role omitted for Earlier Work */
       motivationHeader="Overview"
       contributionHeader="FOCUS"
