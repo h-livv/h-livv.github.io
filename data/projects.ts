@@ -6,35 +6,39 @@ export interface Project {
   category: 'Research Projects' | 'Research Labs';
   image: string;
   href: string;
+  date?: string;
 }
 
 export const projects: Project[] = [
   {
     title: 'Janus',
     slug: 'janus',
-    description: 'Computational framework coupling particle-interaction simulation with beam transport.',
+    description: 'Geant4 Monte Carlo for particle collisions coupled to an Xsuite-based CERN-inspired beamline.',
     role: 'Lead Developer',
     category: 'Research Projects',
     image: '/images/projects/janus.png',
-    href: '/projects/janus'
+    href: '/projects/janus',
+    date: 'Jun - Aug 2026'
   },
   {
     title: 'Penrose',
     slug: 'penrose',
-    description: 'Numerical exploration of particle and photon motion in curved spacetime.',
+    description: 'Computes Christoffel symbols and integrates null geodesics for a generalized metric on the CPU side, paired with a GPU raytracer built by collaborators.',
     role: 'Core Developer',
     category: 'Research Projects',
     image: '/images/projects/penrose.png',
-    href: '/projects/penrose'
+    href: '/projects/penrose',
+    date: 'Mar - Jul 2026'
   },
   {
     title: 'Tempest',
     slug: 'tempest',
-    description: 'Computational laboratory for studying numerical methods for partial differential equations through derivation, implementation, and computational experiments.',
+    description: 'A numerical PDE laboratory spanning multiple equation families and integration schemes, now extending into scientific machine learning.',
     role: 'Lead Developer',
     category: 'Research Labs',
     image: '/images/projects/tempest.png',
-    href: '/projects/tempest'
+    href: '/projects/tempest',
+    date: 'Jun - Aug 2026'
   },
   {
     title: 'Atlas',

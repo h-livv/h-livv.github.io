@@ -22,6 +22,9 @@ export default function ProjectCard({ project, featured = false, compact = false
             <h3 className={`font-semibold text-primary ${featured ? 'text-sm md:text-base' : 'text-sm'}`}>{project.title}</h3>
             <ArrowRight className="w-5 h-5 text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary" />
           </div>
+          {project.date && (
+            <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mb-1.5">{project.date}</span>
+          )}
           <p className={`text-secondary leading-normal max-w-prose ${featured ? 'text-[11px] md:text-xs line-clamp-3' : 'text-[11px] line-clamp-2'}`}>{project.description}</p>
         </div>
       </div>
