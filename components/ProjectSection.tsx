@@ -46,14 +46,6 @@ export default function ProjectSection() {
                   </p>
                 </div>
               </a>
-
-              <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl p-6 md:p-8 transition-all duration-200 hover:border-white/[0.15] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]">
-                <h3 className="font-semibold text-primary text-base md:text-lg mb-1">Research Agent Harness <span className="text-secondary/70 font-normal text-sm md:text-base ml-2">(early design)</span></h3>
-                <span className="block text-xs font-mono text-secondary/70 uppercase tracking-widest mb-3">Sept 2026 - Present</span>
-                <p className="text-secondary leading-relaxed text-sm md:text-base">
-                  Rethinking how agentic tools represent context, for research workflows rather than software development.
-                </p>
-              </div>
             </div>
           </div>
 
