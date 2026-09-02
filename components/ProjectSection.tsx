@@ -106,7 +106,7 @@ export default function ProjectSection() {
               {[
                 {
                   title: "GeantPy",
-                  desc: "Automates Geant4 workflows via macro generation, outputting NPZ/tensor datasets for downstream ML use.",
+                  desc: "Automates Geant4 workflows via macro generation, outputting NPZ/tensor datasets for downstream use.",
                   link: "/projects/geantpy",
                   date: "Last touched: Jul 2026"
                 },
