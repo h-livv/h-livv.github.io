@@ -24,35 +24,20 @@ export default function ProjectSection() {
                 <h3 className="font-semibold text-primary text-base md:text-lg mb-1">QC4HEP</h3>
                 <span className="block text-xs font-mono text-secondary/70 uppercase tracking-widest mb-3">Aug 2026 - Present</span>
                 <p className="text-secondary leading-relaxed text-sm md:text-base">
-                  Mapping the empirical and infrastructural landscape of quantum computing for high-energy physics, including benchmarking, replication auditing, resource estimation, and software bridging, based on the QC4HEP roadmap (Di Meglio et al., PRX Quantum 5, 037001, 2024).
+                  Leading an undergraduate research project investigating quantum simulation of QFTs and lattice gauge theories, and evaluating quantum methods for HEP workflows under near-term hardware constraints.
                 </p>
                 <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/[0.05]">
                   <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Scoping phase</span>
                   <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">qBITS @ BITS Goa</span>
                 </div>
-              </div>
-
-              <a href="https://github.com/h-livv/emergent-misalignment" target="_blank" rel="noopener noreferrer" className="block group">
-                <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl p-6 md:p-8 transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]">
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="font-semibold text-primary text-base md:text-lg group-hover:text-white transition-colors">Emergent Misalignment</h3>
-                    <span className="text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary">
-                      →
-                    </span>
-                  </div>
-                  <span className="block text-xs font-mono text-secondary/70 uppercase tracking-widest mb-3">Last touched: Aug 2026</span>
-                  <p className="text-secondary leading-relaxed text-sm md:text-base">
-                    Reproduces emergent misalignment on smaller models; investigating the mechanism via interpretability.
-                  </p>
                 </div>
-              </a>
+              </div>
             </div>
-          </div>
 
           {/* PAST SECTION */}
           <div className="mb-16">
             <h2 className="text-sm font-mono text-secondary uppercase tracking-widest mb-6">Past</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                 {simulations.map((project, index) => (
                   <motion.div
                     key={project.slug}
@@ -83,6 +68,29 @@ export default function ProjectSection() {
                         <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mb-2">Aug 2026</span>
                         <p className="text-secondary leading-normal text-[11px] md:text-xs max-w-[250px] mx-auto">
                           Full transformer built from scratch in NumPy, including the tokenizer, self-attention, backpropagation, and cross-entropy, with no autograd.
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.35, delay: 4 * 0.08 }}
+                  className="h-full"
+                >
+                  <a href="https://github.com/h-livv/emergent-misalignment" target="_blank" rel="noopener noreferrer" className="block group h-full">
+                    <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl overflow-hidden transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)] h-full text-center">
+                      <div className="flex flex-col items-center justify-center w-full aspect-[4/3] sm:aspect-[16/10] p-6 border-b border-white/[0.05] bg-white/[0.02] group-hover:bg-white/[0.04] transition-colors">
+                         <h3 className="font-bold text-primary text-xl sm:text-2xl tracking-tight leading-none mb-2">Emergent</h3>
+                         <h4 className="font-medium text-secondary text-base sm:text-lg">Misalignment</h4>
+                      </div>
+                      <div className="p-4 md:p-6 md:pb-5 flex-1 flex flex-col items-center justify-center">
+                        <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mb-2">Last touched: Aug 2026</span>
+                        <p className="text-secondary leading-normal text-[11px] md:text-xs max-w-[250px] mx-auto">
+                          Reproduces emergent misalignment on smaller models; investigating the mechanism via interpretability.
                         </p>
                       </div>
                     </div>
