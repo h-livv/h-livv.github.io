@@ -28,6 +28,9 @@ export default function TempestPage() {
               <p className="text-[19px] font-light text-neutral-400 leading-normal max-w-2xl">
                 A computational physics laboratory for numerical methods, PDE simulation, and scientific machine learning.
               </p>
+              <span className="inline-block px-2.5 py-1 text-[11px] font-mono tracking-widest text-neutral-300 uppercase border border-white/10 bg-white/5 rounded w-fit mt-2">
+                Archived
+              </span>
             </div>
           </section>
 
@@ -46,24 +49,24 @@ export default function TempestPage() {
             </div>
           </section>
 
-          {/* 3. CURRENT FOCUS SECTION */}
+          {/* 3. FOCUS SECTION */}
           <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
             <div className="md:col-span-4 font-mono text-[13px] uppercase tracking-widest text-neutral-500">
-              Current Focus
+              Focus
             </div>
             <div className="md:col-span-8 flex flex-col gap-4">
               {[
                 {
                   title: 'Numerical Methods',
-                  text: 'Implementing and validating finite difference methods, time integration schemes, stability analysis, and convergence studies.',
+                  text: 'Finite difference methods, time integration schemes, stability analysis, and convergence studies.',
                 },
                 {
                   title: 'Physical Systems',
-                  text: 'Exploring partial differential equations ranging from linear advection and diffusion to shallow water dynamics and geophysical fluid models.',
+                  text: 'Partial differential equations ranging from linear advection and diffusion to shallow water dynamics and geophysical fluid models.',
                 },
                 {
                   title: 'Scientific Machine Learning',
-                  text: 'Investigating neural operators and physics-informed approaches alongside traditional numerical methods.',
+                  text: 'Neural operators and physics-informed approaches alongside traditional numerical methods.',
                 }
               ].map((card, idx) => (
                 <div key={idx} className="border border-white/[0.04] p-5 rounded bg-neutral-950/40 backdrop-blur-sm flex flex-col gap-2 hover:border-white/[0.1] transition-colors">
@@ -79,7 +82,7 @@ export default function TempestPage() {
           {/* 4. RECENT EXPLORATIONS SECTION */}
           <section className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-white/[0.04] pt-8">
             <div className="md:col-span-4 font-mono text-[13px] uppercase tracking-widest text-neutral-500">
-              Recent Explorations
+              Explorations
             </div>
             <div className="md:col-span-8 flex flex-col gap-4">
               {[
@@ -100,7 +103,7 @@ export default function TempestPage() {
               Explore Tempest.
             </h2>
             <p className="text-neutral-300 text-[15px] font-light leading-relaxed max-w-lg">
-              Tempest is an evolving computational laboratory where numerical methods are implemented, tested, and understood through experimentation.
+              The repository preserves an archived computational laboratory for numerical methods, PDE simulation, and scientific machine learning.
             </p>
             
             <div className="flex flex-wrap gap-4 font-mono text-[13px] justify-center">
@@ -129,7 +132,7 @@ export default function TempestPage() {
           <div className="max-w-5xl mx-auto flex items-center justify-between font-mono text-[13px] text-neutral-500 uppercase tracking-wider">
             <span className="text-neutral-300">Harliv Singh</span>
             <Link
-              href="/#projects"
+              href="/#work"
               className="hover:text-white transition-colors"
             >
               Back to Portfolio

@@ -149,7 +149,7 @@ export default function CollaborativeProjectLayout({
               Explore {title}.
             </h2>
             <p className="text-neutral-400 text-[12px] font-light leading-relaxed max-w-sm">
-              {repositoryDescription || "The repository contains source code, documentation, and ongoing development."}
+              {repositoryDescription || "The repository contains source code and documentation."}
             </p>
             <Link
               href={repoUrl}

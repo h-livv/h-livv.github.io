@@ -1,157 +1,236 @@
-import { projects } from '../data/projects';
-import ProjectCard from './ProjectCard';
-import * as motion from "framer-motion/client";
+import type { ReactNode } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import * as motion from 'framer-motion/client';
+import {
+  currentProject,
+  earlierExperiments,
+  selectedWork,
+  type Project,
+} from '../data/projects';
+import SectionKicker from './SectionKicker';
 
-export default function ProjectSection() {
-  const getProject = (slug: string) => projects.find(p => p.slug === slug)!;
+function isExternalProject(project: Project) {
+  return Boolean(project.external || project.href?.startsWith('http'));
+}
 
-  const simulations = ['janus', 'tempest', 'penrose'].map(getProject);
+function ProjectAnchor({
+  project,
+  className,
+  children,
+}: {
+  project: Project;
+  className?: string;
+  children: ReactNode;
+}) {
+  if (!project.href) {
+    return <div className={className}>{children}</div>;
+  }
+
+  if (isExternalProject(project)) {
+    return (
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
-    <section id="work" className="py-20 md:py-28 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24">
+    <Link href={project.href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+function StatusLine({ date, status }: { date?: string; status?: string }) {
+  if (!date && !status) return null;
+
+  return (
+    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
+      {date}
+      {date && status ? (
+        <span className="text-white/20 mx-1.5" aria-hidden="true">
+          ·
+        </span>
+      ) : null}
+      {status}
+    </p>
+  );
+}
+
+function DestinationLabel({ project }: { project: Project }) {
+  return (
+    <span className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary/75 group-hover:text-primary transition-colors duration-200">
+      {isExternalProject(project) ? 'Repository' : 'Project'}
+      <span aria-hidden="true">→</span>
+    </span>
+  );
+}
+
+function SelectedEntry({ project }: { project: Project }) {
+  const imageOnRight = project.imageAlign === 'right';
+
+  if (project.image) {
+    return (
+      <ProjectAnchor
+        project={project}
+        className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
+      >
+        <article className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 py-12 md:py-16 border-t border-white/[0.06]">
+          <div
+            className={`relative aspect-[16/10] bg-black md:col-span-7 overflow-hidden ${
+              imageOnRight ? 'md:order-2' : ''
+            }`}
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="(min-width: 768px) 58vw, 100vw"
+            />
+          </div>
+          <div className="md:col-span-5 flex flex-col justify-center">
+            <h3 className="font-serif text-3xl md:text-[2.5rem] font-normal tracking-normal text-primary leading-tight">
+              {project.title}
+            </h3>
+            <div className="mt-4">
+              <StatusLine date={project.date} status={project.status} />
+            </div>
+            <p className="mt-5 text-sm text-secondary leading-relaxed max-w-md">
+              {project.description}
+            </p>
+            <DestinationLabel project={project} />
+          </div>
+        </article>
+      </ProjectAnchor>
+    );
+  }
+
+  return (
+    <ProjectAnchor
+      project={project}
+      className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
+    >
+      <article className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 md:py-16 border-t border-white/[0.06]">
+        <div className="md:col-span-4">
+          <h3 className="font-serif text-3xl md:text-[2.25rem] font-normal tracking-normal text-primary leading-tight">
+            {project.title}
+          </h3>
+          <div className="mt-4">
+            <StatusLine date={project.date} status={project.status} />
+          </div>
+        </div>
+        <div className="md:col-span-8 flex flex-col justify-center">
+          <p className="text-sm md:text-[15px] text-secondary leading-relaxed max-w-xl">
+            {project.description}
+          </p>
+          <DestinationLabel project={project} />
+        </div>
+      </article>
+    </ProjectAnchor>
+  );
+}
+
+export default function ProjectSection() {
+  return (
+    <section
+      id="work"
+      className="py-24 md:py-32 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24"
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-          {/* CURRENT SECTION */}
-          <div className="mb-16">
-            <h2 className="text-sm font-mono text-secondary uppercase tracking-widest mb-6">Current</h2>
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl p-6 md:p-8 transition-all duration-200 hover:border-white/[0.15] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]">
-                <h3 className="font-semibold text-primary text-base md:text-lg mb-1">QC4HEP</h3>
-                <span className="block text-xs font-mono text-secondary/70 uppercase tracking-widest mb-3">Aug 2026 - Present</span>
-                <p className="text-secondary leading-relaxed text-sm md:text-base">
-                  Leading an undergraduate research project investigating quantum simulation of QFTs and lattice gauge theories, and evaluating quantum methods for HEP workflows under near-term hardware constraints.
-                </p>
-                <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/[0.05]">
-                  <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Scoping phase</span>
-                  <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">qBITS @ BITS Goa</span>
-                </div>
-                </div>
-              </div>
-            </div>
-
-          {/* PAST SECTION */}
-          <div className="mb-16">
-            <h2 className="text-sm font-mono text-secondary uppercase tracking-widest mb-6">Past</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                {simulations.map((project, index) => (
-                  <motion.div
-                    key={project.slug}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.35, delay: index * 0.08 }}
-                    className="h-full"
-                  >
-                    <ProjectCard project={project} featured={true} />
-                  </motion.div>
-                ))}
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.35, delay: 3 * 0.08 }}
-                  className="h-full"
-                >
-                  <a href="https://github.com/h-livv/transformer-numpy" target="_blank" rel="noopener noreferrer" className="block group h-full">
-                    <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl overflow-hidden transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)] h-full text-center">
-                      <div className="flex flex-col items-center justify-center w-full aspect-[4/3] sm:aspect-[16/10] p-6 border-b border-white/[0.05] bg-white/[0.02] group-hover:bg-white/[0.04] transition-colors">
-                         <h3 className="font-bold text-primary text-2xl sm:text-3xl tracking-tight leading-none mb-2">Transformer</h3>
-                         <h4 className="font-medium text-secondary text-lg sm:text-xl">from NumPy</h4>
-                      </div>
-                      <div className="p-4 md:p-6 md:pb-5 flex-1 flex flex-col items-center justify-center">
-                        <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mb-2">Aug 2026</span>
-                        <p className="text-secondary leading-normal text-[11px] md:text-xs max-w-[250px] mx-auto">
-                          Full transformer built from scratch in NumPy, including the tokenizer, self-attention, backpropagation, and cross-entropy, with no autograd.
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.35, delay: 4 * 0.08 }}
-                  className="h-full"
-                >
-                  <a href="https://github.com/h-livv/emergent-misalignment" target="_blank" rel="noopener noreferrer" className="block group h-full">
-                    <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl overflow-hidden transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)] h-full text-center">
-                      <div className="flex flex-col items-center justify-center w-full aspect-[4/3] sm:aspect-[16/10] p-6 border-b border-white/[0.05] bg-white/[0.02] group-hover:bg-white/[0.04] transition-colors">
-                         <h3 className="font-bold text-primary text-xl sm:text-2xl tracking-tight leading-none mb-2">Emergent</h3>
-                         <h4 className="font-medium text-secondary text-base sm:text-lg">Misalignment</h4>
-                      </div>
-                      <div className="p-4 md:p-6 md:pb-5 flex-1 flex flex-col items-center justify-center">
-                        <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mb-2">Last touched: Aug 2026</span>
-                        <p className="text-secondary leading-normal text-[11px] md:text-xs max-w-[250px] mx-auto">
-                          Reproduces emergent misalignment on smaller models; investigating the mechanism via interpretability.
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </motion.div>
+          <SectionKicker tone="current">Current</SectionKicker>
+          <div className="mt-8 md:mt-10 border-l border-accent/50 pl-6 md:pl-10">
+            <h3 className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal tracking-normal text-primary leading-[1.05]">
+              {currentProject.title}
+            </h3>
+            {currentProject.subtitle && (
+              <p className="mt-5 md:mt-6 font-serif text-lg md:text-2xl font-normal text-secondary leading-snug max-w-3xl">
+                {currentProject.subtitle}
+              </p>
+            )}
+            <p className="mt-6 md:mt-8 text-sm md:text-base text-secondary leading-relaxed max-w-2xl">
+              {currentProject.description}
+            </p>
+            <div className="mt-10 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-x-8 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
+              <span>{currentProject.date}</span>
+              <span>{currentProject.affiliation}</span>
+              <span className="text-primary">{currentProject.status}</span>
             </div>
           </div>
+        </motion.div>
 
-          {/* TOOLS SECTION */}
-          <div>
-            <h2 className="text-sm font-mono text-secondary uppercase tracking-widest mb-6">Tools</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                {
-                  title: "GeantPy",
-                  desc: "Automates Geant4 workflows via macro generation, outputting NPZ/tensor datasets for downstream use.",
-                  link: "/projects/geantpy",
-                  date: "Last touched: Jul 2026"
-                },
-                {
-                  title: "CiteHop",
-                  desc: "Given a paper, retrieves its citation network and runs a local-LLM review against a claims/gaps schema.",
-                  link: "https://github.com/h-livv/citehop"
-                },
-                {
-                  title: "Machina",
-                  desc: "Personal local Linux dashboard: telemetry, service control, model setup, and device health in one place.",
-                  link: "https://github.com/h-livv/machina"
-                },
-                {
-                  title: "LLM Bench",
-                  desc: "Benchmarks local LLMs against personal hardware constraints to find the best-fit model.",
-                  link: "https://github.com/h-livv/llm-bench"
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-28 md:mt-36"
+        >
+          <SectionKicker>Selected Work</SectionKicker>
+          <div className="mt-8">
+            {selectedWork.map((project) => (
+              <SelectedEntry key={project.slug} project={project} />
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-24 md:mt-32"
+        >
+          <SectionKicker>Earlier Experiments</SectionKicker>
+          <div className="mt-8 border-b border-white/[0.06]">
+            {earlierExperiments.map((project) => (
+              <ProjectAnchor
+                key={project.slug}
+                project={project}
+                className={
+                  project.href
+                    ? 'block group focus-visible:outline-none focus-visible:bg-white/[0.02]'
+                    : 'block'
                 }
-              ].map((item: any, idx) => (
-                <a
-                  key={idx}
-                  href={item.link}
-                  target={item.link.startsWith('/') ? undefined : "_blank"}
-                  rel={item.link.startsWith('/') ? undefined : "noopener noreferrer"}
-                  className="block group h-full"
-                >
-                  <div className="flex items-center justify-between p-4 h-full bg-white/[0.01] border border-white/[0.05] rounded-lg transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.2)]">
-                    <div className="flex flex-col gap-1 pr-4">
-                      <span className="text-sm font-semibold text-primary group-hover:text-white transition-colors duration-200">
-                        {item.title}
-                      </span>
-                      {item.date && (
-                        <span className="block text-[10px] font-mono text-secondary/70 uppercase tracking-widest mt-0.5 mb-0.5">{item.date}</span>
-                      )}
-                      <span className="text-[11px] text-secondary leading-normal">
-                        {item.desc}
-                      </span>
-                    </div>
-                    <span className="text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary shrink-0">
-                      →
+              >
+                <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-5 md:py-6 border-t border-white/[0.06]">
+                  <h3
+                    className={`sm:col-span-4 text-sm text-primary ${
+                      project.href ? 'group-hover:text-white transition-colors duration-200' : ''
+                    }`}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="sm:col-span-5 text-xs text-secondary leading-relaxed">
+                    {project.description}
+                  </p>
+                  <p className="sm:col-span-3 sm:text-right font-mono text-[10px] uppercase tracking-[0.16em] text-secondary">
+                    {project.date}
+                    <span className="text-white/20 mx-1.5" aria-hidden="true">
+                      ·
                     </span>
-                  </div>
-                </a>
-              ))}
-            </div>
+                    {project.status}
+                    {project.href ? (
+                      <span className="ml-2 text-primary/45 group-hover:text-primary" aria-hidden="true">
+                        →
+                      </span>
+                    ) : null}
+                  </p>
+                </article>
+              </ProjectAnchor>
+            ))}
           </div>
         </motion.div>
       </div>

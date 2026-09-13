@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
-import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -45,26 +44,27 @@ const markdownStyles = `
     font-family: var(--font-geist-sans), sans-serif;
   }
   .blog-markdown h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: var(--font-garamond), ui-serif, Georgia, serif;
+    font-size: 2.75rem;
+    font-weight: 400;
     letter-spacing: -0.02em;
+    line-height: 1.1;
     color: #ffffff;
     margin-top: 0;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 0.75rem;
+    margin-bottom: 1.75rem;
   }
   .blog-markdown h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: var(--font-garamond), ui-serif, Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
     letter-spacing: -0.02em;
     color: #ffffff;
-    margin-top: 2.25rem;
+    margin-top: 2.5rem;
     margin-bottom: 0.85rem;
   }
   .blog-markdown h3 {
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #ffffff;
     margin-top: 1.75rem;
     margin-bottom: 0.65rem;
@@ -98,25 +98,25 @@ const markdownStyles = `
     color: #ffffff;
   }
   .blog-markdown a {
-    color: #5EEAD4;
-    text-decoration: none;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(255, 255, 255, 0.25);
   }
   .blog-markdown a:hover {
-    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.7);
   }
   .blog-markdown code {
     font-family: var(--font-geist-mono), monospace;
-    color: #5EEAD4;
+    color: #d4d4d4;
     background-color: rgba(255, 255, 255, 0.04);
     padding: 0.125rem 0.3rem;
-    border-radius: 0.25rem;
     font-size: 0.85em;
   }
   .blog-markdown pre {
     background-color: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 1rem;
-    border-radius: 0.5rem;
     overflow-x: auto;
     margin-bottom: 1.5rem;
   }
@@ -135,12 +135,11 @@ const markdownStyles = `
     display: block;
     max-width: 100%;
     height: auto;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     margin: 1.75rem 0;
   }
   .blog-markdown blockquote {
-    border-left: 2px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
     padding-left: 1rem;
     color: #888888;
     margin: 1.5rem 0;
@@ -164,22 +163,33 @@ export default async function BlogPostPage({ params }: PageProps) {
       <>
         <Navbar />
         <main className="flex-1">
-          <section className="px-6 md:px-12 pt-28 pb-20">
-            <div className="max-w-3xl mx-auto">
-              <h1 className="text-2xl font-bold tracking-tight text-primary mb-4">Notes</h1>
-              <p className="text-sm md:text-base text-secondary mb-10 max-w-prose leading-relaxed">
+          <section className="px-6 md:px-12 pt-32 pb-24 md:pb-32">
+            <div className="max-w-6xl mx-auto">
+              <h1 className="font-serif text-4xl md:text-5xl font-normal tracking-normal text-primary leading-[1.1]">
+                Writing
+              </h1>
+              <p className="mt-5 text-sm md:text-base text-secondary mb-10 max-w-2xl leading-relaxed">
                 Essays and notes on scientific computing, physical simulations, and mathematical abstractions.
               </p>
 
-              <div className="flex flex-col gap-4">
+              <div className="border-b border-white/[0.06]">
                 {posts.map((post) => (
-                  <Link key={post.slug} href={post.href} className="block group">
-                    <div className="bg-white/[0.01] border border-white/[0.05] rounded-xl p-4 transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]">
-                      <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-semibold text-primary">{post.title}</h2>
-                        <ArrowRight className="w-5 h-5 text-secondary opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-primary" />
-                      </div>
-                    </div>
+                  <Link
+                    key={post.slug}
+                    href={post.href}
+                    className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
+                  >
+                    <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-5 md:py-6 border-t border-white/[0.06]">
+                      <h2 className="sm:col-span-4 font-serif text-xl md:text-2xl font-normal text-primary leading-tight group-hover:text-white transition-colors duration-200">
+                        {post.title}
+                      </h2>
+                      <p className="sm:col-span-7 text-xs sm:text-sm text-secondary leading-relaxed">
+                        {post.description}
+                      </p>
+                      <p className="sm:col-span-1 sm:text-right font-mono text-[11px] uppercase tracking-[0.18em] text-primary/45 group-hover:text-primary transition-colors duration-200">
+                        <span aria-hidden="true">→</span>
+                      </p>
+                    </article>
                   </Link>
                 ))}
               </div>
@@ -204,13 +214,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       <Navbar />
       <main className="flex-1">
         <style dangerouslySetInnerHTML={{ __html: markdownStyles }} />
-        <article className="px-6 md:px-12 pt-28 pb-20">
-          <div className="max-w-3xl mx-auto">
+        <article className="px-6 md:px-12 pt-32 pb-24 md:pb-32">
+          <div className="max-w-2xl mx-auto">
             <Link
               href="/blog"
-              className="inline-block text-[11px] font-mono uppercase tracking-widest text-secondary hover:text-primary transition-colors mb-8"
+              className="inline-block text-[11px] font-mono uppercase tracking-[0.22em] text-secondary hover:text-primary transition-colors mb-10"
             >
-              ← Notes
+              ← Writing
             </Link>
             <div
               className="blog-markdown"

@@ -11,6 +11,10 @@ export interface BlogPost {
 
 const BLOG_DIR = path.join(process.cwd(), 'blog');
 
+const listingDescriptions: Record<string, string> = {
+  tempest: 'Inception',
+};
+
 function extractTitle(markdown: string, fallback: string): string {
   const match = markdown.match(/^#\s+(.+)$/m);
   return match ? match[1].trim() : fallback;
@@ -20,6 +24,7 @@ function extractDescription(markdown: string): string {
   const withoutHeading = markdown.replace(/^#\s+.+$/m, '').trim();
   const paragraphs = withoutHeading
     .split(/\n\s*\n/)
+    .filter((block) => !/^#+\s+/.test(block.trim()))
     .map((block) =>
       block
         .replace(/^#+\s+/gm, '')
@@ -73,7 +78,7 @@ export function getAllPosts(): BlogPost[] {
       return {
         slug,
         title,
-        description: extractDescription(content),
+        description: listingDescriptions[slug] ?? extractDescription(content),
         content,
         href: `/blog/${slug}`,
       };

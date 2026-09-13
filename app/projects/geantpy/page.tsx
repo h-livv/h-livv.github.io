@@ -30,6 +30,9 @@ export default function GeantPyPage() {
           <p className="text-[19px] font-light text-neutral-400 leading-normal max-w-2xl">
             A Python orchestration layer for Geant4 simulation workflows.
           </p>
+          <span className="inline-block px-2.5 py-1 text-[11px] font-mono tracking-widest text-neutral-300 uppercase border border-white/10 bg-white/5 rounded w-fit mt-2">
+            Archived
+          </span>
         </section>
 
         {/* ==========================================
@@ -206,7 +209,7 @@ export default function GeantPyPage() {
               Explore GeantPy.
             </h2>
             <p className="text-neutral-400 text-[13px] font-light leading-relaxed max-w-sm">
-              The repository contains source code, documentation, and ongoing development.
+              The repository is preserved as an archived orchestration layer for Geant4 simulation workflows.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-2">
               <Link

@@ -25,7 +25,7 @@ export default function JanusPage() {
     <CollaborativeProjectLayout
       title="JANUS"
       subtitle="A computational framework for studying high-energy particle transport and production."
-      statusContext="Exploration"
+      statusContext="Archived"
       motivationHeader="Overview"
       contributionHeader="PHYSICAL MODEL"
       summaryParagraphs={summary}

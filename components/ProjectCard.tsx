@@ -4,10 +4,12 @@ import { ArrowRight } from 'lucide-react';
 import type { Project } from '../data/projects';
 
 export default function ProjectCard({ project, featured = false, compact = false, diminished = false, stretchImage = false }: { project: Project, featured?: boolean, compact?: boolean, diminished?: boolean, stretchImage?: boolean }) {
+  if (!project.href) return null;
+
   return (
     <Link href={project.href} className={`block group h-full ${diminished ? 'scale-[0.90] hover:scale-[0.93] transition-all duration-500' : ''}`}>
       <div className="flex flex-col bg-white/[0.01] border border-white/[0.05] rounded-xl overflow-hidden transition-all duration-200 hover:border-white/[0.15] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)] h-full">
-        {!compact && (
+        {!compact && project.image && (
           <div className={`relative bg-black w-full overflow-hidden border-b border-white/[0.05] ${stretchImage ? 'aspect-[4/3] sm:aspect-[16/10] md:aspect-auto md:flex-1 md:min-h-0' : (featured ? 'aspect-[4/3] sm:aspect-[16/10]' : 'aspect-[4/3]')}`}>
             <Image
               src={project.image}
