@@ -26,6 +26,17 @@ export const projects: Project[] = [
     tier: 'current',
   },
   {
+    title: 'Transformer from Scratch',
+    slug: 'transformer-numpy',
+    description:
+      'Full transformer language-model architecture implemented from scratch in NumPy, including tokenizer, multi-head self-attention across multiple transformer blocks, backpropagation, and cross-entropy loss, with no autograd.',
+    href: 'https://github.com/h-livv/transformer-numpy',
+    date: '2026',
+    status: 'Active — working toward inference',
+    external: true,
+    tier: 'selected',
+  },
+  {
     title: 'Emergent Misalignment',
     slug: 'emergent-misalignment',
     description:
@@ -33,17 +44,6 @@ export const projects: Project[] = [
     href: 'https://github.com/h-livv/emergent-misalignment',
     date: '2026',
     status: 'Archived',
-    external: true,
-    tier: 'selected',
-  },
-  {
-    title: 'Transformer from NumPy',
-    slug: 'transformer-numpy',
-    description:
-      'Full Transformer language-model architecture built from scratch in NumPy, including the tokenizer, self-attention, backpropagation, and cross-entropy, with no autograd.',
-    href: 'https://github.com/h-livv/transformer-numpy',
-    date: '2026',
-    status: 'Experimental',
     external: true,
     tier: 'selected',
   },
