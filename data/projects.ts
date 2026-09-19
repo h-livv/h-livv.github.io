@@ -10,7 +10,7 @@ export interface Project {
   affiliation?: string;
   external?: boolean;
   imageAlign?: 'left' | 'right';
-  tier: 'current' | 'selected' | 'earlier';
+  tier: 'current' | 'selected' | 'physics' | 'earlier';
 }
 
 export const projects: Project[] = [
@@ -26,27 +26,14 @@ export const projects: Project[] = [
     tier: 'current',
   },
   {
-    title: 'Tempest',
-    slug: 'tempest',
+    title: 'Emergent Misalignment',
+    slug: 'emergent-misalignment',
     description:
-      'A computational physics laboratory for numerical methods, PDE simulation, and scientific machine learning.',
-    href: '/projects/tempest',
-    image: '/images/projects/tempest.png',
-    date: 'Jun – Aug 2026',
+      'Small-scale local reproduction attempt of emergent misalignment experiments from Betley et al. The experiments did not recover the intended persona at the available scale.',
+    href: 'https://github.com/h-livv/emergent-misalignment',
+    date: '2026',
     status: 'Archived',
-    imageAlign: 'left',
-    tier: 'selected',
-  },
-  {
-    title: 'Janus',
-    slug: 'janus',
-    description:
-      'A computational framework coupling Geant4 particle-interaction simulation with Xsuite beam transport.',
-    href: '/projects/janus',
-    image: '/images/projects/janus.png',
-    date: 'Jun – Aug 2026',
-    status: 'Archived',
-    imageAlign: 'right',
+    external: true,
     tier: 'selected',
   },
   {
@@ -61,17 +48,6 @@ export const projects: Project[] = [
     tier: 'selected',
   },
   {
-    title: 'Emergent Misalignment',
-    slug: 'emergent-misalignment',
-    description:
-      'Small-scale local reproduction attempt of emergent misalignment experiments from Betley et al. The experiments did not recover the intended persona at the available scale.',
-    href: 'https://github.com/h-livv/emergent-misalignment',
-    date: '2026',
-    status: 'Archived',
-    external: true,
-    tier: 'selected',
-  },
-  {
     title: 'Penrose',
     slug: 'penrose',
     description:
@@ -81,7 +57,31 @@ export const projects: Project[] = [
     date: 'Mar – Jul 2026',
     status: 'Club Project',
     imageAlign: 'left',
-    tier: 'selected',
+    tier: 'physics',
+  },
+  {
+    title: 'Tempest',
+    slug: 'tempest',
+    description:
+      'A computational physics laboratory for numerical methods, PDE simulation, and scientific machine learning.',
+    href: '/projects/tempest',
+    image: '/images/projects/tempest.png',
+    date: 'Jun – Aug 2026',
+    status: 'Archived',
+    imageAlign: 'left',
+    tier: 'physics',
+  },
+  {
+    title: 'Janus',
+    slug: 'janus',
+    description:
+      'A computational framework coupling Geant4 particle-interaction simulation with Xsuite beam transport.',
+    href: '/projects/janus',
+    image: '/images/projects/janus.png',
+    date: 'Jun – Aug 2026',
+    status: 'Archived',
+    imageAlign: 'right',
+    tier: 'physics',
   },
   {
     title: 'Atlas',
@@ -128,4 +128,5 @@ export const projects: Project[] = [
 
 export const currentProject = projects.find((project) => project.tier === 'current')!;
 export const selectedWork = projects.filter((project) => project.tier === 'selected');
+export const physicsSimulations = projects.filter((project) => project.tier === 'physics');
 export const earlierExperiments = projects.filter((project) => project.tier === 'earlier');

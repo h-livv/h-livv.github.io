@@ -17,13 +17,13 @@ export default function Hero() {
           </p>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-normal leading-[1.05] tracking-normal text-primary max-w-4xl">
-            Physics, Mathematics,
+            Mathematics, Deep&nbsp;Learning,{" "}
             <br />
-            and Computation
+            Quantum&nbsp;Computing
           </h1>
 
           <p className="mt-8 text-sm md:text-base text-secondary max-w-2xl leading-relaxed">
-            A mathematics student exploring interesting systems from first principles.
+            Exploring interesting systems from first principles.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
