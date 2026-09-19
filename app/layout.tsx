@@ -17,9 +17,16 @@ const garamond = EB_Garamond({
   subsets: ["latin"],
 });
 
+const description =
+  "Mathematics, deep learning, and quantum computing — exploring interesting systems from first principles.";
+
 export const metadata: Metadata = {
   title: "Harliv",
-  description: "Building scientific software for computational physics, simulation, and machine learning.",
+  description,
+  openGraph: {
+    title: "Harliv",
+    description,
+  },
 };
 
 export default function RootLayout({
