@@ -5,6 +5,7 @@ import * as motion from 'framer-motion/client';
 import {
   currentProject,
   earlierExperiments,
+  physicsSimulations,
   selectedWork,
   type Project,
 } from '../data/projects';
@@ -63,12 +64,53 @@ function StatusLine({ date, status }: { date?: string; status?: string }) {
   );
 }
 
-function DestinationLabel({ project }: { project: Project }) {
+function DestinationLabel({
+  project,
+  compact = false,
+}: {
+  project: Project;
+  compact?: boolean;
+}) {
   return (
-    <span className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary/75 group-hover:text-primary transition-colors duration-200">
+    <span
+      className={`${compact ? 'mt-auto pt-4' : 'mt-6'} inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary/75 group-hover:text-primary transition-colors duration-200`}
+    >
       {isExternalProject(project) ? 'Repository' : 'Project'}
       <span aria-hidden="true">→</span>
     </span>
+  );
+}
+
+function ArchivedTile({ project }: { project: Project }) {
+  return (
+    <ProjectAnchor
+      project={project}
+      className="block group h-full focus-visible:outline-none focus-visible:bg-white/[0.02]"
+    >
+      <article className="flex h-full flex-col">
+        {project.image ? (
+          <div className="relative aspect-[16/10] bg-black overflow-hidden">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="(min-width: 768px) 30vw, 100vw"
+            />
+          </div>
+        ) : null}
+        <h3 className="mt-4 font-serif text-xl md:text-2xl font-normal tracking-normal text-primary leading-tight">
+          {project.title}
+        </h3>
+        <div className="mt-2">
+          <StatusLine date={project.date} status={project.status} />
+        </div>
+        <p className="mt-3 text-xs text-secondary leading-relaxed">
+          {project.description}
+        </p>
+        <DestinationLabel project={project} compact />
+      </article>
+    </ProjectAnchor>
   );
 }
 
@@ -193,8 +235,22 @@ export default function ProjectSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-24 md:mt-32"
         >
-          <SectionKicker>Earlier Experiments</SectionKicker>
-          <div className="mt-8 border-b border-white/[0.06]">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <SectionKicker>Computational Physics &amp; Simulation</SectionKicker>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
+              Archived — 2026
+            </p>
+          </div>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            {physicsSimulations.map((project) => (
+              <ArchivedTile key={project.slug} project={project} />
+            ))}
+          </div>
+
+          <h3 className="mt-16 md:mt-20 text-[12px] font-mono uppercase tracking-[0.18em] text-secondary">
+            Earlier Experiments
+          </h3>
+          <div className="mt-6 border-b border-white/[0.06]">
             {earlierExperiments.map((project) => (
               <ProjectAnchor
                 key={project.slug}
@@ -206,13 +262,13 @@ export default function ProjectSection() {
                 }
               >
                 <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-5 md:py-6 border-t border-white/[0.06]">
-                  <h3
+                  <h4
                     className={`sm:col-span-4 text-sm text-primary ${
                       project.href ? 'group-hover:text-white transition-colors duration-200' : ''
                     }`}
                   >
                     {project.title}
-                  </h3>
+                  </h4>
                   <p className="sm:col-span-5 text-xs text-secondary leading-relaxed">
                     {project.description}
                   </p>
