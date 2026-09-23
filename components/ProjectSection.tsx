@@ -202,7 +202,7 @@ export default function ProjectSection() {
                 {currentProject.subtitle}
               </p>
             )}
-            <p className="mt-6 md:mt-8 text-sm md:text-base text-secondary leading-relaxed max-w-2xl">
+            <p className="mt-6 md:mt-8 text-sm md:text-base text-secondary leading-relaxed max-w-2xl whitespace-pre-wrap">
               {currentProject.description}
             </p>
             <div className="mt-10 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-x-8 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">

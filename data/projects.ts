@@ -19,9 +19,9 @@ export const projects: Project[] = [
     slug: 'qc4hep',
     subtitle: 'Quantum simulation of QFTs and lattice gauge theories, and quantum computing for HEP workflows',
     description:
-      'A computational research project investigating quantum simulation of QFTs and lattice gauge theories, and exploring quantum computing for HEP workflows under near-term hardware constraints.',
+      'A computational research project investigating quantum simulation of QFTs and lattice gauge theories, and exploring quantum computing for HEP workflows under near-term hardware constraints.\n\nCurrently reproducing electric-field quench dynamics in the 1+1D Schwinger model via exact diagonalization, as a validated classical baseline ahead of the paper\'s quantum algorithms.',
     date: 'Aug 2026 — Present',
-    status: 'Scoping phase',
+    status: 'BASELINE REPRODUCTION',
     affiliation: 'qBITS · BITS Goa',
     tier: 'current',
   },
