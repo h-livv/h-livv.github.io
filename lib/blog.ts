@@ -7,12 +7,14 @@ export interface BlogPost {
   description: string;
   content: string;
   href: string;
+  lastModified: number;
 }
 
 const BLOG_DIR = path.join(process.cwd(), 'blog');
 
 const listingDescriptions: Record<string, string> = {
-  tempest: 'Inception',
+  tempest: 'Retrospective',
+  'what-are-derivatives': 'First Principles',
 };
 
 function extractTitle(markdown: string, fallback: string): string {
@@ -60,9 +62,11 @@ function discoverMarkdownFiles(dir: string, base = ''): { relativePath: string; 
     const folder = path.dirname(relativePath);
     const name = entry.name.replace(/\.md$/, '');
     // Prefer folder slug when file matches folder (e.g. tempest/tempest.md → tempest)
-    const slug = folder !== '.' && (name === path.basename(folder) || name === 'index')
+    const rawSlug = folder !== '.' && (name === path.basename(folder) || name === 'index')
       ? folder.replace(/\\/g, '/')
       : relativePath.replace(/\.md$/, '').replace(/\\/g, '/');
+
+    const slug = rawSlug.split('/').map(part => part.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')).join('/');
 
     files.push({ relativePath, slug });
   }
@@ -73,7 +77,9 @@ function discoverMarkdownFiles(dir: string, base = ''): { relativePath: string; 
 export function getAllPosts(): BlogPost[] {
   return discoverMarkdownFiles(BLOG_DIR)
     .map(({ relativePath, slug }) => {
-      const content = fs.readFileSync(path.join(BLOG_DIR, relativePath), 'utf8');
+      const filePath = path.join(BLOG_DIR, relativePath);
+      const content = fs.readFileSync(filePath, 'utf8');
+      const stat = fs.statSync(filePath);
       const title = extractTitle(content, slug);
       return {
         slug,
@@ -81,9 +87,10 @@ export function getAllPosts(): BlogPost[] {
         description: listingDescriptions[slug] ?? extractDescription(content),
         content,
         href: `/blog/${slug}`,
+        lastModified: stat.mtimeMs,
       };
     })
-    .sort((a, b) => a.title.localeCompare(b.title));
+    .sort((a, b) => b.lastModified - a.lastModified);
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {

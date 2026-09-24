@@ -1,10 +1,14 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
+import markedKatex from 'marked-katex-extension';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getAllPosts, getAllPostSlugs, getPostBySlug } from '@/lib/blog';
+
+marked.use(markedKatex({ throwOnError: false }));
+
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
@@ -70,7 +74,7 @@ const markdownStyles = `
     margin-bottom: 0.65rem;
   }
   .blog-markdown p {
-    color: #888888;
+    color: #b3b3b3;
     font-weight: 400;
     line-height: 1.7;
     margin-bottom: 1.25rem;
@@ -78,7 +82,7 @@ const markdownStyles = `
   }
   .blog-markdown ul, .blog-markdown ol {
     padding-left: 1.5rem;
-    color: #888888;
+    color: #b3b3b3;
     font-weight: 400;
     margin-bottom: 1.25rem;
     font-size: 0.95rem;
@@ -141,7 +145,7 @@ const markdownStyles = `
   .blog-markdown blockquote {
     border-left: 1px solid rgba(255, 255, 255, 0.18);
     padding-left: 1rem;
-    color: #888888;
+    color: #b3b3b3;
     margin: 1.5rem 0;
   }
 `;
@@ -213,6 +217,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <>
       <Navbar />
       <main className="flex-1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
         <style dangerouslySetInnerHTML={{ __html: markdownStyles }} />
         <article className="px-6 md:px-12 pt-32 pb-24 md:pb-32">
           <div className="max-w-2xl mx-auto">

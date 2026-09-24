@@ -62,11 +62,11 @@ This was a feature pending for a while. Didn't take long because of the already 
 
 What came with it was a beautiful dashboard and even more beautiful visuals.
 
-![Tempest](../../public/images/projects/tempest.png)
+![Tempest](../public/images/projects/tempest.png)
 
 ## Looking back
 
-Tempest has come a long way. From just the linear advection to a potential research-grade (I hope) framework.
+Tempest has come a long way. From just the linear advection to a potential research-grade framework as I had hoped.
 
 I think the best thing about Tempest is its modular and generalized architecture. Implementing a new PDE just requires you to write its equation and nothing else.
 
@@ -99,14 +99,16 @@ Without a doubt, I'd focus on modularity, extensibility, and fidelity.
 
 This has been my approach toward all my future projects and I think Tempest was the best learning platform for that.
 
-## Looking forward
+## Stepping back
 
-Tempest still has a long way to go and I think will never stop evolving. It is already really close to very exciting use-cases.
+I haven't touched Tempest in a while now. Not because something broke or the ideas ran dry, just because my attention moved elsewhere. Math, deep learning, interpretability, quantum computing.
 
-Complex, emergent atmospheric phenomena.
+So yeah, Tempest is done, for now at least.
 
-Surrogate research.
+Looking back, I don't think it ever really became the "research-grade framework" I hoped it would. What it actually was, was a sandbox. A place to just build things and see if they broke. Discretization, convergence, boundary conditions, surrogates. I didn't learn any of this from a textbook, I learnt it by getting it wrong first and then figuring out why.
 
-PDE discovery (inverse problems).
+The CNN-PINN, the Fourier neural operator, all of it taught me way more about how to approach a problem than about the specific equations I was solving.
+
+Tempest doesn't need to keep growing for any of that to count.
 
 ---
