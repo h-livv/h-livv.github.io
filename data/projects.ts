@@ -84,6 +84,17 @@ export const projects: Project[] = [
     tier: 'physics',
   },
   {
+    title: 'Elliptic Curve Multi-Secret Sharing',
+    slug: 'elliptic-curve-mss',
+    description:
+      'SageMath reproduction of a conjunctive hierarchical multi-secret sharing scheme built on elliptic curves and pairings.',
+    href: 'https://github.com/h-livv/elliptic-curve-mss',
+    date: 'Sept 2026',
+    status: 'IN PROGRESS',
+    external: true,
+    tier: 'earlier',
+  },
+  {
     title: 'Atlas',
     slug: 'atlas',
     description: 'Physics-first laboratory for quantum Hamiltonian simulation and variational algorithms.',

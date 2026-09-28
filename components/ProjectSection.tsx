@@ -248,7 +248,7 @@ export default function ProjectSection() {
           </div>
 
           <h3 className="mt-16 md:mt-20 text-[12px] font-mono uppercase tracking-[0.18em] text-secondary">
-            Earlier Experiments
+            Experiments
           </h3>
           <div className="mt-6 border-b border-white/[0.06]">
             {earlierExperiments.map((project) => (
