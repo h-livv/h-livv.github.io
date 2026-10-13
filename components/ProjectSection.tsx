@@ -209,6 +209,16 @@ export default function ProjectSection() {
               <span>{currentProject.date}</span>
               <span>{currentProject.affiliation}</span>
               <span className="text-primary">{currentProject.status}</span>
+              {currentProject.href && (
+                <a
+                  href={currentProject.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary/60 hover:text-primary transition-colors duration-200"
+                >
+                  Repository <span aria-hidden="true">→</span>
+                </a>
+              )}
             </div>
           </div>
         </motion.div>
@@ -237,9 +247,6 @@ export default function ProjectSection() {
         >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
             <SectionKicker>Computational Physics &amp; Simulation</SectionKicker>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
-              Archived — 2026
-            </p>
           </div>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
             {physicsSimulations.map((project) => (

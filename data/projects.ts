@@ -14,44 +14,63 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  // ── Current ──────────────────────────────────────────────────────────────
   {
     title: 'QC4HEP',
     slug: 'qc4hep',
-    subtitle: 'Quantum simulation of QFTs and lattice gauge theories, and quantum computing for HEP workflows',
+    subtitle:
+      'Quantum simulation of QFTs and lattice gauge theories, and quantum computing for HEP workflows',
     description:
-      'A computational research project investigating quantum simulation of QFTs and lattice gauge theories, and exploring quantum computing for HEP workflows under near-term hardware constraints.\n\nCurrently reproducing electric-field quench dynamics in the 1+1D Schwinger model via exact diagonalization, as a validated classical baseline ahead of the paper\'s quantum algorithms.',
-    date: 'Aug 2026 — Present',
-    status: 'BASELINE REPRODUCTION',
-    affiliation: 'qBITS · BITS Goa',
+      'A computational research project investigating quantum simulation of lattice gauge theories and quantum computing for high-energy physics.\n\nReproduced selected results from a paper on nonequilibrium dynamics in the 1+1D Schwinger model, using exact diagonalization as a classical reference. Implemented VQE, VQD, and second-order Suzuki–Trotter evolution, comparing their results against exact calculations. Current extensions include larger-lattice benchmarks, time-dependent fields, and further validation of quantum algorithms.',
+    href: 'https://github.com/qBITS-github/lattice-schwinger-qc',
+    date: 'AUG 2026 — PRESENT',
+    status: 'EXTENSION PHASE',
+    affiliation: 'QBITS · BITS GOA',
+    external: true,
     tier: 'current',
+  },
+
+  // ── Selected Work ─────────────────────────────────────────────────────────
+  {
+    title: 'Grokking & Mechanistic Interpretability',
+    slug: 'grokking-mechinterp',
+    description:
+      'Investigating delayed generalization in Transformers trained on modular arithmetic, and whether their learned computations follow a Fourier-based algorithm.',
+    href: 'https://github.com/h-livv/grokking-mechinterp',
+    date: 'OCT 2026',
+    status: 'RESEARCH EXPERIMENT',
+    external: true,
+    tier: 'selected',
+  },
+  {
+    title: 'Elliptic Curve Multi-Secret Sharing',
+    slug: 'elliptic-curve-mss',
+    description:
+      'SageMath reproduction of a hierarchical multi-secret sharing scheme using elliptic curves and pairings, currently scoped to two levels and one secret.',
+    href: 'https://github.com/h-livv/elliptic-curve-mss',
+    date: 'SEP–OCT 2026',
+    status: 'MATHEMATICAL INVESTIGATION',
+    external: true,
+    tier: 'selected',
   },
   {
     title: 'Transformer from Scratch',
     slug: 'transformer-numpy',
     description:
-      'Full transformer language-model architecture implemented from scratch in NumPy, including tokenizer, multi-head self-attention across multiple transformer blocks, backpropagation, and cross-entropy loss, with no autograd.',
+      'A decoder-only character-level Transformer implemented from scratch in NumPy, including tokenization, multi-head self-attention, multiple Transformer blocks, manual backpropagation, and cross-entropy loss without automatic differentiation.',
     href: 'https://github.com/h-livv/transformer-numpy',
     date: '2026',
-    status: 'Active — working toward inference',
+    status: 'IMPLEMENTATION STUDY',
     external: true,
     tier: 'selected',
   },
-  {
-    title: 'Emergent Misalignment',
-    slug: 'emergent-misalignment',
-    description:
-      'Small-scale local reproduction attempt of emergent misalignment experiments from Betley et al. The experiments did not recover the intended persona at the available scale.',
-    href: 'https://github.com/h-livv/emergent-misalignment',
-    date: '2026',
-    status: 'Archived',
-    external: true,
-    tier: 'selected',
-  },
+
+  // ── Computational Physics & Simulation ───────────────────────────────────
   {
     title: 'Penrose',
     slug: 'penrose',
     description:
-      'Numerical exploration of particle and photon motion in curved spacetime, focusing on geodesic integration in Schwarzschild spacetime and related visualisation.',
+      'Numerical exploration of particle and photon motion in curved spacetime, focusing on geodesic integration in Schwarzschild spacetime and relativistic visualization.',
     href: '/projects/penrose',
     image: '/images/projects/penrose.png',
     date: 'Mar – Jul 2026',
@@ -63,7 +82,7 @@ export const projects: Project[] = [
     title: 'Tempest',
     slug: 'tempest',
     description:
-      'A computational physics laboratory for numerical methods, PDE simulation, and scientific machine learning.',
+      'A computational physics laboratory exploring numerical methods for partial differential equations alongside learned surrogate solvers, including experiments on long-horizon rollout and generalization.',
     href: '/projects/tempest',
     image: '/images/projects/tempest.png',
     date: 'Jun – Aug 2026',
@@ -83,55 +102,48 @@ export const projects: Project[] = [
     imageAlign: 'right',
     tier: 'physics',
   },
+
+  // ── Experiments ───────────────────────────────────────────────────────────
   {
-    title: 'Elliptic Curve Multi-Secret Sharing',
-    slug: 'elliptic-curve-mss',
+    title: 'Emergent Misalignment',
+    slug: 'emergent-misalignment',
     description:
-      'SageMath reproduction of a conjunctive hierarchical multi-secret sharing scheme built on elliptic curves and pairings.',
-    href: 'https://github.com/h-livv/elliptic-curve-mss',
-    date: 'Sept 2026',
-    status: 'IN PROGRESS',
+      'A small-scale reproduction study testing whether narrow fine-tuning induces broader behavioral changes. The intended behavior did not emerge at the tested model scale.',
+    href: 'https://github.com/h-livv/emergent-misalignment',
+    date: '2026',
+    status: 'ARCHIVED REPRODUCTION STUDY',
     external: true,
     tier: 'earlier',
   },
   {
     title: 'Atlas',
     slug: 'atlas',
-    description: 'Physics-first laboratory for quantum Hamiltonian simulation and variational algorithms.',
+    description:
+      'An earlier physics-first environment for quantum Hamiltonian simulation and variational algorithms.',
     href: 'https://github.com/h-livv/atlas',
     date: 'July 2026',
-    status: 'Archived',
+    status: 'ARCHIVED',
     external: true,
     tier: 'earlier',
   },
   {
     title: 'GeantPy',
     slug: 'geantpy',
-    description: 'A Python orchestration layer for Geant4 simulation workflows.',
+    description:
+      'A Python orchestration layer for Geant4 simulation workflows, enabling reproducible experiment configuration, automated execution, and structured data collection.',
     href: '/projects/geantpy',
     date: 'Jul 2026',
-    status: 'Archived',
+    status: 'ARCHIVED',
     tier: 'earlier',
   },
   {
-    title: 'Deconvolution Lab',
-    slug: 'deconvolution',
-    description:
-      'Exploratory study of convolution-based inverse problems using controlled 2D experiments, with Solar Gravitational Lens imaging as a motivating application.',
-    href: 'https://github.com/h-livv/deconvolution',
-    date: 'Aug 2026',
-    status: 'Exploration',
-    external: true,
-    tier: 'earlier',
-  },
-  {
-    title: 'Exoplanet detection',
+    title: 'Exoplanet Detection',
     slug: 'exoplanet-detection',
     description:
-      'Exploratory pipeline for detecting and characterizing exoplanet transit signals in TESS photometric data.',
+      'An exploratory notebook-based pipeline for detecting and characterizing transit signals in TESS photometric data.',
     href: 'https://github.com/h-livv/exoplanet-detection',
     date: 'July 2026',
-    status: 'Exploration',
+    status: 'EXPLORATION',
     external: true,
     tier: 'earlier',
   },
