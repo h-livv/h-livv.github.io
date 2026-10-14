@@ -15,6 +15,7 @@ const BLOG_DIR = path.join(process.cwd(), 'blog');
 const listingDescriptions: Record<string, string> = {
   tempest: 'Retrospective',
   'what-are-derivatives': 'First Principles',
+  'the-schwinger-model' : 'Intuition',
 };
 
 function extractTitle(markdown: string, fallback: string): string {
