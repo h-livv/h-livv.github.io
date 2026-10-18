@@ -1,52 +1,32 @@
 import Link from 'next/link';
-import * as motion from 'framer-motion/client';
 import { getAllPosts } from '@/lib/blog';
+import AsciiDivider from './AsciiDivider';
+import SectionKicker from './SectionKicker';
 
 export default function BlogSection() {
   const posts = getAllPosts();
-
   return (
-    <section id="blog" className="py-24 md:py-32 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24">
+    <section id="blog" className="writing-section py-24 md:py-32 px-6 md:px-12 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-        >
-          <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-normal text-primary leading-[1.1]">
-            Writing
-          </h2>
-          <p className="mt-5 text-sm md:text-base text-secondary max-w-2xl leading-relaxed">
-            Notes and essays on things I find interesting.
-          </p>
-
-          {posts.length === 0 ? (
-            <p className="mt-10 text-secondary text-sm">No posts yet.</p>
-          ) : (
-            <div className="mt-10 border-b border-white/[0.06]">
-              {posts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={post.href}
-                  className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
-                >
-                  <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-5 md:py-6 border-t border-white/[0.06]">
-                    <h3 className="sm:col-span-4 font-serif text-xl md:text-2xl font-normal text-primary leading-tight group-hover:text-white transition-colors duration-200">
-                      {post.title}
-                    </h3>
-                    <p className="sm:col-span-7 text-xs sm:text-sm text-secondary leading-relaxed">
-                      {post.description}
-                    </p>
-                    <p className="sm:col-span-1 sm:text-right font-mono text-[11px] uppercase tracking-[0.18em] text-primary/45 group-hover:text-primary transition-colors duration-200">
-                      <span aria-hidden="true">→</span>
-                    </p>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          )}
-        </motion.div>
+        <AsciiDivider />
+        <div className="section-heading">
+          <div><SectionKicker>Notes & essays</SectionKicker><h2 className="font-serif text-6xl md:text-8xl mt-5">Writing<span className="text-dither-warm">.</span></h2></div>
+          <p className="section-note">Notes and essays on<br />things I find interesting.</p>
+        </div>
+        <div className="notebook mt-14">
+          <div className="notebook-pages">
+            {posts.length === 0 ? <p className="p-8 text-secondary">No posts yet.</p> : posts.map((post, index) => (
+              <Link key={post.slug} href={post.href} className="note-entry group">
+                <span className="note-index" aria-hidden="true">[{String(index + 1).padStart(2, '0')}]</span>
+                <article>
+                  <h3 className="font-serif text-3xl md:text-4xl leading-tight">{post.title}</h3>
+                  <p className="mt-4 text-sm text-secondary max-w-xl">{post.description}</p>
+                </article>
+                <span className="note-arrow" aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

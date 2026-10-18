@@ -21,15 +21,17 @@ Open [http://localhost:3000](http://localhost:3000) to view the site locally.
 
 ```bash
 npm run build
-npm run start
 ```
+
+The build exports the static website to `out/` for hosting on GitHub Pages.
+Use `npm run dev` for a local preview.
 
 ## Project structure
 
 - `app/` — Next.js routes and page entry points
 - `components/` — page sections and shared interface components
 - `data/` — project and social-link content
-- `content/` — writing and project content
+- `blog/` — Markdown posts
 - `public/` — images and other static assets
 
 The site is built with Next.js, TypeScript, and Tailwind CSS.

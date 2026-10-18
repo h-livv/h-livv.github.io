@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #000000;
-  --color-cards: #0a0a0a;
-  --color-borders: #1a1a1a;
+  --color-background: #050505;
+  --color-cards: #080808;
+  --color-borders: #141414;
   --color-primary: #ffffff;
-  --color-secondary: #b3b3b3;
+  --color-secondary: #8a8a8a;
   --color-accent: #5EEAD4;
+  --color-dither-warm: #D4805E;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-garamond);
 }
 
 :root {
-  --background: #000000;
+  --background: #050505;
   --foreground: #ffffff;
 }
 
@@ -32,5 +35,58 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  line-height: 1.6;
+  line-height: 1.75;
+}
+
+/* Ink, paper, phosphor. Keep texture decorative and interaction unobstructed. */
+.noise-overlay {
+  position: fixed;
+  inset: -4px;
+  z-index: 9999;
+  pointer-events: none;
+  background: url('/noise.svg') repeat;
+  opacity: .025;
+  mix-blend-mode: screen;
+  animation: grain-shift 4s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 2px); }
+}
+.ascii-divider {
+  overflow: hidden;
+  margin-bottom: 3rem;
+  color: rgba(94, 234, 212, .22);
+  font: 10px / 1 var(--font-geist-mono), monospace;
+  white-space: nowrap;
+  user-select: none;
+  animation: ascii-breathe 6s ease-in-out infinite;
+}
+@keyframes ascii-breathe {
+  0%, 100% { opacity: .55; letter-spacing: 0; }
+  50% { opacity: 1; letter-spacing: .04em; }
+}
+.dither-layer { visibility: hidden; image-rendering: pixelated; transition: opacity 400ms ease; }
+.dither-layer[data-ready] { visibility: visible; }
+@media (hover: hover) {
+  .group:hover .dither-layer, .dither-image:hover .dither-layer { opacity: 0; }
+}
+.group:focus-visible .dither-layer { opacity: 0; }
+.print-caption {
+  position: absolute; bottom: .75rem; right: .75rem;
+  padding: .2rem .4rem; background: #080808d9; color: #5eead4;
+  font: 9px / 1.5 var(--font-geist-mono), monospace;
+  letter-spacing: .12em; pointer-events: none;
+}
+@media (hover: none) { .print-caption { display: none; } }
+a:focus-visible { outline: 1px solid var(--color-accent); outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }

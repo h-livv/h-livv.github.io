@@ -46,8 +46,6 @@ export function TempestBackground() {
       // Draw 3D wireframe mesh grid (solving PDE wave equation)
       const cols = 28;
       const rows = 28;
-      const spacingX = width / (cols - 1) * 1.4;
-      const spacingY = height / (rows - 1) * 1.4;
       
       // Projection helper
       const project = (r: number, c: number) => {

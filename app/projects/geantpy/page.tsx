@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Layers } from 'lucide-react';
 import { GeantPyBackground } from '../../../components/projects/ProjectBackgrounds';
 import ProjectNavbar from '../../../components/projects/ProjectNavbar';
 import ProjectFooter from '../../../components/projects/ProjectFooter';
@@ -44,7 +43,7 @@ export default function GeantPyPage() {
           </div>
           <div className="md:col-span-8 flex flex-col gap-4 text-neutral-300 text-[15px] font-light leading-relaxed">
             <p>
-              GeantPy is a Python orchestration layer built around the Geant4 simulation toolkit. Rather than replacing Geant4's simulation engine, it automates experiment configuration, execution, parameter exploration, and result collection through a unified Python interface.
+              GeantPy is a Python orchestration layer built around the Geant4 simulation toolkit. Rather than replacing Geant4&apos;s simulation engine, it automates experiment configuration, execution, parameter exploration, and result collection through a unified Python interface.
             </p>
             <p>
               Designed for reproducible computational physics workflows, GeantPy enables researchers to build scalable simulation pipelines while preserving the flexibility and performance of the underlying Geant4 framework.

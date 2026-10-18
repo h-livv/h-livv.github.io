@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import * as motion from 'framer-motion/client';
 import {
@@ -10,6 +9,9 @@ import {
   type Project,
 } from '../data/projects';
 import SectionKicker from './SectionKicker';
+import DitheredImage from './DitheredImage';
+import AsciiDivider from './AsciiDivider';
+import ResearchPlate from './ResearchPlate';
 
 function isExternalProject(project: Project) {
   return Boolean(project.external || project.href?.startsWith('http'));
@@ -89,15 +91,12 @@ function ArchivedTile({ project }: { project: Project }) {
     >
       <article className="flex h-full flex-col">
         {project.image ? (
-          <div className="relative aspect-[16/10] bg-black overflow-hidden">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 768px) 30vw, 100vw"
-            />
-          </div>
+          <DitheredImage
+            src={project.image}
+            alt={project.title}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            className="aspect-[16/10] bg-black"
+          />
         ) : null}
         <h3 className="mt-4 font-serif text-xl md:text-2xl font-normal tracking-normal text-primary leading-tight">
           {project.title}
@@ -114,65 +113,22 @@ function ArchivedTile({ project }: { project: Project }) {
   );
 }
 
-function SelectedEntry({ project }: { project: Project }) {
-  const imageOnRight = project.imageAlign === 'right';
-
-  if (project.image) {
-    return (
-      <ProjectAnchor
-        project={project}
-        className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
-      >
-        <article className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 py-12 md:py-16 border-t border-white/[0.06]">
-          <div
-            className={`relative aspect-[16/10] bg-black md:col-span-7 overflow-hidden ${
-              imageOnRight ? 'md:order-2' : ''
-            }`}
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 768px) 58vw, 100vw"
-            />
-          </div>
-          <div className="md:col-span-5 flex flex-col justify-center">
-            <h3 className="font-serif text-3xl md:text-[2.5rem] font-normal tracking-normal text-primary leading-tight">
-              {project.title}
-            </h3>
-            <div className="mt-4">
-              <StatusLine date={project.date} status={project.status} />
-            </div>
-            <p className="mt-5 text-sm text-secondary leading-relaxed max-w-md">
-              {project.description}
-            </p>
-            <DestinationLabel project={project} />
-          </div>
-        </article>
-      </ProjectAnchor>
-    );
-  }
-
+function SelectedEntry({ project, index }: { project: Project; index: number }) {
+  const kinds = ['fourier', 'curve', 'attention'] as const;
   return (
-    <ProjectAnchor
-      project={project}
-      className="block group focus-visible:outline-none focus-visible:bg-white/[0.02]"
-    >
-      <article className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 md:py-16 border-t border-white/[0.06]">
-        <div className="md:col-span-4">
-          <h3 className="font-serif text-3xl md:text-[2.25rem] font-normal tracking-normal text-primary leading-tight">
-            {project.title}
-          </h3>
-          <div className="mt-4">
-            <StatusLine date={project.date} status={project.status} />
-          </div>
+    <ProjectAnchor project={project} className={`research-card research-card-${index} group`}>
+      <article className="h-full flex flex-col">
+        <div className="research-card-image">
+          <ResearchPlate kind={kinds[index % kinds.length]} />
         </div>
-        <div className="md:col-span-8 flex flex-col justify-center">
-          <p className="text-sm md:text-[15px] text-secondary leading-relaxed max-w-xl">
-            {project.description}
-          </p>
-          <DestinationLabel project={project} />
+        <div className="research-card-copy flex flex-col flex-1">
+          <StatusLine status={project.status} />
+          <h3 className="font-serif text-3xl md:text-4xl leading-[1.08] mt-5 mb-5">{project.title}</h3>
+          <p className="text-sm text-secondary">{project.description}</p>
+          <div className="mt-auto pt-8 flex justify-between items-center">
+            <span className="font-mono text-[10px] text-secondary">{project.date}</span>
+            <DestinationLabel project={project} compact />
+          </div>
         </div>
       </article>
     </ProjectAnchor>
@@ -183,42 +139,33 @@ export default function ProjectSection() {
   return (
     <section
       id="work"
-      className="py-24 md:py-32 px-6 md:px-12 border-t border-white/[0.05] scroll-mt-24"
+      className="py-24 md:py-32 px-6 md:px-12 scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto">
+        <AsciiDivider />
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-          <SectionKicker tone="current">Current</SectionKicker>
-          <div className="mt-8 md:mt-10 border-l border-accent/50 pl-6 md:pl-10">
-            <h3 className="font-serif text-5xl md:text-6xl lg:text-7xl font-normal tracking-normal text-primary leading-[1.05]">
-              {currentProject.title}
-            </h3>
-            {currentProject.subtitle && (
-              <p className="mt-5 md:mt-6 font-serif text-lg md:text-2xl font-normal text-secondary leading-snug max-w-3xl">
-                {currentProject.subtitle}
-              </p>
-            )}
-            <p className="mt-6 md:mt-8 text-sm md:text-base text-secondary leading-relaxed max-w-2xl whitespace-pre-wrap">
-              {currentProject.description}
-            </p>
-            <div className="mt-10 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-x-8 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
-              <span>{currentProject.date}</span>
-              <span>{currentProject.affiliation}</span>
-              <span className="text-primary">{currentProject.status}</span>
-              {currentProject.href && (
-                <a
-                  href={currentProject.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary/60 hover:text-primary transition-colors duration-200"
-                >
-                  Repository <span aria-hidden="true">→</span>
-                </a>
-              )}
+          <div className="current-study">
+            <div className="current-visual">
+              <ResearchPlate kind="lattice" />
+              <div className="study-equation" aria-hidden="true">|ψ(t)⟩ = e<sup>−iHt</sup>|ψ₀⟩</div>
+            </div>
+            <div className="current-copy">
+              <SectionKicker tone="current">Current research</SectionKicker>
+              <h3 className="font-serif text-6xl md:text-8xl font-normal tracking-tight mt-8 mb-5">{currentProject.title}</h3>
+              <p className="font-serif text-xl md:text-2xl text-primary/80 leading-snug">{currentProject.subtitle}</p>
+              <p className="mt-6 text-sm text-secondary whitespace-pre-wrap">{currentProject.description}</p>
+              <div className="study-meta">
+                <span className="study-status"><span className="status-dot" />{currentProject.status}</span>
+                <div className="study-details">
+                  <span>{currentProject.affiliation}</span>
+                  <span>{currentProject.date}</span>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -230,10 +177,12 @@ export default function ProjectSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-28 md:mt-36"
         >
-          <SectionKicker>Selected Work</SectionKicker>
-          <div className="mt-8">
-            {selectedWork.map((project) => (
-              <SelectedEntry key={project.slug} project={project} />
+          <div className="section-heading">
+            <div><SectionKicker>Research & code</SectionKicker><h2 className="font-serif text-5xl md:text-7xl mt-5">Selected work.</h2></div>
+          </div>
+          <div className="research-grid mt-12">
+            {selectedWork.map((project, index) => (
+              <SelectedEntry key={project.slug} project={project} index={index} />
             ))}
           </div>
         </motion.div>
@@ -254,21 +203,21 @@ export default function ProjectSection() {
             ))}
           </div>
 
-          <h3 className="mt-16 md:mt-20 text-[12px] font-mono uppercase tracking-[0.18em] text-secondary">
-            Experiments
-          </h3>
-          <div className="mt-6 border-b border-white/[0.06]">
+          <div className="mt-16 md:mt-20">
+            <SectionKicker as="h3">Experiments</SectionKicker>
+          </div>
+          <div className="experiment-index mt-6">
             {earlierExperiments.map((project) => (
               <ProjectAnchor
                 key={project.slug}
                 project={project}
                 className={
                   project.href
-                    ? 'block group focus-visible:outline-none focus-visible:bg-white/[0.02]'
+                    ? 'block group experiment-row'
                     : 'block'
                 }
               >
-                <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-5 md:py-6 border-t border-white/[0.06]">
+                <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-6 md:py-8">
                   <h4
                     className={`sm:col-span-4 text-sm text-primary ${
                       project.href ? 'group-hover:text-white transition-colors duration-200' : ''

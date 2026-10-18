@@ -116,13 +116,13 @@ export const projects: Project[] = [
     tier: 'earlier',
   },
   {
-    title: 'Atlas',
-    slug: 'atlas',
+    title: 'Optimization',
+    slug: 'optimization',
     description:
-      'An earlier physics-first environment for quantum Hamiltonian simulation and variational algorithms.',
-    href: 'https://github.com/h-livv/atlas',
-    date: 'July 2026',
-    status: 'ARCHIVED',
+      'Optimization algorithms derived from their mathematical formulations and implemented in NumPy, starting with the simplex method for linear programming and its basis changes, pivots, and reduced costs.',
+    href: 'https://github.com/h-livv/optimization',
+    date: '2026',
+    status: 'IN PROGRESS',
     external: true,
     tier: 'earlier',
   },
@@ -134,6 +134,28 @@ export const projects: Project[] = [
     href: '/projects/geantpy',
     date: 'Jul 2026',
     status: 'ARCHIVED',
+    tier: 'earlier',
+  },
+  {
+    title: 'Atlas',
+    slug: 'atlas',
+    description:
+      'An earlier physics-first environment for quantum Hamiltonian simulation and variational algorithms.',
+    href: 'https://github.com/h-livv/atlas',
+    date: 'July 2026',
+    status: 'ARCHIVED',
+    external: true,
+    tier: 'earlier',
+  },
+  {
+    title: 'Deconvolution',
+    slug: 'deconvolution',
+    description:
+      'Controlled 2D inverse-problem experiments comparing direct, Fourier, and matrix-free iterative reconstruction methods, with a focus on convolution operators and boundary-model mismatch.',
+    href: 'https://github.com/h-livv/deconvolution',
+    date: 'Aug 2026',
+    status: 'EXPLORATION',
+    external: true,
     tier: 'earlier',
   },
   {
