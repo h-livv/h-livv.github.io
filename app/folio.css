@@ -1,18 +1,18 @@
 /* Minimal composition with compact, clearly coloured mathematical studies. */
-.folio-hero { max-width:1248px; margin:auto; padding:128px 48px 72px; }
-.hero-topline { color:#8c918c; font:10px/1.6 var(--font-geist-mono); letter-spacing:.08em; text-transform:uppercase; }
-.hero-name { margin:28px 0 32px; }
-.hero-name h1 { font:400 clamp(52px,6vw,80px)/1 var(--font-geist-sans); letter-spacing:-.055em; color:#e1e3dd; }
-.hero-name h1 > span:first-child { font-family:var(--font-garamond); font-style:italic; }
+.folio-hero { max-width:1248px; margin:auto; padding:144px 48px 56px; }
+.hero-masthead { text-align:center; padding:32px 0 64px; }
+.hero-topline { margin-bottom:32px; color:#8c918c; font:10px/1.6 var(--font-geist-mono); letter-spacing:.12em; text-transform:uppercase; }
+.hero-masthead h1 { font:400 clamp(72px,10vw,132px)/1 var(--font-garamond); letter-spacing:-.045em; color:#e1e3dd; }
+.hero-masthead h1 > span:first-child { font-style:italic; }
 .name-period { color:#5eead4; }
-.texture-study { height:180px; overflow:hidden; background:transparent; }
-.texture-study canvas { width:100%; height:100%; object-fit:cover; }
-.hero-bottomline { display:flex; justify-content:space-between; align-items:start; gap:28px; padding-top:28px; }
-.hero-bottomline > p:first-child { font-size:16px; line-height:1.5; }
-.hero-bottomline > p:first-child span { color:#9ca49c; }
+.hero-subjects { margin-top:28px; font-size:16px; line-height:1.8; color:#a5aaa5; }
+.hero-subjects br { display:none; }
+.hero-subjects span::before { content:' '; }
+.hero-footnote { display:flex; justify-content:space-between; align-items:end; gap:28px; border-top:1px solid #ffffff16; padding-top:24px; }
 .hero-description { color:#8c918c; font-size:12px; line-height:1.8; }
-.hero-explore { padding-top:5px; font:10px/1.8 var(--font-geist-mono); color:#b4c3b8; }
-.hero-explore span { margin-left:18px; }
+.hero-explore { font:11px/1.8 var(--font-geist-mono); color:#c5d0c9; }
+.hero-explore:hover { color:#5eead4; }
+.hero-explore span { display:inline-block; margin-left:16px; }
 .section-heading { display:flex; justify-content:space-between; align-items:end; gap:24px; }
 .section-heading > div > h2:last-child { font:400 clamp(34px,3.5vw,46px)/1.1 var(--font-garamond); letter-spacing:-.025em; }
 .section-note { font-size:12px; color:#8c918c; line-height:1.8; }
@@ -71,12 +71,14 @@
  .research-card-copy > div:last-child { flex-wrap:wrap; gap:12px; }
 }
 @media (max-width:600px) {
- .folio-hero { padding-top:104px; padding-bottom:40px; }
- .hero-name h1 { font-size:52px; }
- .texture-study { height:130px; }
- .hero-bottomline { flex-wrap:wrap; gap:18px; }
- .hero-description { font-size:12px; }
- .hero-explore { width:100%; padding-top:12px; }
+ .folio-hero { padding-top:112px; padding-bottom:32px; }
+ .hero-masthead { padding:32px 0 48px; }
+ .hero-masthead h1 { font-size:72px; }
+ .hero-description { font-size:11px; }
+ .hero-subjects { font-size:14px; }
+ .hero-subjects br { display:initial; }
+ .hero-subjects span::before { content:none; }
+ .hero-explore { font-size:10px; }
  .section-heading { display:block; }
  .section-note { margin-top:18px; }
  .current-study { grid-template-columns:1fr; gap:28px; }
