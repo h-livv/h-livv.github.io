@@ -6,7 +6,7 @@ import SectionKicker from './SectionKicker';
 export default function BlogSection() {
   const posts = getAllPosts();
   return (
-    <section id="blog" className="writing-section py-24 md:py-32 px-6 md:px-12 scroll-mt-24">
+    <section id="blog" className="writing-section page-section px-6 md:px-12 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <AsciiDivider />
         <div className="section-heading">

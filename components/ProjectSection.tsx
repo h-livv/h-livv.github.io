@@ -1,9 +1,5 @@
-import type { ReactNode } from 'react';
-import Link from 'next/link';
-import * as motion from 'framer-motion/client';
 import {
   currentProject,
-  earlierExperiments,
   physicsSimulations,
   selectedWork,
   type Project,
@@ -11,44 +7,8 @@ import {
 import SectionKicker from './SectionKicker';
 import DitheredImage from './DitheredImage';
 import AsciiDivider from './AsciiDivider';
+import ProjectAnchor, { isExternalProject } from './ProjectAnchor';
 import ResearchPlate from './ResearchPlate';
-
-function isExternalProject(project: Project) {
-  return Boolean(project.external || project.href?.startsWith('http'));
-}
-
-function ProjectAnchor({
-  project,
-  className,
-  children,
-}: {
-  project: Project;
-  className?: string;
-  children: ReactNode;
-}) {
-  if (!project.href) {
-    return <div className={className}>{children}</div>;
-  }
-
-  if (isExternalProject(project)) {
-    return (
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={project.href} className={className}>
-      {children}
-    </Link>
-  );
-}
 
 function StatusLine({ date, status }: { date?: string; status?: string }) {
   if (!date && !status) return null;
@@ -139,16 +99,11 @@ export default function ProjectSection() {
   return (
     <section
       id="work"
-      className="py-24 md:py-32 px-6 md:px-12 scroll-mt-24"
+      className="work-section px-6 md:px-12 scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto">
         <AsciiDivider />
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-        >
+        <div>
           <div className="current-study">
             <div className="current-visual">
               <ResearchPlate kind="lattice" />
@@ -168,15 +123,9 @@ export default function ProjectSection() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="mt-28 md:mt-36"
-        >
+        <div className="work-group">
           <div className="section-heading">
             <div><SectionKicker>Research & code</SectionKicker><h2 className="font-serif text-5xl md:text-7xl mt-5">Selected work.</h2></div>
           </div>
@@ -185,15 +134,9 @@ export default function ProjectSection() {
               <SelectedEntry key={project.slug} project={project} index={index} />
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="mt-24 md:mt-32"
-        >
+        <div className="work-group">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
             <SectionKicker>Computational Physics &amp; Simulation</SectionKicker>
           </div>
@@ -202,49 +145,7 @@ export default function ProjectSection() {
               <ArchivedTile key={project.slug} project={project} />
             ))}
           </div>
-
-          <div className="mt-16 md:mt-20">
-            <SectionKicker as="h3">Experiments</SectionKicker>
-          </div>
-          <div className="experiment-index mt-6">
-            {earlierExperiments.map((project) => (
-              <ProjectAnchor
-                key={project.slug}
-                project={project}
-                className={
-                  project.href
-                    ? 'block group experiment-row'
-                    : 'block'
-                }
-              >
-                <article className="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-8 py-6 md:py-8">
-                  <h4
-                    className={`sm:col-span-4 text-sm text-primary ${
-                      project.href ? 'group-hover:text-white transition-colors duration-200' : ''
-                    }`}
-                  >
-                    {project.title}
-                  </h4>
-                  <p className="sm:col-span-5 text-xs text-secondary leading-relaxed">
-                    {project.description}
-                  </p>
-                  <p className="sm:col-span-3 sm:text-right font-mono text-[10px] uppercase tracking-[0.16em] text-secondary">
-                    {project.date}
-                    <span className="text-white/20 mx-1.5" aria-hidden="true">
-                      ·
-                    </span>
-                    {project.status}
-                    {project.href ? (
-                      <span className="ml-2 text-primary/45 group-hover:text-primary" aria-hidden="true">
-                        →
-                      </span>
-                    ) : null}
-                  </p>
-                </article>
-              </ProjectAnchor>
-            ))}
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

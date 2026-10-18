@@ -1,6 +1,9 @@
+import AsciiBackground from './AsciiBackground';
+
 export default function Hero() {
   return (
     <section className="folio-hero">
+      <AsciiBackground />
       <div className="hero-masthead">
         <p className="hero-topline">Mathematics student / BITS Goa</p>
         <h1>Harliv<span> Singh</span><span className="name-period">.</span></h1>

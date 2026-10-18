@@ -4,7 +4,7 @@ import SectionKicker from './SectionKicker';
 
 export default function Contact() {
   return (
-    <section id="contact" className="contact-section py-24 md:py-32 px-6 md:px-12 scroll-mt-24">
+    <section id="contact" className="contact-section page-section px-6 md:px-12 scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         <AsciiDivider />
         <div className="contact-grid">
