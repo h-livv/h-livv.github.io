@@ -19,6 +19,8 @@ export const projects: Project[] = [
   {
     title: 'Quantum Computing',
     slug: 'quantum-computing',
+    description:
+      'Research exploration in quantum simulation, quantum-assisted drug discovery, and post-quantum cryptography through qBITS at BITS Goa.',
     subtitle: 'Research with qBITS, the quantum computing club at BITS Goa.',
     explorations: [
       {
