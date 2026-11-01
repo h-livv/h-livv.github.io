@@ -1,7 +1,7 @@
 export interface Project {
   title: string;
   slug: string;
-  description: string;
+  description?: string;
   href?: string;
   image?: string;
   date?: string;
