@@ -10,23 +10,28 @@ export interface Project {
   affiliation?: string;
   external?: boolean;
   imageAlign?: 'left' | 'right';
+  explorations?: { title: string; description?: string }[];
   tier: 'current' | 'selected' | 'physics' | 'earlier';
 }
 
 export const projects: Project[] = [
   // ── Current ──────────────────────────────────────────────────────────────
   {
-    title: 'QC4HEP',
-    slug: 'qc4hep',
-    subtitle:
-      'Quantum simulation of QFTs and lattice gauge theories, and quantum computing for HEP workflows',
-    description:
-      'A computational research project investigating quantum simulation of lattice gauge theories and quantum computing for high-energy physics.\n\nReproduced selected results from a paper on nonequilibrium dynamics in the 1+1D Schwinger model, using exact diagonalization as a classical reference. Implemented VQE, VQD, and second-order Suzuki–Trotter evolution, comparing their results against exact calculations. Current extensions include larger-lattice benchmarks, time-dependent fields, and further validation of quantum algorithms.',
-    href: 'https://github.com/qBITS-github/lattice-schwinger-qc',
+    title: 'Quantum Computing',
+    slug: 'quantum-computing',
+    subtitle: 'Research with qBITS, the quantum computing club at BITS Goa.',
+    explorations: [
+      {
+        title: 'QC4HEP',
+        description:
+          'Quantum simulation of the Schwinger effect to investigate theoretical and computational approaches towards identifying signatures relevant to its experimental observation.',
+      },
+      { title: 'Quantum-assisted drug discovery' },
+      { title: 'Post-quantum cryptography' },
+    ],
     date: 'AUG 2026 — PRESENT',
-    status: 'EXTENSION PHASE',
-    affiliation: 'QBITS · BITS GOA',
-    external: true,
+    status: 'QUANTUM COMPUTING EXPLORATIONS',
+    affiliation: 'BITS GOA',
     tier: 'current',
   },
 
@@ -43,13 +48,13 @@ export const projects: Project[] = [
     tier: 'selected',
   },
   {
-    title: 'Elliptic Curve Multi-Secret Sharing',
-    slug: 'elliptic-curve-mss',
+    title: 'Pairing-Based Additive Masking Cryptanalysis',
+    slug: 'pairing-mask-cryptanalysis',
     description:
-      'SageMath reproduction of a hierarchical multi-secret sharing scheme using elliptic curves and pairings, currently scoped to two levels and one secret.',
-    href: 'https://github.com/h-livv/elliptic-curve-mss',
-    date: 'SEP–OCT 2026',
-    status: 'MATHEMATICAL INVESTIGATION',
+      'SageMath experiments testing attacks on the prime-field masking layer of a pairing-based scheme.',
+    href: 'https://github.com/h-livv/pairing-mask-cryptanalysis',
+    date: '2026',
+    status: 'REPRODUCIBLE CRYPTANALYSIS',
     external: true,
     tier: 'selected',
   },

@@ -30,9 +30,7 @@
 .plate-curve { color:#f2977d; }
 .plate-attention { color:#78e6a2; }
 .current-visual .research-plate { height:100%; }
-.current-visual svg { height:75%; top:5%; opacity:.7; }
-.study-equation { position:absolute; bottom:45px; width:100%; text-align:center; font:italic 24px var(--font-garamond); color:#9abfa9; }
-.study-equation sup { font-size:.6em; }
+.current-visual svg { height:100%; top:0; opacity:.7; }
 .current-copy { padding:8px 0; display:flex; flex-direction:column; }
 .current-copy h3 { font:400 clamp(44px,4vw,56px)/1.1 var(--font-garamond); letter-spacing:-.03em; }
 .current-copy > p:first-of-type { font-size:20px; color:#bbc4bc; }
@@ -87,7 +85,6 @@
  .section-note { margin-top:18px; }
  .current-study { grid-template-columns:1fr; gap:28px; }
  .current-visual { min-height:220px; }
- .study-equation { bottom:24px; }
  .study-details { text-align:left; }
  .research-grid { grid-template-columns:1fr; gap:36px; }
  .research-card-image { height:150px; }

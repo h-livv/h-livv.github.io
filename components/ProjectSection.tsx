@@ -107,13 +107,29 @@ export default function ProjectSection() {
           <div className="current-study">
             <div className="current-visual">
               <ResearchPlate kind="lattice" />
-              <div className="study-equation" aria-hidden="true">|ψ(t)⟩ = e<sup>−iHt</sup>|ψ₀⟩</div>
             </div>
             <div className="current-copy">
               <SectionKicker tone="current">Current research</SectionKicker>
               <h3 className="font-serif text-6xl md:text-8xl font-normal tracking-tight mt-8 mb-5">{currentProject.title}</h3>
               <p className="font-serif text-xl md:text-2xl text-primary/80 leading-snug">{currentProject.subtitle}</p>
-              <p className="mt-6 text-sm text-secondary whitespace-pre-wrap">{currentProject.description}</p>
+              {currentProject.description ? (
+                <p className="mt-6 text-sm text-secondary whitespace-pre-wrap">{currentProject.description}</p>
+              ) : null}
+              {currentProject.explorations ? (
+                <ol className="mt-7 grid grid-rows-[repeat(3,minmax(6.5rem,1fr))] border-y border-white/10">
+                  {currentProject.explorations.map((exploration, index) => (
+                    <li key={exploration.title} className="grid min-w-0 grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border-b border-white/[0.06] py-4 last:border-0">
+                      <span className="font-mono text-[10px] text-secondary/70">0{index + 1}</span>
+                      <div className="min-w-0">
+                        <h4 className="font-serif text-xl leading-tight">{exploration.title}</h4>
+                        {exploration.description ? (
+                          <p className="mt-1.5 text-sm text-secondary leading-relaxed">{exploration.description}</p>
+                        ) : null}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              ) : null}
               <div className="study-meta">
                 <span className="study-status"><span className="status-dot" />{currentProject.status}</span>
                 <div className="study-details">
