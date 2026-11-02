@@ -8,6 +8,13 @@ import Footer from '../components/Footer';
 import ExperimentsSection from '../components/ExperimentsSection';
 import AsciiBackground from '../components/AsciiBackground';
 import { socials } from '../data/socials';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata = pageMetadata({
+  title: 'Harliv Singh | Mathematics, AI & Computational Research',
+  description: 'Harliv Singh is a mathematics student at BITS Pilani, Goa, exploring computational physics, quantum computing, artificial intelligence, and scientific software.',
+  path: '/',
+});
 
 export default function Home() {
   return (

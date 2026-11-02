@@ -77,7 +77,7 @@ export const projects: Project[] = [
     description:
       'Numerical exploration of particle and photon motion in curved spacetime, focusing on geodesic integration in Schwarzschild spacetime and relativistic visualization.',
     href: '/projects/penrose',
-    image: '/images/projects/penrose.png',
+    image: '/images/projects/penrose.webp',
     date: 'Mar – Jul 2026',
     status: 'Club Project',
     imageAlign: 'left',
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     description:
       'A computational physics laboratory exploring numerical methods for partial differential equations alongside learned surrogate solvers, including experiments on long-horizon rollout and generalization.',
     href: '/projects/tempest',
-    image: '/images/projects/tempest.png',
+    image: '/images/projects/tempest.webp',
     date: 'Jun – Aug 2026',
     status: 'Archived',
     imageAlign: 'left',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     description:
       'A computational framework coupling Geant4 particle-interaction simulation with Xsuite beam transport.',
     href: '/projects/janus',
-    image: '/images/projects/janus.png',
+    image: '/images/projects/janus.webp',
     date: 'Jun – Aug 2026',
     status: 'Archived',
     imageAlign: 'right',

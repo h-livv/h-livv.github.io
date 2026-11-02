@@ -19,13 +19,13 @@ However, I couldn't rely on this intuition to understand the meaning of derivati
 I thought about what a derivative actually is. It is essentially a linear local approximation. Zoom in close enough on a smooth function, and it starts behaving like a line: 
 
 $$
-f(x+h)≈f(x)+f^′(x)h.
+f(x+h)\approx f(x)+f'(x)h.
 $$
 
 Now where do higher order derivatives fit in? The answer is in an attempt to approximate the function better. We get something like: 
 
 $$
-f(x+h)=f(x)+f'(x)h+f''(x)h/2+⋯
+f(x+h)=f(x)+f'(x)h+\frac{f''(x)h^2}{2}+⋯
 $$
 
 This is the Taylor expansion. It is a beautiful way to reconstruct the function using polynomials. But how does it help us understand what a derivative actually is?

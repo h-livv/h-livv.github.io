@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getAllPosts, getAllPostSlugs, getPostBySlug } from '@/lib/blog';
+import { pageMetadata } from '@/lib/metadata';
 
 marked.use(markedKatex({ throwOnError: false }));
 
@@ -28,19 +29,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const slug = (resolved.slug ?? []).join('/');
 
   if (!slug) {
-    return {
-      title: 'Notes · Harliv',
-      description: 'Essays and notes on scientific computing, physical simulations, and mathematical abstractions.',
-    };
+    return pageMetadata({
+      title: 'Writing',
+      description: 'Essays and notes on mathematics, computational physics, scientific computing, and machine learning.',
+      path: '/blog',
+    });
   }
 
   const post = getPostBySlug(slug);
   if (!post) return { title: 'Not Found' };
 
-  return {
-    title: `${post.title} · Harliv`,
-    description: post.description,
-  };
+  const title = slug === 'tempest' ? 'Tempest Retrospective' : post.title;
+  return pageMetadata({ title, description: post.description, path: `/blog/${slug}` });
 }
 
 const markdownStyles = `
@@ -217,7 +217,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     <>
       <Navbar />
       <main className="flex-1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
         <style dangerouslySetInnerHTML={{ __html: markdownStyles }} />
         <article className="px-6 md:px-12 pt-32 pb-24 md:pb-32">
           <div className="max-w-2xl mx-auto">

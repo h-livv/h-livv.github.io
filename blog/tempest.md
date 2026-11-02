@@ -62,7 +62,7 @@ This was a feature pending for a while. Didn't take long because of the already 
 
 What came with it was a beautiful dashboard and even more beautiful visuals.
 
-![Tempest](../public/images/projects/tempest.png)
+![Tempest](../public/images/projects/tempest.webp)
 
 ## Looking back
 

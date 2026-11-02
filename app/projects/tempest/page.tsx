@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { BookOpen, FileText } from 'lucide-react';
 import TempestGlobalBackground from '@/components/tempest/Background/TempestGlobalBackground';
 import TempestPageWrapper from '@/components/tempest/TempestPageWrapper';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Tempest',
   description:
     'A computational physics laboratory for numerical methods, PDE simulation, and scientific machine learning.',
-};
+  path: '/projects/tempest',
+});
 
 export default function TempestPage() {
   return (

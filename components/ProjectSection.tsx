@@ -53,7 +53,7 @@ function ArchivedTile({ project }: { project: Project }) {
         {project.image ? (
           <DitheredImage
             src={project.image}
-            alt={project.title}
+            alt={project.description ?? project.title}
             sizes="(min-width: 768px) 30vw, 100vw"
             className="aspect-[16/10] bg-black"
           />
@@ -110,7 +110,7 @@ export default function ProjectSection() {
             </div>
             <div className="current-copy">
               <SectionKicker tone="current">Current research</SectionKicker>
-              <h3 className="font-serif text-6xl md:text-8xl font-normal tracking-tight mt-8 mb-5">{currentProject.title}</h3>
+              <h2 className="font-serif text-6xl md:text-8xl font-normal tracking-tight mt-8 mb-5">{currentProject.title}</h2>
               <p className="font-serif text-xl md:text-2xl text-primary/80 leading-snug">{currentProject.subtitle}</p>
               {currentProject.description ? (
                 <p className="mt-6 text-sm text-secondary whitespace-pre-wrap">{currentProject.description}</p>

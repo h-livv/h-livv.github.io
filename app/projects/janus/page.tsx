@@ -2,11 +2,13 @@ import React from 'react';
 import type { Metadata } from 'next';
 import CollaborativeProjectLayout from '../../../components/projects/CollaborativeProjectLayout';
 import { JanusBackground } from '../../../components/projects/ProjectBackgrounds';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'JANUS',
   description: 'A computational framework for studying high-energy particle transport and production.',
-};
+  path: '/projects/janus',
+});
 
 export default function JanusPage() {
   const summary = [
