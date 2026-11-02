@@ -4,7 +4,7 @@ My personal website and project portfolio. It brings together current work,
 selected projects, earlier computational physics experiments, writing, and
 contact links.
 
-**Live site:** [h-livv.github.io](https://h-livv.github.io/)
+**Live site:** [harliv.dev](https://harliv.dev/)
 
 ## Development
 
