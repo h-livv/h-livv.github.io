@@ -6,22 +6,23 @@ import { pageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = pageMetadata({
   title: 'JANUS',
-  description: 'A computational framework for studying high-energy particle transport and production.',
+  description: 'A research code for Geant4 particle production and handwritten relativistic Boris transport through idealized magnetic beamlines, with a historical validation campaign.',
   path: '/projects/janus',
 });
 
 export default function JanusPage() {
   const summary = [
-    'Janus couples Geant4 particle-interaction simulation with Xsuite beam transport to study how physical parameters affect downstream particle behavior.',
-    'The case study explored 26 GeV proton bombardment of a high-Z target, with antiproton production as the primary observable.'
+    'Janus is a from-scratch particle-production and beam-transport research code. Its C++ Geant4 engine models proton bombardment of a high-Z target and records secondary-particle phase space.',
+    'A separate handwritten relativistic Boris integrator transports selected charged particles through prescribed electromagnetic fields. The repository preserves an archived validation campaign; its reported figures are historical and were not regenerated for this website update.'
   ];
 
   const explored = [
-    'Particle interaction: Geant4 models high-energy proton–target interactions and particle production.',
-    'Beam transport: Xsuite models relativistic particle transport through accelerator lattices and magnetic elements.'
+    'Particle production: Geant4 simulates target interactions and writes secondary-particle data for transport.',
+    'Particle transport: Janus integrates the relativistic Lorentz force with a staggered Boris leapfrog scheme in prescribed fields.',
+    'Validation: archived cases cover single-particle trajectories, conservation, timestep convergence, composite lattices, beam observables, and linear-optics comparisons.'
   ];
 
-  const technologies = ['Geant4', 'Xsuite', 'Python', 'C++', 'Numerical Simulation'];
+  const technologies = ['Geant4', 'Relativistic Boris Integrator', 'Python', 'C++', 'ROOT'];
 
   return (
     <CollaborativeProjectLayout
@@ -35,7 +36,7 @@ export default function JanusPage() {
       technologies={technologies}
       repoUrl="https://github.com/h-livv/janus"
       backgroundCanvas={<JanusBackground />}
-      repositoryDescription="The repository is preserved as a completed exploration of coupled particle-interaction simulation and beam transport."
+      repositoryDescription="Archived research snapshot containing the handwritten transport implementation, validation framework, and historical validation figures. No further development is planned."
     >
       {/* ==========================================
           THE PIPELINE
@@ -46,7 +47,7 @@ export default function JanusPage() {
         </div>
         <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
           <div className="font-mono text-[12px] p-4 border border-white/[0.04] bg-neutral-950/40 rounded text-center">
-            Proton Beam → Particle Interaction → Particle Production → Beam Transport → Diagnostics
+            Proton Beam → Geant4 Target Interaction → Secondary Phase Space → Boris Transport → Beamline Diagnostics
           </div>
         </div>
       </section>
@@ -60,10 +61,10 @@ export default function JanusPage() {
         </div>
         <div className="md:col-span-8 flex flex-col gap-4 text-neutral-350 text-[14px] font-light leading-relaxed">
           <p className="text-white font-medium italic">
-            &ldquo;How do physical beamline parameters influence coupled high-energy particle simulations?&rdquo;
+            &ldquo;How well can a handwritten relativistic particle tracker reproduce expected motion through idealized beamline fields?&rdquo;
           </p>
           <p>
-            The exploration focused on parameter sensitivity, downstream beam behavior, and the computational structure of coupling particle-interaction and beam-transport simulations.
+            The project separates stochastic particle production in Geant4 from classical transport in externally prescribed fields. The tracker does not model self-consistent fields or collective space-charge effects.
           </p>
         </div>
       </section>
@@ -79,10 +80,10 @@ export default function JanusPage() {
           <p>The implemented system includes:</p>
           <ul className="list-disc pl-5 space-y-2 text-neutral-400">
             <li>Geant4 target bombardment and collision validation</li>
-            <li>ROOT-based particle data transfer</li>
-            <li>Xsuite beam transport</li>
-            <li>Configurable drift, quadrupole, bend, and aperture elements</li>
-            <li>Transport diagnostics and validation tests</li>
+            <li>ROOT output and phase-space input for selected secondary particles</li>
+            <li>Handwritten relativistic Boris leapfrog integration of the Lorentz force</li>
+            <li>Idealized drift, dipole, quadrupole, and magnetic-horn fields with apertures</li>
+            <li>Historical validation cases for trajectories, conservation, timestep convergence, composite lattices, beam observables, and linear optics</li>
           </ul>
         </div>
       </section>

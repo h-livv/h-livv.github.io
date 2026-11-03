@@ -99,7 +99,7 @@ export const projects: Project[] = [
     title: 'Janus',
     slug: 'janus',
     description:
-      'A computational framework coupling Geant4 particle-interaction simulation with Xsuite beam transport.',
+      'A research code combining Geant4 target particle production with a handwritten relativistic Boris tracker for charged-particle transport through idealized magnetic beamlines.',
     href: '/projects/janus',
     image: '/images/projects/janus.webp',
     date: 'Jun – Aug 2026',
