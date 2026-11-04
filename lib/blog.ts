@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { execFileSync } from 'child_process';
 
 export interface BlogPost {
   slug: string;
@@ -76,6 +77,20 @@ function discoverMarkdownFiles(dir: string, base = ''): { relativePath: string; 
   return files;
 }
 
+function getLastEdited(filePath: string, fallback: number): number {
+  try {
+    const relativePath = path.relative(process.cwd(), filePath);
+    const timestamp = execFileSync('git', ['log', '-1', '--format=%ct', '--', relativePath], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    const seconds = Number(timestamp);
+    return Number.isFinite(seconds) && seconds > 0 ? seconds * 1000 : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export function getAllPosts(): BlogPost[] {
   return discoverMarkdownFiles(BLOG_DIR)
     .map(({ relativePath, slug }) => {
@@ -89,10 +104,10 @@ export function getAllPosts(): BlogPost[] {
         description: listingDescriptions[slug] ?? extractDescription(content),
         content,
         href: `/blog/${slug}`,
-        lastModified: stat.mtimeMs,
+        lastModified: getLastEdited(filePath, stat.mtimeMs),
       };
     })
-    .sort((a, b) => b.lastModified - a.lastModified);
+    .sort((a, b) => b.lastModified - a.lastModified || b.slug.localeCompare(a.slug));
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
