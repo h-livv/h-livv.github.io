@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength{\PreviewBorder}{4pt}
+\usepackage{xcolor}
+\definecolor{ink}{HTML}{E6E6E6}
+\definecolor{muted}{HTML}{A6A6A6}
+\definecolor{blueText}{HTML}{B9C8FF}
+\definecolor{blueLine}{HTML}{829BFF}
+\definecolor{blueFill}{HTML}{1B2440}
+\definecolor{redText}{HTML}{FFC2C2}
+\definecolor{redLine}{HTML}{F08C8C}
+\definecolor{redFill}{HTML}{3A2025}
+\definecolor{gapLine}{HTML}{737373}
+\definecolor{gapFill}{HTML}{14171D}
+\begin{document}
+\begin{tikzpicture}[every node/.style={font=\small,text=ink,inner sep=1pt}]
+    \draw[muted,->,line width=1pt] (0,-3.35)--(0,3.35) node[above,text=ink] {Energy ($E$)};
+    \fill[blueFill,draw=blueLine,thick] (0.02,1.2) rectangle (8.0,3.05);
+    \node[anchor=west,text=blueText] at (0.35,2.62) {\textbf{Positive-energy continuum} ($E\geq +m$)};
+    \node[anchor=west,text width=7.2cm,align=left] at (0.35,1.85) {Allowed positive-energy states (e.g. electrons).};
+    \fill[redFill,draw=redLine,thick] (0.02,-1.2) rectangle (8.0,-3.05);
+    \node[anchor=west,text=redText] at (0.35,-1.72) {\textbf{Negative-energy continuum} ($E\leq -m$)};
+    \node[anchor=west,text width=7.2cm,align=left] at (0.35,-2.40) {Negative-frequency solutions; after quantization, these are associated with antiparticles.};
+    \fill[gapFill,draw=gapLine,dashed] (0.02,-1.2) rectangle (8.0,1.2);
+    \node[anchor=west,text width=7.3cm,align=center,text=muted] at (0.35,0) {No free one-particle energy eigenstates in this gap.};
+    \draw[latex-latex,thick,gapLine] (8.0,-1.2)--(8.0,1.2);
+    \node[anchor=west] at (8.25,0.2) {\textbf{Mass gap}};
+    \node[anchor=west,text=muted] at (8.25,-0.2) {Width $=2m$};
+    \draw[thick,blueLine] (-0.05,1.2)--(0.05,1.2) node[left=3pt,text=ink] {$+m$};
+    \draw[thick,redLine] (-0.05,-1.2)--(0.05,-1.2) node[left=3pt,text=ink] {$-m$};
+\end{tikzpicture}
+\end{document}

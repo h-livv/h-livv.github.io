@@ -16,6 +16,7 @@ const listingDescriptions: Record<string, string> = {
   tempest: 'A retrospective on building Tempest, a computational physics sandbox for PDE solvers, numerical validation, and scientific machine learning.',
   'what-are-derivatives': 'An exploration of higher derivatives through local polynomial approximations, Taylor expansion, and geometric intuition.',
   'the-schwinger-model': 'An introduction to the 1+1D Schwinger model, staggered fermions, lattice gauge fields, Gauss’s law, and Hamiltonian dynamics.',
+  'dase': 'A technical writeup on facilitated Schwinger pair production and the dynamically assisted Schwinger effect (DASE).',
 };
 
 function extractTitle(markdown: string, fallback: string): string {
