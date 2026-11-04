@@ -216,7 +216,7 @@ It does **not** mean that physical electrons have alternating masses.
 
 Notice that this term does not require a separate Hermitian-conjugate contribution. The occupation operator is already Hermitian:
 $$\phi_n^\dagger\phi_n.$$
-For the massless Schwinger model, we set $m=0$, making this term vanish. However, the paper retains the mass parameter and uses $m=1$ in its default numerical calculations. The Hamiltonian above therefore describes the more general massive lattice model, with the massless case obtained by setting $m=0$.
+For the massless Schwinger model, we set $m=0$, making this term vanish. However, the paper [1](#ref-schwinger-paper) retains the mass parameter and uses $m=1$ in its default numerical calculations. The Hamiltonian above therefore describes the more general massive lattice model, with the massless case obtained by setting $m=0$.
 
 #### 3. Electric-field energy
 
@@ -232,11 +232,11 @@ The factor $\frac{g^2a}{2}$ comes from expressing the electric-field energy in t
 
 Unlike the hopping term, this expression is already Hermitian because the electric-field operator $L_n$ is Hermitian. Consequently, no additional Hermitian-conjugate term is needed.
 
-Notice that the external field $\varepsilon$ does not appear explicitly in this version of the Hamiltonian. In the paper, it enters through the boundary condition for the electric field.
+Notice that the external field $\varepsilon$ does not appear explicitly in this version of the Hamiltonian. In the paper [1](#ref-schwinger-paper), it enters through the boundary condition for the electric field.
 
 #### 4. What about the external electric field?
 
-The paper uses **open boundary conditions** and sets the electric field at the left boundary to a constant external field $\varepsilon$:
+The paper [1](#ref-schwinger-paper) uses **open boundary conditions** and sets the electric field at the left boundary to a constant external field $\varepsilon$:
 
 $$L_0=\varepsilon.$$
 
@@ -266,7 +266,7 @@ Recall that the hopping term contains the gauge-link variable $U_n$:
 
 $$\phi_n^\dagger U_n\phi_{n+1}.$$
 
-In the open-boundary formulation used by the paper, a gauge transformation can absorb the link variables from the hopping term. The hopping contribution then takes the form
+In the open-boundary formulation used by the paper [1](#ref-schwinger-paper), a gauge transformation can absorb the link variables from the hopping term. The hopping contribution then takes the form
 
 $$\frac{1}{2a}\sum_{n=1}^{N-1} \left( \phi_n^\dagger\phi_{n+1} +\mathrm{H.c.} \right).$$
 
@@ -300,11 +300,11 @@ $$|\Psi(t)\rangle=e^{-iHt}|\Psi(0)\rangle.$$
 
 Here, $|\Psi(0)\rangle$ is the initial quantum state, and $|\Psi(t)\rangle$ is the state after time $t$.
 
-The paper studies what happens when the system is initially prepared in the ground state without an external field and an external electric field is switched on. The Hamiltonian changes to include the new boundary field, and the state evolves under this new Hamiltonian.
+The paper [1](#ref-schwinger-paper) studies what happens when the system is initially prepared in the ground state without an external field and an external electric field is switched on. The Hamiltonian changes to include the new boundary field, and the state evolves under this new Hamiltonian.
 
 By tracking quantities such as the charge distribution, electric-field energy, and overlap with the initial vacuum state, the authors investigate how the system responds to the external field.
 
-**In essence:** the Hamiltonian combines matter hopping, the fermion mass, and electric-field energy into a single description of the system's dynamics. Gauss's law connects the matter charges to the electric flux, allowing the gauge field to be eliminated under the paper's open-boundary setup. The resulting Hamiltonian then determines how the quantum state evolves, including its response when an external electric field is switched on.
+**In essence:** the Hamiltonian combines matter hopping, the fermion mass, and electric-field energy into a single description of the system's dynamics. Gauss's law connects the matter charges to the electric flux, allowing the gauge field to be eliminated under the paper’s open-boundary setup [1](#ref-schwinger-paper). The resulting Hamiltonian then determines how the quantum state evolves, including its response when an external electric field is switched on.
 
 ### Summary of the Lattice Schwinger Model
 
@@ -343,3 +343,9 @@ The Hamiltonian describes the energy of the system and determines how its quantu
 The external field $\varepsilon$ enters through the electric-field energy rather than as a separate potential-energy term. After the gauge variables are eliminated using Gauss's law, the Hamiltonian can be written entirely in terms of fermionic operators, with the electric-field energy becoming an interaction involving charges across the lattice.
 
 **In essence:** the matter occupies the sites, the electric field connects neighbouring sites, Gauss's law links the two, and the Hamiltonian determines how the coupled system evolves over time.
+
+### Reference
+
+<a id="ref-schwinger-paper"></a>
+
+[1] Haobin Chen, Lin Cheng, and Xingyu Guo, “[Digital Quantum Simulation of Nonequilibrium Dynamics in the Schwinger Model under a Strong External Electric Field](https://arxiv.org/abs/2607.02894),” arXiv:2607.02894 (2026).
