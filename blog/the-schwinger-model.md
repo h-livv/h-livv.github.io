@@ -36,23 +36,18 @@ A "mode" means one independent fermionic state, localized at a lattice site. A m
 In a staggered-fermionic lattice, each site $n$ has a single fermionic mode described by two operators: $\chi_n$ and $\chi_n^\dagger$.
 
 $\chi_n$ means annihilate a fermion in mode $n$.
+
 $\chi_n^\dagger$ means create a fermion in mode $n$.
 
 The occupation operator is
 
-$$  
-\hat n_n=\chi_n^\dagger\chi_n.  
-$$
+$$\hat n_n=\chi_n^\dagger\chi_n.$$
 
 This basically counts the number of matter particles residing in a specific lattice mode.
 
 For a single fermionic mode, the allowed occupation numbers are only zero and one:
 
-$$  
-\hat n_n|0\rangle=0,  
-\qquad  
-\hat n_n|1\rangle=|1\rangle.  
-$$
+$$\hat n_n|0\rangle=0, \qquad \hat n_n|1\rangle=|1\rangle.$$
 
 Here, $|0\rangle$ means the mode is empty, and $|1\rangle$ means the mode is occupied.
 
@@ -64,7 +59,8 @@ A reference vacuum means no physical particle excitations. It is not an exact va
 
 With $N$ such modes, the matter Hilbert space has dimension $2^N$, before imposing gauge constraints. These are the matter degrees of freedom.
 
-What is a gauge field?
+**What is a gauge field?**
+
 "A gauge field is a **local connection** that tracks the orientation of a particle's internal U(1) phase space across spacetime, ensuring that physics remains completely unchanged regardless of how we arbitrarily define that orientation at any given point."
 
 #### At each link
@@ -72,45 +68,35 @@ The gauge field, represented by a link variable $U_n$, and its conjugate electri
 
 The link variable can be written as
 
-$$  
-U_n=e^{i\theta_n},  
-$$
+$$U_n=e^{i\theta_n},$$
 
 where $\theta_n$ represents the gauge-field variable associated with that link. The conjugate electric field $L_n$ represents the electric flux along it.
 
 Suppose we want a fermion to move from site $n+1$ to site $n$. This can be described mathematically by
 
-$$  
-\chi_n^\dagger\chi_{n+1}.  
-$$
+$$\chi_n^\dagger\chi_{n+1}.$$
 
 Here, $\chi_{n+1}$ annihilates the fermion at site $n+1$, and $\chi_n^\dagger$ creates it at site $n$.
 
 Since the Schwinger model is a gauge theory, this hopping process must respect local gauge invariance.
 
-What is the local U(1) gauge symmetry?
+**What is the local U(1) gauge symmetry?**
+
 "**Local U(1) gauge symmetry** means that the fundamental laws of physics must remain unchanged even if you rotate the phase of a quantum particle's wavefunction $e^{i\theta }$ by a different amount at every single point in space and time. Because changing these phases independently across spacetime disrupts how particles interact and move, you cannot maintain this symmetry for a free, isolated particle. To fix this and restore balance, nature must introduce a new vector field—the **electromagnetic gauge field** (the photon)—which acts as a mediator to absorb these local shifts. In short, demanding that this local phase symmetry exists mathematically forces the physical reality of **electromagnetism** into existence."
 
 Under a local gauge transformation,
 
-$$  
-\chi_n\longrightarrow e^{i\alpha_n}\chi_n.  
-$$
+$$\chi_n\longrightarrow e^{i\alpha_n}\chi_n.$$
 
 Since each site can have a different phase $\alpha_n$, the product $\chi_n^\dagger\chi_{n+1}$ does not remain gauge invariant on its own.
 
 So, we introduce a link variable $U_n$ between the two sites and replace the previous product with
 
-$$  
-\boxed{\chi_n^\dagger U_n\chi_{n+1}}.  
-$$
+$$\boxed{\chi_n^\dagger U_n\chi_{n+1}}.$$
 
 The link variable transforms as
 
-$$  
-U_n\longrightarrow  
-e^{i(\alpha_n-\alpha_{n+1})}U_n.  
-$$
+$$U_n\longrightarrow e^{i(\alpha_n-\alpha_{n+1})}U_n.$$
 
 This exactly cancels the phase factors introduced by the fermionic operators. Therefore, the complete hopping term is gauge invariant.
 
@@ -118,17 +104,13 @@ The link variable allows matter to move between neighboring sites while preservi
 
 Gauss's law connects the matter degrees of freedom at each site to the electric fluxes on the neighboring links:
 
-$$  
-\boxed{L_n-L_{n-1}=Q_n.}  
-$$
+$$\boxed{L_n-L_{n-1}=Q_n.}$$
 
 This says that the difference between the outgoing and incoming electric flux at a site must equal the charge at that site.
 
 In the staggered-fermion formulation, the charge operator is defined as
 
-$$  
-Q_n=\hat n_n-\frac{1-(-1)^n}{2}.  
-$$
+$$Q_n=\hat n_n-\frac{1-(-1)^n}{2}.$$
 
 The second term subtracts a staggered background charge. It is zero at even sites and one at odd sites.
 
@@ -142,18 +124,7 @@ This is where the **Hamiltonian** comes in. The Hamiltonian describes the energy
 
 In the lattice Schwinger model, the Hamiltonian is
 
-$$  
-\begin{aligned}  
-H={}&\frac{1}{2a}\sum_{n=1}^{N-1}  
-\left(  
-\phi_n^\dagger U_n\phi_{n+1}  
-+\mathrm{H.c.}  
-\right)\  
-&+m\sum_{n=1}^{N}(-1)^n  
-\phi_n^\dagger\phi_n\  
-&+\frac{g^2a}{2}\sum_{n=1}^{N-1}L_n^2.  
-\end{aligned}  
-$$
+$$\begin{aligned} H={}&\frac{1}{2a}\sum_{n=1}^{N-1} \left( \phi_n^\dagger U_n\phi_{n+1} +\mathrm{H.c.} \right)\\ &+m\sum_{n=1}^{N}(-1)^n \phi_n^\dagger\phi_n\\ &+\frac{g^2a}{2}\sum_{n=1}^{N-1}L_n^2. \end{aligned}$$
 
 Before breaking this down, let's establish what each symbol means.
 
@@ -185,21 +156,14 @@ The Hamiltonian consists of three main contributions.
 #### 1. Matter hopping
 
 The first term is
-$$
-\frac{1}{2a}\sum_{n=1}^{N-1}  
-\left(  
-\phi_n^\dagger U_n\phi_{n+1}  
-+\mathrm{H.c.}  
-\right).  
-$$
+
+$$\frac{1}{2a}\sum_{n=1}^{N-1} \left( \phi_n^\dagger U_n\phi_{n+1} +\mathrm{H.c.} \right).$$
 
 This term describes matter moving between neighbouring sites.
 
 Consider the operator inside the summation:
 
-$$  
-A_n=\phi_n^\dagger U_n\phi_{n+1}.  
-$$
+$$A_n=\phi_n^\dagger U_n\phi_{n+1}.$$
 
 The operators act in the following way:
 
@@ -216,43 +180,21 @@ Together, they describe a fermion hopping from site $n+1$ to site $n$, with the 
 
 The Hermitian conjugate of a product reverses the order of its operators and takes the Hermitian conjugate of each one:
 
-$$  
-(ABC)^\dagger=C^\dagger B^\dagger A^\dagger.  
-$$
+$$(ABC)^\dagger=C^\dagger B^\dagger A^\dagger.$$
 
 Applying this rule gives
 
-$$  
-\begin{aligned}  
-A_n^\dagger  
-&=  
-\left(\phi_n^\dagger U_n\phi_{n+1}\right)^\dagger\  
-&=\phi_{n+1}^\dagger U_n^\dagger\phi_n.  
-\end{aligned}  
-$$
+$$\begin{aligned} A_n^\dagger &= \left(\phi_n^\dagger U_n\phi_{n+1}\right)^\dagger\\ &=\phi_{n+1}^\dagger U_n^\dagger\phi_n. \end{aligned}$$
 
 Therefore, the full hopping term can be written explicitly as
 
-$$  
-\boxed{  
-\begin{aligned}  
-H_{\mathrm{hop}}  
-=\frac{1}{2a}\sum_{n=1}^{N-1}  
-\big(  
-&\phi_n^\dagger U_n\phi_{n+1}\  
-+\phi_{n+1}^\dagger U_n^\dagger\phi_n  
-\big).  
-\end{aligned}  
-}  
-$$
+$$\boxed{ \begin{aligned} H_{\mathrm{hop}} =\frac{1}{2a}\sum_{n=1}^{N-1} \big( &\phi_n^\dagger U_n\phi_{n+1}\\ +\phi_{n+1}^\dagger U_n^\dagger\phi_n \big). \end{aligned} }$$
 
 The second term describes the reverse hopping process, from site $n$ to site $n+1$. The operator $U_n^\dagger$ accounts for the gauge field in that reverse direction.
 
 We include both terms because the Hamiltonian must be Hermitian. In particular,
 
-$$  
-(A_n+A_n^\dagger)^\dagger=A_n+A_n^\dagger.  
-$$
+$$(A_n+A_n^\dagger)^\dagger=A_n+A_n^\dagger.$$
 
 This ensures that the hopping contribution has real energy eigenvalues.
 
@@ -263,10 +205,8 @@ The important idea is that **matter can move between neighbouring sites, but its
 #### 2. Fermion mass
 
 The second term is
-$$
-m\sum_{n=1}^{N}(-1)^n  
-\phi_n^\dagger\phi_n.  
-$$
+
+$$m\sum_{n=1}^{N}(-1)^n \phi_n^\dagger\phi_n.$$
 
 Here, $\phi_n^\dagger\phi_n$ counts the occupation of the fermionic mode at site $n$. The parameter $m$ sets the strength of the fermion mass contribution to the energy.
 
@@ -282,10 +222,7 @@ For the massless Schwinger model, we set $m=0$, making this term vanish. However
 
 The third term is
 
-$$  
-H_E=  
-\frac{g^2a}{2}\sum_{n=1}^{N-1}L_n^2.  
-$$
+$$H_E= \frac{g^2a}{2}\sum_{n=1}^{N-1}L_n^2.$$
 
 Recall that each link carries an electric flux $L_n$. This term assigns energy to the electric field on every link.
 
@@ -301,38 +238,21 @@ Notice that the external field $\varepsilon$ does not appear explicitly in this 
 
 The paper uses **open boundary conditions** and sets the electric field at the left boundary to a constant external field $\varepsilon$:
 
-$$  
-L_0=\varepsilon.  
-$$
+$$L_0=\varepsilon.$$
 
 Gauss's law relates the difference between the outgoing and incoming electric flux at site $n$ to the charge at that site:
-$$
-\phi_n^\dagger\phi_n  
--\frac{1-(-1)^n}{2}.  
-$$
+
+$$\phi_n^\dagger\phi_n -\frac{1-(-1)^n}{2}.$$
 
 The right-hand side is the staggered charge operator,
 
-$$  
-Q_n=  
-\phi_n^\dagger\phi_n  
--\frac{1-(-1)^n}{2}.  
-$$
+$$Q_n= \phi_n^\dagger\phi_n -\frac{1-(-1)^n}{2}.$$
 
 The occupation operator gives the fermion number at site $n$, while the subtraction term accounts for the staggered background charge. It is zero at even sites and one at odd sites.
 
 Starting with $L_0=\varepsilon$, we can repeatedly apply Gauss's law to determine the electric flux on each link:
 
-$$  
-\boxed{  
-L_n=\varepsilon+  
-\sum_{l=1}^{n}  
-\left(  
-\phi_l^\dagger\phi_l  
--\frac{1-(-1)^l}{2}  
-\right).  
-}  
-$$
+$$\boxed{ L_n=\varepsilon+ \sum_{l=1}^{n} \left( \phi_l^\dagger\phi_l -\frac{1-(-1)^l}{2} \right). }$$
 
 In other words, the electric flux on a link is determined by the external field at the boundary and the cumulative charge distribution to its left.
 
@@ -344,66 +264,25 @@ The electric flux therefore does not need to be treated as an independent variab
 
 Recall that the hopping term contains the gauge-link variable $U_n$:
 
-$$  
-\phi_n^\dagger U_n\phi_{n+1}.  
-$$
+$$\phi_n^\dagger U_n\phi_{n+1}.$$
 
 In the open-boundary formulation used by the paper, a gauge transformation can absorb the link variables from the hopping term. The hopping contribution then takes the form
-$$
-\frac{1}{2a}\sum_{n=1}^{N-1}  
-\left(  
-\phi_n^\dagger\phi_{n+1}  
-+\mathrm{H.c.}  
-\right).  
-$$
+
+$$\frac{1}{2a}\sum_{n=1}^{N-1} \left( \phi_n^\dagger\phi_{n+1} +\mathrm{H.c.} \right).$$
 
 Its Hermitian conjugate is now simply
-$$
-\phi_{n+1}^\dagger\phi_n.  
-$$
+
+$$\phi_{n+1}^\dagger\phi_n.$$
 
 This does not mean that the gauge field's influence has disappeared. Instead, its contribution survives through the electric-field energy.
 
 Substituting the expression for $L_n$ into $H_E$ gives
 
-$$  
-\begin{aligned}  
-H_E={}&\frac{g^2a}{2}\sum_{n=1}^{N-1}  
-\Bigg[  
-\varepsilon+  
-\sum_{l=1}^{n}  
-\left(  
-\phi_l^\dagger\phi_l  
--\frac{1-(-1)^l}{2}  
-\right)  
-\Bigg]^2.  
-\end{aligned}  
-$$
+$$\begin{aligned} H_E={}&\frac{g^2a}{2}\sum_{n=1}^{N-1} \Bigg[ \varepsilon+ \sum_{l=1}^{n} \left( \phi_l^\dagger\phi_l -\frac{1-(-1)^l}{2} \right) \Bigg]^2. \end{aligned}$$
 
 The resulting Hamiltonian, written entirely in terms of fermionic operators, is
 
-$$  
-\boxed{  
-\begin{aligned}  
-H={}&\frac{1}{2a}\sum_{n=1}^{N-1}  
-\left(  
-\phi_n^\dagger\phi_{n+1}  
-+\mathrm{H.c.}  
-\right)\  
-+m\sum_{n=1}^{N}(-1)^n  
-\phi_n^\dagger\phi_n\  
-+\frac{g^2a}{2}\sum_{n=1}^{N-1}  
-\Bigg[  
-\varepsilon+  
-\sum_{l=1}^{n}  
-\left(  
-\phi_l^\dagger\phi_l  
--\frac{1-(-1)^l}{2}  
-\right)  
-\Bigg]^2.  
-\end{aligned}  
-}  
-$$
+$$\boxed{ \begin{aligned} H={}&\frac{1}{2a}\sum_{n=1}^{N-1} \left( \phi_n^\dagger\phi_{n+1} +\mathrm{H.c.} \right)\\ &+m\sum_{n=1}^{N}(-1)^n \phi_n^\dagger\phi_n\\ &+\frac{g^2a}{2}\sum_{n=1}^{N-1} \Bigg[ \varepsilon+ \sum_{l=1}^{n} \left( \phi_l^\dagger\phi_l -\frac{1-(-1)^l}{2} \right) \Bigg]^2. \end{aligned} }$$
 
 Notice what has happened: the explicit link variables have disappeared from the hopping term, but the electric-field energy now depends on the cumulative charge distribution. When the square is expanded, it produces interactions involving charges at different sites.
 
@@ -416,9 +295,8 @@ Once we know the Hamiltonian, we can determine how the quantum state changes wit
 For a time-independent Hamiltonian, using natural units where $\hbar=1$, $H|\Psi(t)\rangle.$
 
 Equivalently,
-$$  
-|\Psi(t)\rangle=e^{-iHt}|\Psi(0)\rangle.  
-$$
+
+$$|\Psi(t)\rangle=e^{-iHt}|\Psi(0)\rangle.$$
 
 Here, $|\Psi(0)\rangle$ is the initial quantum state, and $|\Psi(t)\rangle$ is the state after time $t$.
 
@@ -446,10 +324,7 @@ In one spatial dimension, the gauge field has no independent propagating degrees
 
 Gauss's law relates the difference between the outgoing and incoming electric flux at a site to the charge at that site:
 
-$$
-\phi_n^\dagger\phi_n  
--\frac{1-(-1)^n}{2}.  
-$$
+$$\phi_n^\dagger\phi_n -\frac{1-(-1)^n}{2}.$$
 
 Intuitively, the charge at a site determines how the electric flux changes across it. This means that the matter occupations and electric fields cannot be chosen independently.
 
