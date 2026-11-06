@@ -3,6 +3,7 @@ export interface Project {
   slug: string;
   description?: string;
   href?: string;
+  linkLabel?: string;
   image?: string;
   date?: string;
   status?: string;
@@ -37,6 +38,17 @@ export const projects: Project[] = [
 
   // ── Selected Work ─────────────────────────────────────────────────────────
   {
+    title: 'Pairing-Based Additive Masking Cryptanalysis',
+    slug: 'pairing-mask-cryptanalysis',
+    description: 'Cryptanalysis of Pairing-Based Additive Masking with Prime-Field Secrets.',
+    href: 'https://eprint.iacr.org/2026/2768',
+    linkLabel: 'IACR Link',
+    date: '2026',
+    status: 'PAPER',
+    external: true,
+    tier: 'selected',
+  },
+  {
     title: 'Grokking & Mechanistic Interpretability',
     slug: 'grokking-mechinterp',
     description:
@@ -44,17 +56,6 @@ export const projects: Project[] = [
     href: 'https://github.com/h-livv/grokking-mechinterp',
     date: 'OCT 2026',
     status: 'RESEARCH EXPERIMENT',
-    external: true,
-    tier: 'selected',
-  },
-  {
-    title: 'Pairing-Based Additive Masking Cryptanalysis',
-    slug: 'pairing-mask-cryptanalysis',
-    description:
-      'SageMath experiments testing attacks on the prime-field masking layer of a pairing-based scheme.',
-    href: 'https://github.com/h-livv/pairing-mask-cryptanalysis',
-    date: '2026',
-    status: 'REPRODUCIBLE CRYPTANALYSIS',
     external: true,
     tier: 'selected',
   },

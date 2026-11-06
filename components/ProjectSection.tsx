@@ -37,7 +37,7 @@ function DestinationLabel({
     <span
       className={`${compact ? 'mt-auto pt-4' : 'mt-6'} inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary/75 group-hover:text-primary transition-colors duration-200`}
     >
-      {isExternalProject(project) ? 'Repository' : 'Project'}
+      {project.linkLabel ?? (isExternalProject(project) ? 'Repository' : 'Project')}
       <span aria-hidden="true">→</span>
     </span>
   );
@@ -74,7 +74,7 @@ function ArchivedTile({ project }: { project: Project }) {
 }
 
 function SelectedEntry({ project, index }: { project: Project; index: number }) {
-  const kinds = ['fourier', 'curve', 'attention'] as const;
+  const kinds = ['curve', 'fourier', 'attention'] as const;
   return (
     <ProjectAnchor project={project} className={`research-card research-card-${index} group`}>
       <article className="h-full flex flex-col">
