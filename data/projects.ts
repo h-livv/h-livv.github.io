@@ -27,8 +27,6 @@ export const projects: Project[] = [
         description:
           'Quantum simulation of the Schwinger effect to investigate theoretical and computational approaches towards identifying signatures relevant to its experimental observation.',
       },
-      { title: 'Quantum-assisted drug discovery' },
-      { title: 'Post-quantum cryptography' },
     ],
     date: 'AUG 2026 — PRESENT',
     status: 'QUANTUM COMPUTING EXPLORATIONS',
