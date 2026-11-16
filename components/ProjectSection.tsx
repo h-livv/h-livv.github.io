@@ -116,7 +116,7 @@ export default function ProjectSection() {
                 <p className="mt-6 text-sm text-secondary whitespace-pre-wrap">{currentProject.description}</p>
               ) : null}
               {currentProject.explorations ? (
-                <ol className="mt-7 grid grid-rows-[repeat(3,minmax(6.5rem,1fr))] border-y border-white/10">
+                <ol className="mt-7 grid border-y border-white/10">
                   {currentProject.explorations.map((exploration, index) => (
                     <li key={exploration.title} className="grid min-w-0 grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border-b border-white/[0.06] py-4 last:border-0">
                       <span className="font-mono text-[10px] text-secondary/70">0{index + 1}</span>
